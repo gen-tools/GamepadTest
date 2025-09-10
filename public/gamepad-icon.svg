@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- Minimalist game controller favicon -->
+  <!-- Outline -->
+  <rect x="10" y="18" width="44" height="28" rx="10" stroke="#6A7D94" stroke-width="4"/>
+
+  <!-- D-pad (left) -->
+  <path d="M22 28 v-4 m0 12 v-4 m-4 -4 h4 m8 0 h-4" stroke="#6A7D94" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Buttons (right) -->
+  <circle cx="44" cy="28" r="3" fill="#6A7D94"/>
+  <circle cx="48" cy="36" r="3" fill="#6A7D94"/>
+
+  <!-- Center dot / stick -->
+  <circle cx="32" cy="30" r="2" fill="#6A7D94"/>
+</svg>
