@@ -100,7 +100,7 @@ export function Footer() {
         </div>
         <div className="mt-8 border-t border-border pt-6 sm:mt-12 lg:mt-16">
           <p className="text-xs leading-5 text-muted-foreground">
-            &copy; 2024 GamepadTest. All rights reserved. Built for gamers, by gamers.
+            &copy; 2025 GamepadTest. All rights reserved. Built for gamers, by gamers.
           </p>
         </div>
       </div>
