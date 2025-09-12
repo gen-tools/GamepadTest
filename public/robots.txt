@@ -30,7 +30,7 @@ User-agent: LinkedInBot
 Allow: /
 
 # Sitemap
-Sitemap: https://gamepadchecker.com/sitemap.xml
+Sitemap: https://www.gamepadtest.tech/sitemap.xml
 
 # Crawl delay (optional)
 Crawl-delay: 1
