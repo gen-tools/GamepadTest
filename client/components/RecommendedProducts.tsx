@@ -7,6 +7,7 @@ export interface RecommendedProductItem {
   description?: string;
   href: string;
   imageSrc?: string;
+  alt?: string;
 }
 
 interface RecommendedProductsSectionProps {
@@ -34,7 +35,9 @@ export function RecommendedProductsSection({
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={p.imageSrc.startsWith('http') ? `/api/image-proxy?url=${encodeURIComponent(p.imageSrc)}` : p.imageSrc}
-                        alt={p.name}
+                        alt={p.alt || p.name}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-contain"
                         onError={(e) => {
                           const img = e.currentTarget as HTMLImageElement;
@@ -53,7 +56,7 @@ export function RecommendedProductsSection({
                     ) : null}
                     <div className="pt-2">
                       <Button asChild className="w-full bg-[#FF9900] hover:bg-[#f5a623] text-black border border-yellow-500/60 focus-visible:ring-yellow-500">
-                        <a href={p.href} target="_blank" rel="noopener noreferrer">
+                        <a href={p.href} target="_blank" rel="nofollow sponsored noopener noreferrer">
                           Buy on Amazon
                         </a>
                       </Button>
