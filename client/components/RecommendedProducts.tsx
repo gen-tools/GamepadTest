@@ -47,7 +47,7 @@ export function RecommendedProductsSection({
                       <p className="text-sm text-muted-foreground">{p.description}</p>
                     ) : null}
                     <div className="pt-2">
-                      <Button asChild className="w-full">
+                      <Button asChild className="w-full bg-[#FF9900] hover:bg-[#f5a623] text-black border border-yellow-500/60 focus-visible:ring-yellow-500">
                         <a href={p.href} target="_blank" rel="noopener noreferrer">
                           Buy on Amazon
                         </a>
