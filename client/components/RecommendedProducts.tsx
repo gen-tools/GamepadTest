@@ -35,7 +35,13 @@ export function RecommendedProductsSection({
                       <img
                         src={p.imageSrc}
                         alt={p.name}
-                        className="h-full object-contain"
+                        className="w-full h-full object-contain"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const img = e.currentTarget as HTMLImageElement;
+                          img.onerror = null;
+                          img.src = "/placeholder.svg";
+                        }}
                       />
                     ) : (
                       <div className="w-16 h-16 bg-gray-200 rounded" />
