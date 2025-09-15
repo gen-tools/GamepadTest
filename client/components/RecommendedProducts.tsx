@@ -33,10 +33,9 @@ export function RecommendedProductsSection({
                     {p.imageSrc ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        src={p.imageSrc}
+                        src={p.imageSrc.startsWith('http') ? `/api/image-proxy?url=${encodeURIComponent(p.imageSrc)}` : p.imageSrc}
                         alt={p.name}
                         className="w-full h-full object-contain"
-                        referrerPolicy="no-referrer"
                         onError={(e) => {
                           const img = e.currentTarget as HTMLImageElement;
                           img.onerror = null;
