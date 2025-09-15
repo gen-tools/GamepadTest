@@ -27,5 +27,43 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Simple image proxy for allowed hosts (fixes hotlink/CORS blocks)
+  app.get("/api/image-proxy", async (req, res) => {
+    try {
+      const src = String(req.query.url || "");
+      const parsed = new URL(src);
+      if (!/^https?:$/.test(parsed.protocol)) {
+        return res.status(400).json({ error: "Invalid protocol" });
+      }
+      // Whitelist to reduce SSRF risk; extend as needed
+      const allowedHosts = [
+        "m.media-amazon.com",
+        "images-na.ssl-images-amazon.com",
+      ];
+      if (!allowedHosts.some((h) => parsed.hostname.endsWith(h))) {
+        return res.status(403).json({ error: "Host not allowed" });
+      }
+
+      const resp = await fetch(src, {
+        headers: {
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Safari/537.36",
+          accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+          referer: "https://www.amazon.com/",
+        },
+      });
+      if (!resp.ok) {
+        return res.status(resp.status).json({ error: `Upstream ${resp.status}` });
+      }
+      const contentType = resp.headers.get("content-type") || "image/jpeg";
+      const buf = Buffer.from(await resp.arrayBuffer());
+      res.setHeader("Content-Type", contentType);
+      res.setHeader("Cache-Control", "public, max-age=86400");
+      res.status(200).send(buf);
+    } catch (e) {
+      res.status(500).json({ error: "Proxy error" });
+    }
+  });
+
   return app;
 }
