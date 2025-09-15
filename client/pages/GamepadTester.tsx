@@ -244,16 +244,19 @@ export default function GamepadTester() {
       name: "Official Luna Wireless Controller",
       href: "https://amzn.to/42wogzI",
       imageSrc: "https://m.media-amazon.com/images/I/51qbcWzHSML._AC_SL1000_.jpg",
+      alt: "gamepad tester",
     },
     {
       name: "Xbox Wireless Gaming Controller – Ice Breaker Special Edition",
       href: "https://amzn.to/3KmlSW4",
       imageSrc: "https://m.media-amazon.com/images/I/71Js3hjffrL._SL1500_.jpg",
+      alt: "gamepad checker",
     },
     {
       name: "PlayStation DualSense® Wireless Controller",
       href: "https://amzn.to/3K1XlWl",
       imageSrc: "https://m.media-amazon.com/images/I/51PmeLGEkML._SL1500_.jpg",
+      alt: "controller tester",
     },
   ];
 
