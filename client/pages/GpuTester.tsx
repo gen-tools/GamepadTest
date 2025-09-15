@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { RecommendedProductsSection } from '@/components/RecommendedProducts';
 
 interface GPUInfo {
   vendor: string;
@@ -449,6 +450,7 @@ export default function GpuTester() {
             )}
           </>
         )}
+        <RecommendedProductsSection />
         {/* Comprehensive Guide & FAQs */}
         <Card className="mt-10">
           <CardHeader>

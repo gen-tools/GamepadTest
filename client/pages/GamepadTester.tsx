@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { createHowToStructuredData } from '@/components/SEO';
+import { RecommendedProductsSection } from '@/components/RecommendedProducts';
 
 interface GamepadState {
   connected: boolean;
@@ -517,6 +518,8 @@ export default function GamepadTester() {
             </CardContent>
           </Card>
         ))}
+
+        <RecommendedProductsSection />
 
         {/* FAQ and Comprehensive Guide */}
         <Card>

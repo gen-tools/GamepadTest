@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { RecommendedProductsSection } from '@/components/RecommendedProducts';
 
 interface AudioStats {
   level: number;
@@ -475,6 +476,7 @@ export default function MicTester() {
           </Card>
         )}
 
+        <RecommendedProductsSection />
         {/* Instructions */}
         <Card>
           <CardHeader>

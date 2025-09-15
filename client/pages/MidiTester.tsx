@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { RecommendedProductsSection } from '@/components/RecommendedProducts';
 
 interface MIDIDeviceInfo {
   id: string;
@@ -620,6 +621,7 @@ export default function MidiTester() {
           </>
         )}
 
+        <RecommendedProductsSection />
         {/* Comprehensive Guide & FAQs */}
         <Card className="mt-10">
           <CardHeader>
