@@ -1,14 +1,12 @@
+# Allow common search engines + AI crawlers
 User-agent: *
-Allow: /
+Disallow:
 
-# Specific bot permissions
+# Explicitly allow major search engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
 Allow: /
 
 User-agent: DuckDuckBot
@@ -20,21 +18,18 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-User-agent: facebookexternalhit
+# Allow popular AI crawlers (remove or change if you want to block any)
+User-agent: GPTBot
 Allow: /
 
-User-agent: Twitterbot
+User-agent: ClaudeBot
 Allow: /
 
-User-agent: LinkedInBot
+User-agent: Amazonbot
 Allow: /
 
-# Sitemap
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap — make sure this is correct for your site
 Sitemap: https://www.gamepadtest.tech/sitemap.xml
-
-# Crawl delay (optional)
-Crawl-delay: 1
-
-# Disallow certain paths if any
-# Disallow: /admin/
-# Disallow: /private/
