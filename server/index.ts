@@ -10,6 +10,7 @@ export function createServer() {
   app.use(cors());
   app.use((_, res, next) => {
     res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("Permissions-Policy", "midi=(self), microphone=(self)");
     if (process.env.NODE_ENV === "production") {
       res.setHeader("X-Frame-Options", "SAMEORIGIN");
     }
