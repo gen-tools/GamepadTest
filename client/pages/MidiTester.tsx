@@ -44,6 +44,7 @@ export default function MidiTester() {
   const [midiSupported, setMidiSupported] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
   const [totalMessages, setTotalMessages] = useState(0);
+  const [midiError, setMidiError] = useState<string | null>(null);
 
   const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
@@ -252,9 +253,14 @@ export default function MidiTester() {
       access.onstatechange = () => updateDeviceList(access);
       setupInputListeners(access);
 
-    } catch (error) {
-      console.error('MIDI access failed:', error);
+    } catch (error: any) {
       setMidiSupported(false);
+      const message = typeof error?.message === 'string' ? error.message : '';
+      if (error?.name === 'SecurityError' || /permissions policy/i.test(message)) {
+        setMidiError('Web MIDI is blocked by Permissions Policy in this context. Open this page directly (not in an embedded preview) or use a browser that allows Web MIDI.');
+      } else {
+        setMidiError('MIDI access failed. Please ensure your browser supports Web MIDI and try again.');
+      }
     }
   };
 
@@ -323,9 +329,7 @@ export default function MidiTester() {
   };
 
   useEffect(() => {
-    requestMIDIAccess();
     return () => {
-      // cleanup any active voices
       const ctx = audioCtxRef.current;
       activeOscRef.current.forEach(entry => {
         try {
@@ -437,9 +441,9 @@ export default function MidiTester() {
         {!midiSupported ? (
           <Card className="mb-8 border-red-200 bg-red-50 animate-fade-in-up animate-stagger-3">
             <CardHeader>
-              <CardTitle className="text-red-800">MIDI Not Supported</CardTitle>
+              <CardTitle className="text-red-800">MIDI Not Available</CardTitle>
               <CardDescription className="text-red-700">
-                Your browser doesn't support the Web MIDI API. Please use Chrome, Edge, or Opera for MIDI testing.
+                {midiError || "Your browser doesn't support the Web MIDI API. Please use Chrome, Edge, or Opera for MIDI testing."}
               </CardDescription>
             </CardHeader>
           </Card>
