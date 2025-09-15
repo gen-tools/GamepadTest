@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export interface RecommendedProductItem {
   name: string;
-  description: string;
+  description?: string;
   href: string;
   imageSrc?: string;
 }
@@ -17,26 +17,7 @@ interface RecommendedProductsSectionProps {
 
 export function RecommendedProductsSection({
   title = "Recommended Products",
-  products = [
-    {
-      name: "Product Name",
-      description: "Short description goes here. Describe key benefit in one line.",
-      href: "#",
-      imageSrc: "/placeholder.svg",
-    },
-    {
-      name: "Product Name",
-      description: "Short description goes here. Describe key benefit in one line.",
-      href: "#",
-      imageSrc: "/placeholder.svg",
-    },
-    {
-      name: "Product Name",
-      description: "Short description goes here. Describe key benefit in one line.",
-      href: "#",
-      imageSrc: "/placeholder.svg",
-    },
-  ],
+  products = [],
   className,
 }: RecommendedProductsSectionProps) {
   return (
@@ -62,7 +43,9 @@ export function RecommendedProductsSection({
                   </div>
                   <div className="p-4 space-y-2">
                     <div className="font-semibold text-lg text-foreground">{p.name}</div>
-                    <p className="text-sm text-muted-foreground">{p.description}</p>
+                    {p.description ? (
+                      <p className="text-sm text-muted-foreground">{p.description}</p>
+                    ) : null}
                     <div className="pt-2">
                       <Button asChild className="w-full">
                         <a href={p.href} target="_blank" rel="noopener noreferrer">
