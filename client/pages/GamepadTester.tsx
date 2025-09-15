@@ -239,6 +239,24 @@ export default function GamepadTester() {
 
   const faqStructuredData = faqData;
 
+  const recommendedProducts = [
+    {
+      name: "Official Luna Wireless Controller",
+      href: "https://amzn.to/42wogzI",
+      imageSrc: "https://m.media-amazon.com/images/I/51qbcWzHSML._AC_SL1000_.jpg",
+    },
+    {
+      name: "Xbox Wireless Gaming Controller – Ice Breaker Special Edition",
+      href: "https://amzn.to/3KmlSW4",
+      imageSrc: "https://m.media-amazon.com/images/I/71Js3hjffrL._SL1500_.jpg",
+    },
+    {
+      name: "PlayStation DualSense® Wireless Controller",
+      href: "https://amzn.to/3K1XlWl",
+      imageSrc: "https://m.media-amazon.com/images/I/51PmeLGEkML._SL1500_.jpg",
+    },
+  ];
+
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
@@ -519,7 +537,7 @@ export default function GamepadTester() {
           </Card>
         ))}
 
-        <RecommendedProductsSection />
+        <RecommendedProductsSection products={recommendedProducts} />
 
         {/* FAQ and Comprehensive Guide */}
         <Card>
