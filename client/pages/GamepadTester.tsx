@@ -542,237 +542,178 @@ export default function GamepadTester() {
 
         <RecommendedProductsSection products={recommendedProducts} />
 
-        {/* FAQ and Comprehensive Guide */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Controller Testing Guide & FAQs</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-8 text-base leading-7 text-foreground">
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold">Online Gamepad & Controller Tester – Check Your Controller Instantly</h2>
-              <p>
-                Controllers are at the heart of gaming. Whether you’re grinding ranked matches online or casually exploring a new open-world title, every button press matters. But controllers wear down over time. A joystick might drift, a bumper may stop responding, or a trigger could lose sensitivity. The question is, how do you know if the problem is the game or the controller itself?
-              </p>
-              <p>
-                That’s where an online controller checker comes in. Our tool helps you test every button, joystick, and trigger in real time. You can run a quick check to confirm stick drift, verify if all inputs are registering, and get instant peace of mind—all without installing any software.
-              </p>
-              <p>
-                Whether you’re looking for a <Link to="/gamepad-tester" className="text-primary underline">PS4 controller tester</Link>, <Link to="/gamepad-tester" className="text-primary underline">PS5 controller tester</Link>, <Link to="/gamepad-tester" className="text-primary underline">Xbox controller tester</Link>, or even a classic <Link to="/gamepad-tester" className="text-primary underline">PS3 controller</Link> test, this page is your complete guide to using our <Link to="/gamepad-tester" className="text-primary underline">gamepad tester online free</Link> tool. You’ll also learn how to troubleshoot common problems, why testing matters, and what you can do if your controller fails.
-              </p>
-              <div className="pt-2">
-                <Button asChild className="gap-2">
-                  <Link to="/gamepad-tester">👉 Start now with our Gamepad Tester</Link>
-                </Button>
-              </div>
-            </section>
+        {/* Guide: Gamepad Tester – The Complete Guide */}
+        <section className="mt-12 space-y-8 text-base leading-7 text-foreground">
+          <header className="space-y-3">
+            <h2 className="text-2xl font-bold">Gamepad Tester – The Complete Guide to Checking Your Controller Online</h2>
+            <p>
+              Gaming feels effortless when your controller works perfectly. When something is off — drifting joystick, sticky button, or unresponsive trigger — a gamepad tester becomes essential.
+            </p>
+            <p>
+              Our tool lets you run a <Link to="/gamepad-tester" className="text-primary underline">controller tester online free</Link> in seconds. You’ll see real-time feedback for every button, trigger, and stick. This guide explains how to use the tester, fix common issues, and choose a replacement if needed.
+            </p>
+          </header>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Why Use a Controller Tester Online?</h3>
-              <p>
-                Gaming hardware doesn’t last forever. The more hours you put in, the faster your controller shows signs of wear. Common issues include:
-              </p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Stick drift – your joystick moves on its own without input.</li>
-                <li>Unresponsive buttons – pressing jump or reload doesn’t always register.</li>
-                <li>Weak triggers – you have to squeeze harder to shoot or accelerate.</li>
-                <li>Laggy input – noticeable delays between pressing and on-screen action.</li>
-              </ul>
-              <p>
-                Buying a new controller isn’t always the first answer. Sometimes a simple cleaning or settings adjustment can fix the problem. But before you do anything, you need to diagnose the issue.
-              </p>
-              <p>That’s why a controller tester online free tool helps. Instead of guessing, you can:</p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Detect stick drift instantly.</li>
-                <li>Confirm every button press.</li>
-                <li>Test bumpers, triggers, and thumbsticks.</li>
-                <li>Check input lag in real time.</li>
-                <li>Compare performance across devices (Windows, macOS, Linux, even browsers).</li>
-              </ul>
-              <p>In less than a minute, you’ll know whether your controller is fine, needs cleaning, or should be replaced.</p>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Why You Should Test Your Gamepad</h3>
+            <p>Controllers slowly degrade with use. Small issues can hurt aim, timing, and reaction speed.</p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Detect stick drift early</li>
+              <li>Confirm every input (buttons, triggers, bumpers)</li>
+              <li>Catch dead zones that affect aiming</li>
+              <li>Avoid wasted money by identifying simple calibration/cleaning fixes</li>
+            </ul>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Supported Controllers</h3>
-              <p>One of the best parts of this gamepad tester is that it works with a wide range of devices. Whether you’re loyal to PlayStation, Xbox, or PC gaming, this tool supports them all.</p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li><Link to="/gamepad-tester" className="text-primary underline">PS4 Controller Tester</Link> – Check DualShock 4 buttons, sticks, and triggers via USB or Bluetooth.</li>
-                <li><Link to="/gamepad-tester" className="text-primary underline">PS5 Controller Tester PC</Link> – Ideal for testing DualSense controllers on Windows or Mac.</li>
-                <li><Link to="/gamepad-tester" className="text-primary underline">Xbox Controller Tester</Link> – Works with Xbox One and Series X|S controllers.</li>
-                <li><Link to="/gamepad-tester" className="text-primary underline">Xbox 360 Controller Test</Link> – Still holding onto your 360 pad? This tester works with it too.</li>
-                <li><Link to="/gamepad-tester" className="text-primary underline">PS3 Controller</Link> – Test legacy DualShock 3 controllers with ease.</li>
-                <li><Link to="/gamepad-tester" className="text-primary underline">Joystick Tester Online</Link> – Supports generic USB gamepads and third-party controllers.</li>
-              </ul>
-              <p>Most devices don’t require extra drivers. Just plug in your controller and launch the <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link>.</p>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">What Makes This Tool Different</h3>
+            <p>This is a browser-based gamepad tester — no downloads or sign-ups.</p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Windows</li>
+              <li>macOS</li>
+              <li>Linux</li>
+              <li>Mobile browsers (for Bluetooth controllers)</li>
+            </ul>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">How to Use the Online Gamepad Tester</h3>
-              <p>Using the tool is simple and doesn’t require any technical know-how.</p>
-              <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
-                <li>Connect your controller via USB or Bluetooth.</li>
-                <li>Open the tester in your browser.</li>
-                <li>Press buttons, triggers, and joysticks to see instant feedback.</li>
-                <li>Check joystick alignment by observing if the stick stays centered when untouched.</li>
-              </ol>
-              <p>If the display shows movement without your input, that’s a sign of stick drift. If certain buttons don’t light up, they might be unresponsive.</p>
-              <div className="pt-2">
-                <Button asChild variant="outline" className="gap-2">
-                  <Link to="/gamepad-tester">👉 Try it now with our Controller Tester Online Free</Link>
-                </Button>
-              </div>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Supported Controllers</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li><Link to="/gamepad-tester" className="text-primary underline">PS4 Controller Tester</Link> – DualShock 4 via USB or Bluetooth</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">PS5 Controller Tester PC</Link> – DualSense on Windows or Mac</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Xbox Controller Tester</Link> – Xbox One and Series X|S</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Xbox 360 Controller Test</Link> – Wired and wireless 360</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">PS3 Controller</Link> – Legacy DualShock 3</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Generic Joypad Tester</Link> – Third‑party and budget pads</li>
+            </ul>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">What Is Stick Drift and Why Does It Matter?</h3>
-              <p>Stick drift is one of the most frustrating issues gamers face. It happens when your joystick sends movement signals even when you’re not touching it.</p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Your character slowly walks forward in a shooter.</li>
-                <li>A racing car veers slightly without steering.</li>
-                <li>Menus scroll endlessly on their own.</li>
-              </ul>
-              <h4 className="font-semibold">Causes of Stick Drift</h4>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Dust or dirt trapped under the joystick module.</li>
-                <li>Natural wear of potentiometers (the sensors that track movement).</li>
-                <li>Moisture or accidental pressure damage.</li>
-              </ul>
-              <p>Using a gamepad tester stick drift tool, you’ll see right away whether your joystick rests in the center or sends unwanted signals.</p>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">How to Use the Online Gamepad Test</h3>
+            <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
+              <li>Connect your controller via USB or Bluetooth.</li>
+              <li>Open the <Link to="/gamepad-tester" className="text-primary underline">gamepad tester</Link>.</li>
+              <li>Press buttons, move sticks, and pull triggers to see instant feedback.</li>
+              <li>Check if sticks rest centered. Movement without input indicates stick drift.</li>
+            </ol>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Online vs Software Testers</h3>
-              <p>You may have seen downloadable controller test programs. While they work, they come with downsides: installation time, system compatibility issues, and possible security risks.</p>
-              <p>An online gamepad tester avoids these issues.</p>
-              <h4 className="font-semibold">Benefits of online testing:</h4>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Instant access in your browser.</li>
-                <li>Works across operating systems.</li>
-                <li>Free to use without sign-ups.</li>
-                <li>No downloads, no risk of malware.</li>
-              </ul>
-              <p>For quick checks, online tools are the fastest and safest solution.</p>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Understanding Stick Drift</h3>
+            <p>Stick drift makes your character/camera move without input.</p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Characters walk slowly</li>
+              <li>Cars veer left or right</li>
+              <li>Menus scroll on their own</li>
+            </ul>
+            <p className="text-muted-foreground">Common causes: dust/debris, worn potentiometers, physical/moisture damage.</p>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Common Controller Problems and Fixes</h3>
-              <p>Testing tells you what’s wrong, but fixing it is the next step. Here are common issues and troubleshooting tips.</p>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold">Stick Drift</h4>
-                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                    <li>Clean around the joystick using compressed air.</li>
-                    <li>Apply isopropyl alcohol with a cotton swab to remove dirt.</li>
-                    <li>If drift persists, the analog stick may need replacement.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Unresponsive Buttons</h4>
-                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                    <li>Dust buildup often causes this. Gently clean around the button edges.</li>
-                    <li>Test on another device to confirm if the button itself is failing.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Trigger Issues</h4>
-                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                    <li>Check for physical damage or looseness.</li>
-                    <li>Adjust input sensitivity in game or console settings.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Connectivity Problems</h4>
-                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                    <li>Update Bluetooth or USB drivers.</li>
-                    <li>Re-pair your controller with your system.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Laggy Input</h4>
-                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                    <li>Switch to a wired connection for faster response.</li>
-                    <li>Close background apps that may be interfering.</li>
-                  </ul>
-                </div>
-              </div>
-              <p>The tester helps you confirm if the issue is hardware or software.</p>
-            </section>
+          <section className="space-y-3">
+            <h3 className="text-xl font-semibold">Troubleshooting Common Controller Problems</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border">
+                <thead>
+                  <tr className="bg-gray-50 text-left">
+                    <th className="p-3 border">Problem</th>
+                    <th className="p-3 border">What to Try</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 border font-medium">Stick Drift</td>
+                    <td className="p-3 border">Clean with compressed air, gently rotate sticks; isopropyl alcohol on cotton swab.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border font-medium">Unresponsive Buttons</td>
+                    <td className="p-3 border">Test on another device; clean contacts; may require internal repair.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border font-medium">Trigger Issues</td>
+                    <td className="p-3 border">Check for cracks/loose springs; update firmware if available.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border font-medium">Laggy Input</td>
+                    <td className="p-3 border">Use wired connection; reduce wireless interference; close background apps.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border font-medium">Connection Drops</td>
+                    <td className="p-3 border">Re‑pair controller; update USB/Bluetooth drivers.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Advanced Testing: Input Lag and Calibration</h3>
-              <p>Beyond simple button checks, advanced players often use a controller checker online to test for:</p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Input lag – the time between pressing a button and action appearing on screen.</li>
-                <li>Dead zones – areas where small stick movements don’t register.</li>
-                <li>Button mapping – verifying that inputs are recognized correctly.</li>
-              </ul>
-              <p>For competitive gamers, these small differences matter. Calibrating your controller through settings can extend its life and improve accuracy.</p>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Best Controllers to Buy</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Precise sticks with minimal dead zones</li>
+              <li>Responsive triggers with good resistance</li>
+              <li>Comfortable ergonomics for long sessions</li>
+              <li>Low latency for competitive play</li>
+            </ul>
+          </section>
 
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Other Tools on Our Website</h3>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li><Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> – check PlayStation, Xbox, and PC controllers.</li>
-                <li><Link to="/mic-tester" className="text-primary underline">Mic Tester</Link> – verify your microphone works before calls or streams.</li>
-                <li><Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> – test MIDI keyboards, drum pads, and controllers.</li>
-                <li><Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> – run a gpu test online to check your graphics card performance.</li>
-              </ul>
-              <p>
-                You can also learn more about us on the <Link to="/about" className="text-primary underline">About</Link> page, reach us through <Link to="/contact" className="text-primary underline">Contact</Link>, or find tips and guides on the <Link to="/blog" className="text-primary underline">Blog</Link>.
-              </p>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Recommended Picks</h3>
+            <ul className="list-disc pl-6 space-y-1">
+              <li><Link to="/gamepad-tester" className="text-primary underline">Buy Xbox Controller</Link> – Official Series X|S for PC/console</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Buy PlayStation Controller PS5</Link> – DualSense for PS5/PC</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Buy Joystick for PC</Link> – Great for flight/retro games</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Buy Amazon Luna Controller</Link> – Cloud‑gaming ready</li>
+            </ul>
+          </section>
 
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold">FAQs</h2>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold">1. Can I test my PS4 controller online?</h3>
-                  <p>Yes. The <Link to="/gamepad-tester" className="text-primary underline">PS4 controller tester</Link> works directly in your browser.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">2. How do I test an Xbox controller online free?</h3>
-                  <p>Connect your controller, open the <Link to="/gamepad-tester" className="text-primary underline">Xbox controller tester</Link>, and press buttons to see real-time input.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">3. Does this tool work with PS5 DualSense controllers?</h3>
-                  <p>Yes. The tool functions as a <Link to="/gamepad-tester" className="text-primary underline">PS5 controller tester PC</Link>. Connect via USB or Bluetooth.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">4. Can this detect stick drift?</h3>
-                  <p>Absolutely. If the joystick moves without input, the tester highlights it immediately.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">5. Is it safe to use?</h3>
-                  <p>Yes. It runs entirely in your browser. No downloads or installations are required.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">6. Does it support generic gamepads?</h3>
-                  <p>Yes, the <Link to="/gamepad-tester" className="text-primary underline">joystick tester online</Link> feature works with most third-party controllers.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">7. What about older models like PS3 or Xbox 360?</h3>
-                  <p>The tool supports both <Link to="/gamepad-tester" className="text-primary underline">PS3 controller</Link> and <Link to="/gamepad-tester" className="text-primary underline">Xbox 360 controller test</Link>.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">8. Can I test on Mac or Linux?</h3>
-                  <p>Yes. The tester is browser-based, so it works across platforms.</p>
-                </div>
-              </div>
-            </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Online vs Software Testers</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Instant access, no downloads</li>
+              <li>Works across operating systems</li>
+              <li>No storage space required</li>
+              <li>Lower risk than installing unknown software</li>
+            </ul>
+          </section>
 
-            <section className="space-y-3">
-              <h2 className="text-2xl font-bold">Final Thoughts</h2>
-              <p>
-                Controllers are the bridge between you and your game. Even the smallest problem—like stick drift or an unresponsive button—can ruin immersion. Instead of guessing, use a <Link to="/gamepad-tester" className="text-primary underline">controller tester online free</Link> to confirm the issue.
-              </p>
-              <p>
-                Our <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> makes it easy to check every input in real time. Whether you’re troubleshooting before a tournament, setting up a new controller, or just curious about stick drift, this tool gives you quick answers.
-              </p>
-              <p>
-                Pair it with our <Link to="/mic-tester" className="text-primary underline">Mic Tester</Link>, <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link>, and <Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> to keep your entire setup running smoothly. With free, browser-based diagnostics, you’ll spend less time worrying about hardware and more time actually playing.
-              </p>
-            </section>
-          </CardContent>
-        </Card>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Advanced Controller Testing</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Dead zones – verify small movements are detected</li>
+              <li>Input lag – observe response speed</li>
+              <li>Button mapping – confirm each input matches its action</li>
+            </ul>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Other Tools You Can Try</h3>
+            <ul className="list-disc pl-6 space-y-1">
+              <li><Link to="/mic-tester" className="text-primary underline">Mic Tester</Link> – Check your microphone</li>
+              <li><Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> – Test graphics card online</li>
+              <li><Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> – Test MIDI keyboards/drum pads</li>
+            </ul>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">FAQs</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Mac support? Yes — Safari/Chrome and most modern browsers.</li>
+              <li>PS3 support? Yes — legacy controllers are supported.</li>
+              <li>Stick drift detection? Yes — visible immediately during testing.</li>
+              <li>Is it safe? Yes — runs entirely in your browser.</li>
+              <li>Multiple controllers? Yes — reconnect and refresh.</li>
+            </ul>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Final Thoughts</h3>
+            <p>
+              Your controller is your link to the game world. Use our <Link to="/gamepad-tester" className="text-primary underline">controller tester online free</Link> for quick clarity — decide whether to clean, recalibrate, or replace.
+            </p>
+            <p>
+              If it’s time for a new one, you can buy a gamepad for PC or grab an Xbox/PlayStation controller from the links on this page.
+            </p>
+          </section>
+        </section>
       </div>
     </div>
   );
