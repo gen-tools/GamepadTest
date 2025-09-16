@@ -18,10 +18,9 @@ interface RecommendedProductsSectionProps {
 
 const defaultProducts: RecommendedProductItem[] = [
   {
-    name: "Blue Yeti USB Microphone",
-    description: "Plug-and-play USB mic for streaming, calls, and recording.",
-    href: "https://www.amazon.com/dp/B00N1YPXW2",
-    imageSrc: "https://m.media-amazon.com/images/I/61J3V7aP1YL._AC_SL1500_.jpg",
+    name: "Logitech for Creators Blue Microphones Yeti USB Microphone (Blackout)",
+    href: "https://amzn.to/46sl4Xn",
+    imageSrc: "image address: https://m.media-amazon.com/images/I/61KTMvS5JBL._AC_SL1500_.jpg",
     alt: "Blue Yeti USB Microphone"
   },
   {
