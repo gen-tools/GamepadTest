@@ -476,7 +476,7 @@ export default function MicTester() {
           </Card>
         )}
 
-        <RecommendedProductsSection />
+        <RecommendedProductsSection title="Recommended Products" products={micProducts} />
         {/* Instructions */}
         <Card>
           <CardHeader>
