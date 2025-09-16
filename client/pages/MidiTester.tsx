@@ -625,7 +625,7 @@ export default function MidiTester() {
           </>
         )}
 
-        <RecommendedProductsSection />
+        <RecommendedProductsSection title="Recommended Products" products={midiProducts} />
         {/* MIDI Tester: New SEO content */}
         <article className="mt-10 space-y-10 text-base leading-7">
           <section className="space-y-3" id="midi-tester-online">
