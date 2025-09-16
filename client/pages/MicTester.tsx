@@ -7,6 +7,7 @@ import { Slider } from '@/components/ui/slider';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import { micProducts } from '@/data/recommended';
 
 interface AudioStats {
   level: number;
