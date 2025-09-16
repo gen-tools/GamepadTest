@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import { midiProducts } from '@/data/recommended';
 
 interface MIDIDeviceInfo {
   id: string;
