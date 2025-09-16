@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export interface RecommendedProductItem {
   name: string;
@@ -16,9 +17,33 @@ interface RecommendedProductsSectionProps {
   className?: string;
 }
 
+const defaultProducts: RecommendedProductItem[] = [
+  {
+    name: "Blue Yeti USB Microphone",
+    description: "Plug-and-play USB mic for streaming, calls, and recording.",
+    href: "https://www.amazon.com/dp/B00N1YPXW2",
+    imageSrc: "https://m.media-amazon.com/images/I/61J3V7aP1YL._AC_SL1500_.jpg",
+    alt: "Blue Yeti USB Microphone"
+  },
+  {
+    name: "Focusrite Scarlett 2i2 (3rd Gen)",
+    description: "Best-selling 2-in/2-out USB audio interface for home studios.",
+    href: "https://www.amazon.com/dp/B07QR6Z1JB",
+    imageSrc: "https://m.media-amazon.com/images/I/71w8mW3l7bL._AC_SL1500_.jpg",
+    alt: "Focusrite Scarlett 2i2 Interface"
+  },
+  {
+    name: "AKAI MPK Mini MK3",
+    description: "Compact 25-key MIDI keyboard controller with pads and knobs.",
+    href: "https://www.amazon.com/dp/B0887Y6DCG",
+    imageSrc: "https://m.media-amazon.com/images/I/71kU5lH8vHL._AC_SL1500_.jpg",
+    alt: "AKAI MPK Mini MK3"
+  }
+];
+
 export function RecommendedProductsSection({
   title = "Recommended Products",
-  products = [],
+  products = defaultProducts,
   className,
 }: RecommendedProductsSectionProps) {
   return (
