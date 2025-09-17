@@ -254,18 +254,21 @@ export default function GpuTester() {
   const recommendedProducts = [
     {
       name: "MSI Gaming GeForce GT 710 2GB GDRR3 64-bit HDCP Support DirectX 12 OpenGL 4.5 Single Fan Low Profile Graphics Card (GT 710 2GD3 LP)",
+      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
       href: "https://amzn.to/4mjlF3p",
       imageSrc: "https://m.media-amazon.com/images/I/61XV8hG5mtL._AC_SL1200_.jpg",
       alt: "MSI Gaming GeForce GT 710 2GB GDRR3",
     },
     {
       name: "MSI Gaming GeForce RTX 3060 12GB 15 Gbps GDRR6 192-Bit HDMI/DP PCIe 4 Torx Twin Fan Ampere OC Graphics Card",
+      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
       href: "https://amzn.to/41Q21EP",
       imageSrc: "https://m.media-amazon.com/images/I/71tduSp8ooL._AC_SL1500_.jpg",
       alt: "MSI Gaming GeForce RTX 3060 12GB 15 Gbps GDRR6",
     },
     {
       name: "ASUS Dual NVIDIA GeForce RTX 3050 6GB OC Edition Gaming Graphics Card - PCIe 4.0, 6GB GDDR6 Memory, HDMI 2.1, DisplayPort 1.4a, 2-Slot Design",
+      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
       href: "https://amzn.to/46l2Err",
       imageSrc: "https://m.media-amazon.com/images/I/81mwcITtHBL._AC_SL1500_.jpg",
       alt: "ASUS Dual NVIDIA GeForce RTX 3050 6GB OC",
