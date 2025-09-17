@@ -36,25 +36,25 @@ export default function MicTester() {
   // Recommended products for Mic Tester page (edit these items as needed)
   const micProducts: RecommendedProductItem[] = [
     {
-      name: "Blue Yeti USB Microphone",
+      name: "Logitech for Creators Blue Microphones Yeti USB Microphone (Blackout)",
       description: "Plug-and-play USB mic for streaming, meetings, and recording.",
-      href: "https://www.amazon.com/dp/B00N1YPXW2",
-      imageSrc: "https://m.media-amazon.com/images/I/61J3V7aP1YL._AC_SL1500_.jpg",
+      href: "https://amzn.to/46sl4Xn",
+      imageSrc: "https://m.media-amazon.com/images/I/61KTMvS5JBL._AC_SL1500_.jpg",
       alt: "Blue Yeti USB Microphone"
     },
     {
-      name: "FIFINE K669B Condenser Mic",
+      name: "HyperX SoloCast – USB Condenser Gaming Microphone, for PC, PS4, PS5 and Mac",
       description: "Budget-friendly USB condenser microphone for voice and calls.",
-      href: "https://www.amazon.com/dp/B06XCKGLTP",
-      imageSrc: "https://m.media-amazon.com/images/I/61H8wYc5bZL._AC_SL1500_.jpg",
-      alt: "FIFINE K669B USB Microphone"
+      href: "https://amzn.to/3IncdOu",
+      imageSrc: "https://m.media-amazon.com/images/I/71HnM5DFBBL._AC_SL1500_.jpg",
+      alt: "HyperX SoloCast – USB Condenser Gaming Microphone"
     },
     {
-      name: "Focusrite Scarlett Solo (3rd Gen)",
+      name: "Shure SM58 Pro Dynamic Microphone with 25-Foot XLR Cable",
       description: "USB audio interface with clean mic preamp for creators.",
       href: "https://www.amazon.com/dp/B07QR6Z1JB",
-      imageSrc: "https://m.media-amazon.com/images/I/71w8mW3l7bL._AC_SL1500_.jpg",
-      alt: "Focusrite Scarlett Solo"
+      imageSrc: "https://m.media-amazon.com/images/I/616y7aDplTL._AC_SL1500_.jpg",
+      alt: "Shure SM58 Pro Dynamic Microphone "
     }
   ];
   
