@@ -50,25 +50,25 @@ export default function MidiTester() {
   // Recommended products for MIDI Tester page (edit these items as needed)
   const midiProducts: RecommendedProductItem[] = [
     {
-      name: "AKAI MPK Mini MK3",
-      description: "Compact 25-key MIDI controller with pads and knobs.",
-      href: "https://www.amazon.com/dp/B0887Y6DCG",
-      imageSrc: "https://m.media-amazon.com/images/I/71kU5lH8vHL._AC_SL1500_.jpg",
+      name: "Akai Professional MPK Mini MK3 - 25 Key USB MIDI Keyboard Controller",
+      description: "25-key MIDI controller with drum pads, knobs, and bundled production software — great for music creation.",
+      href: "https://amzn.to/4n15UiE",
+      imageSrc: "https://m.media-amazon.com/images/I/717qmGlA7ZL._AC_SL1500_.jpg",
       alt: "AKAI MPK Mini MK3"
     },
     {
-      name: "Novation Launchkey 49 [MK3]",
-      description: "49-key controller with deep Ableton integration.",
-      href: "https://www.amazon.com/dp/B089M8JQNN",
-      imageSrc: "https://m.media-amazon.com/images/I/61qSxn9VUbL._AC_SL1500_.jpg",
-      alt: "Novation Launchkey 49 MK3"
+      name: "M-VAVE 25 Key USB MIDI Keyboard Controller With 8 Backlit Drum Pads",
+      description: "Bluetooth MIDI controller with semi-weighted keys, pads, and knobs for portable beat-making.",
+      href: "https://amzn.to/47MPWE5",
+      imageSrc: "https://m.media-amazon.com/images/I/61NyksD22vL._AC_SL1500_.jpg",
+      alt: "MIDI Keyboard Controller"
     },
     {
-      name: "Arturia KeyLab Essential 61",
-      description: "61-key controller with DAW controls and software bundle.",
+      name: "Arturia MiniLab 3 - Universal MIDI Controller for Music Production",
+      description: "Compact 25-key controller with pads, controls, and software for seamless music production.",
       href: "https://www.amazon.com/dp/B0711V4S8N",
-      imageSrc: "https://m.media-amazon.com/images/I/71GBo5G2sTL._AC_SL1500_.jpg",
-      alt: "Arturia KeyLab Essential 61"
+      imageSrc: "https://m.media-amazon.com/images/I/61EjCG4omGL._AC_SL1500_.jpg",
+      alt: "Arturia MiniLab 3"
     }
   ];
 
