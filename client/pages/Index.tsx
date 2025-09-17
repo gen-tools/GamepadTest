@@ -127,7 +127,7 @@ export default function Index() {
     <div className="flex flex-col">
       <Helmet>
         <title>GamepadTest | Free Online Controller, GPU, Mic & MIDI Tester</title>
-        <meta name="description" content="GamepadTest lets you test controllers, GPU, mic, and MIDI devices online. Detect drift, check graphics, mic input & MIDI signals instantly—no downloads." />
+        <meta name="description" content="GamepadTest lets you test controllers, GPU, mic, and MIDI online. Find stick drift, verify inputs, run benchmarks, and fix issues — free, no download." />
         <meta name="keywords" content="gamepadtest, gamepad tester, gpu tester, mic tester, midi tester" />
         <link rel="canonical" href="https://www.gamepadtest.tech/" />
         <script type="application/ld+json">{JSON.stringify({
