@@ -262,18 +262,21 @@ export default function GamepadTester() {
   const recommendedProducts = [
     {
       name: "Official Luna Wireless Controller",
+      description: "BUILT FOR AMAZON LUNA – Designed for the best experience on Luna, Amazon's cloud gaming service.",
       href: "https://amzn.to/42wogzI",
       imageSrc: "https://m.media-amazon.com/images/I/51qbcWzHSML._AC_SL1000_.jpg",
       alt: "Luna Wireless Controller",
     },
     {
       name: "Xbox Wireless Gaming Controller – Ice Breaker Special Edition",
+      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
       href: "https://amzn.to/3KmlSW4",
       imageSrc: "https://m.media-amazon.com/images/I/71Js3hjffrL._SL1500_.jpg",
       alt: "Xbox Wireless Gaming Controller",
     },
     {
       name: "PlayStation DualSense® Wireless Controller",
+      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
       href: "https://amzn.to/3K1XlWl",
       imageSrc: "https://m.media-amazon.com/images/I/51PmeLGEkML._SL1500_.jpg",
       alt: "PlayStation DualSense",
