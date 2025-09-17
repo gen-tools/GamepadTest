@@ -37,21 +37,21 @@ export default function MicTester() {
   const micProducts: RecommendedProductItem[] = [
     {
       name: "Logitech for Creators Blue Microphones Yeti USB Microphone (Blackout)",
-      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
+      description: "Studio-quality sound with multiple pickup patterns, perfect for streaming, podcasts, and voiceovers.",
       href: "https://amzn.to/46sl4Xn",
       imageSrc: "https://m.media-amazon.com/images/I/61KTMvS5JBL._AC_SL1500_.jpg",
       alt: "Blue Yeti USB Microphone"
     },
     {
       name: "HyperX SoloCast – USB Condenser Gaming Microphone, for PC, PS4, PS5 and Mac",
-      description: "Budget-friendly USB condenser microphone for voice and calls.",
+      description: "Compact, plug-and-play mic with tap-to-mute and crisp sound for gaming, meetings, and streaming.",
       href: "https://amzn.to/3IncdOu",
       imageSrc: "https://m.media-amazon.com/images/I/71HnM5DFBBL._AC_SL1500_.jpg",
       alt: "HyperX SoloCast – USB Condenser Gaming Microphone"
     },
     {
       name: "Shure SM58 Pro Dynamic Microphone with 25-Foot XLR Cable",
-      description: "USB audio interface with clean mic preamp for creators.",
+      description: "Legendary vocal mic with built-in pop filter and XLR cable, ideal for live performance and recording.",
       href: "https://www.amazon.com/dp/B07QR6Z1JB",
       imageSrc: "https://m.media-amazon.com/images/I/616y7aDplTL._AC_SL1500_.jpg",
       alt: "Shure SM58 Pro Dynamic Microphone "
