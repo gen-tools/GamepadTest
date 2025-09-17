@@ -300,6 +300,37 @@ export default function MicTester() {
     return { rating: 'Poor', color: 'text-red-600' };
   };
 
+  const micAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Online Mic Tester',
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Any',
+    url: 'https://www.gamepadtest.tech/mic-tester',
+    description: 'Instantly test your mic online—free & secure. Check sound levels in seconds and fix mic issues fast.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  } as const;
+
+  const micBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
+      { '@type': 'ListItem', position: 2, name: 'Mic Tester', item: 'https://www.gamepadtest.tech/mic-tester' }
+    ]
+  } as const;
+
+  const micFAQ = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'How to test my microphone online?', acceptedAnswer: { '@type': 'Answer', text: 'Open the mic tester, allow mic permission, and speak. If the level bar moves, your mic works.' }},
+      { '@type': 'Question', name: 'How to test microphone on Windows 10?', acceptedAnswer: { '@type': 'Answer', text: 'Use Sound settings to monitor input, or run our mic tester online for quick verification.' }},
+      { '@type': 'Question', name: 'Why is my microphone not working?', acceptedAnswer: { '@type': 'Answer', text: 'Check mute switches, input selection, drivers, permissions, and cables.' }},
+      { '@type': 'Question', name: 'Best online microphone test?', acceptedAnswer: { '@type': 'Answer', text: 'Our browser-based tester is fast, secure, and requires no downloads.' }}
+    ]
+  } as const;
+
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
@@ -307,6 +338,9 @@ export default function MicTester() {
         <meta name="description" content="Instantly test your mic online—free & secure. Check sound levels in seconds, fix mic issues fast, and join calls with confidence on GamepadTest." />
         <meta name="keywords" content="microphone tester, mic test, audio input test, microphone quality test, mic level test, audio analyzer, microphone sensitivity test" />
         <link rel="canonical" href="https://www.gamepadtest.tech/mic-tester" />
+        <script type="application/ld+json">{JSON.stringify(micAppSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(micBreadcrumb)}</script>
+        <script type="application/ld+json">{JSON.stringify(micFAQ)}</script>
       </Helmet>
       
       <div className="max-w-6xl mx-auto">
@@ -660,7 +694,7 @@ export default function MicTester() {
                 <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> – Diagnose controller input issues
               </li>
               <li>
-                <Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> – Run a GPU test online to check graphics card performance
+                <Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> �� Run a GPU test online to check graphics card performance
               </li>
               <li>
                 <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> – Test MIDI keyboards and controllers
