@@ -7,7 +7,7 @@ import { Slider } from '@/components/ui/slider';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
-import { micProducts } from '@/data/recommended';
+import type { RecommendedProductItem } from '@/components/RecommendedProducts';
 
 interface AudioStats {
   level: number;
@@ -32,6 +32,31 @@ export default function MicTester() {
   const [selectedDevice, setSelectedDevice] = useState<string>('');
   const [sensitivity, setSensitivity] = useState([50]);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Recommended products for Mic Tester page (edit these items as needed)
+  const micProducts: RecommendedProductItem[] = [
+    {
+      name: "Blue Yeti USB Microphone",
+      description: "Plug-and-play USB mic for streaming, meetings, and recording.",
+      href: "https://www.amazon.com/dp/B00N1YPXW2",
+      imageSrc: "https://m.media-amazon.com/images/I/61J3V7aP1YL._AC_SL1500_.jpg",
+      alt: "Blue Yeti USB Microphone"
+    },
+    {
+      name: "FIFINE K669B Condenser Mic",
+      description: "Budget-friendly USB condenser microphone for voice and calls.",
+      href: "https://www.amazon.com/dp/B06XCKGLTP",
+      imageSrc: "https://m.media-amazon.com/images/I/61H8wYc5bZL._AC_SL1500_.jpg",
+      alt: "FIFINE K669B USB Microphone"
+    },
+    {
+      name: "Focusrite Scarlett Solo (3rd Gen)",
+      description: "USB audio interface with clean mic preamp for creators.",
+      href: "https://www.amazon.com/dp/B07QR6Z1JB",
+      imageSrc: "https://m.media-amazon.com/images/I/71w8mW3l7bL._AC_SL1500_.jpg",
+      alt: "Focusrite Scarlett Solo"
+    }
+  ];
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
