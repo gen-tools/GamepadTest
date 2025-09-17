@@ -10,7 +10,10 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Permissions-Policy", "value": "midi=(self), microphone=(self)" }
+        {
+          "key": "Permissions-Policy",
+          "value": "midi=(self), microphone=(self)"
+        }
       ]
     }
   ]

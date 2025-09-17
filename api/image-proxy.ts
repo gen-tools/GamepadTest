@@ -37,7 +37,9 @@ export default async function handler(req: any, res: any) {
     });
 
     if (!upstream.ok) {
-      res.status(upstream.status).json({ error: `Upstream ${upstream.status}` });
+      res
+        .status(upstream.status)
+        .json({ error: `Upstream ${upstream.status}` });
       return;
     }
 
