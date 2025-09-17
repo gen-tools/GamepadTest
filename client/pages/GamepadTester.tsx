@@ -239,6 +239,26 @@ export default function GamepadTester() {
 
   const faqStructuredData = faqData;
 
+  const gamepadAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Online Gamepad Tester',
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Any',
+    url: 'https://www.gamepadtest.tech/gamepad-tester',
+    description: 'Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  } as const;
+
+  const gamepadBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
+      { '@type': 'ListItem', position: 2, name: 'Gamepad Tester', item: 'https://www.gamepadtest.tech/gamepad-tester' }
+    ]
+  } as const;
+
   const recommendedProducts = [
     {
       name: "Official Luna Wireless Controller",
@@ -267,6 +287,9 @@ export default function GamepadTester() {
         <meta name="description" content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." />
         <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker" />
         <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
+        <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(gamepadBreadcrumb)}</script>
+        <script type="application/ld+json">{JSON.stringify(howToStructuredData)}</script>
       </Helmet>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
