@@ -477,8 +477,8 @@ export default function MidiTester() {
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
-        <title>Online MIDI Tester | Check & Monitor MIDI Devices Free</title>
-        <meta name="description" content="Test your MIDI keyboard, drum pad, or controller online—free & secure. Monitor signals, hear notes, and troubleshoot devices instantly on GamepadTest." />
+        <title>MIDI Tester – Test Your Keyboard, Pads & Controllers Online</title>
+        <meta name="description" content="Test your MIDI keyboard, drum pads, and controllers online. Get instant note feedback, troubleshoot connection issues, and ensure your gear works perfectly." />
         <meta name="keywords" content="midi tester, midi device test, midi keyboard test, midi input monitor, midi controller test, midi message analyzer" />
         <link rel="canonical" href="https://www.gamepadtest.tech/midi-tester" />
         <script type="application/ld+json">{JSON.stringify(midiAppSchema)}</script>
