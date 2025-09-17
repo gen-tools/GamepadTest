@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
-import { midiProducts } from '@/data/recommended';
+import type { RecommendedProductItem } from '@/components/RecommendedProducts';
 
 interface MIDIDeviceInfo {
   id: string;
@@ -46,6 +46,31 @@ export default function MidiTester() {
   const [isConnected, setIsConnected] = useState(false);
   const [totalMessages, setTotalMessages] = useState(0);
   const [midiError, setMidiError] = useState<string | null>(null);
+
+  // Recommended products for MIDI Tester page (edit these items as needed)
+  const midiProducts: RecommendedProductItem[] = [
+    {
+      name: "AKAI MPK Mini MK3",
+      description: "Compact 25-key MIDI controller with pads and knobs.",
+      href: "https://www.amazon.com/dp/B0887Y6DCG",
+      imageSrc: "https://m.media-amazon.com/images/I/71kU5lH8vHL._AC_SL1500_.jpg",
+      alt: "AKAI MPK Mini MK3"
+    },
+    {
+      name: "Novation Launchkey 49 [MK3]",
+      description: "49-key controller with deep Ableton integration.",
+      href: "https://www.amazon.com/dp/B089M8JQNN",
+      imageSrc: "https://m.media-amazon.com/images/I/61qSxn9VUbL._AC_SL1500_.jpg",
+      alt: "Novation Launchkey 49 MK3"
+    },
+    {
+      name: "Arturia KeyLab Essential 61",
+      description: "61-key controller with DAW controls and software bundle.",
+      href: "https://www.amazon.com/dp/B0711V4S8N",
+      imageSrc: "https://m.media-amazon.com/images/I/71GBo5G2sTL._AC_SL1500_.jpg",
+      alt: "Arturia KeyLab Essential 61"
+    }
+  ];
 
   const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
