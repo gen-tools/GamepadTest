@@ -443,6 +443,37 @@ export default function MidiTester() {
     );
   };
 
+  const midiAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Online MIDI Tester',
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Any',
+    url: 'https://www.gamepadtest.tech/midi-tester',
+    description: 'Test MIDI keyboards, pads, and controllers online with real-time monitoring and optional sound.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  } as const;
+
+  const midiBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
+      { '@type': 'ListItem', position: 2, name: 'MIDI Tester', item: 'https://www.gamepadtest.tech/midi-tester' }
+    ]
+  } as const;
+
+  const midiFAQ = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'How to test keyboard buttons online?', acceptedAnswer: { '@type': 'Answer', text: 'Press keys and watch the monitor update. Silent keys may indicate hardware or driver issues.' }},
+      { '@type': 'Question', name: 'Controller not working test?', acceptedAnswer: { '@type': 'Answer', text: 'Run a connection check and verify device selection in your DAW and browser.' }},
+      { '@type': 'Question', name: 'How do I test my keyboard online?', acceptedAnswer: { '@type': 'Answer', text: 'Connect your device, open the tester, and play—signals display in real time.' }},
+      { '@type': 'Question', name: 'Keyboard troubleshooting online', acceptedAnswer: { '@type': 'Answer', text: 'Check channels, drivers, permissions, and DAW connections.' }}
+    ]
+  } as const;
+
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
@@ -450,6 +481,9 @@ export default function MidiTester() {
         <meta name="description" content="Test your MIDI keyboard, drum pad, or controller online—free & secure. Monitor signals, hear notes, and troubleshoot devices instantly on GamepadTest." />
         <meta name="keywords" content="midi tester, midi device test, midi keyboard test, midi input monitor, midi controller test, midi message analyzer" />
         <link rel="canonical" href="https://www.gamepadtest.tech/midi-tester" />
+        <script type="application/ld+json">{JSON.stringify(midiAppSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(midiBreadcrumb)}</script>
+        <script type="application/ld+json">{JSON.stringify(midiFAQ)}</script>
       </Helmet>
       
       <div className="max-w-6xl mx-auto">
