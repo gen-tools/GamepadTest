@@ -295,8 +295,8 @@ export default function GpuTester() {
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
-        <title>Online GPU Tester | Check Graphics Instantly – GamepadTest</title>
-        <meta name="description" content="Test your GPU online free. Detect overheating, glitches & performance issues in seconds. Safe, browser-based graphics card checker—try it now on GamepadTest." />
+        <title>GPU Tester – Free Online Graphics Card Benchmark & Checker</title>
+        <meta name="description" content="Run a quick GPU test online to check performance, temps, FPS, and stability. Works with NVIDIA, AMD, and integrated graphics — no download needed." />
         <meta name="keywords" content="gpu tester, graphics card test, webgl benchmark, gpu performance test, graphics performance, hardware testing, gpu specs, rendering test" />
         <link rel="canonical" href="https://www.gamepadtest.tech/gpu-tester" />
         <script type="application/ld+json">{JSON.stringify(gpuAppSchema)}</script>
