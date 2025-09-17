@@ -9,7 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import RootApp from "@/RootApp";
 
 const app = createServer();
-const port = process.env.PORT || 3000;
+const port = Number(process.env.PORT) || 8080;
 
 // In production, serve the built SPA files
 const __dirname = import.meta.dirname;

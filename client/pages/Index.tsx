@@ -130,6 +130,42 @@ export default function Index() {
         <meta name="description" content="GamepadTest lets you test controllers, GPU, mic, and MIDI devices online. Detect drift, check graphics, mic input & MIDI signals instantly—no downloads." />
         <meta name="keywords" content="gamepadtest, gamepad tester, gpu tester, mic tester, midi tester" />
         <link rel="canonical" href="https://www.gamepadtest.tech/" />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'GamepadTest',
+          url: 'https://www.gamepadtest.tech'
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'GamepadTest',
+          url: 'https://www.gamepadtest.tech',
+          sameAs: [
+            'https://twitter.com/gamepadchecker',
+            'https://facebook.com/gamepadchecker'
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SiteNavigationElement',
+          name: [
+            'Gamepad Tester',
+            'GPU Tester',
+            'Mic Tester',
+            'MIDI Tester',
+            'Blog',
+            'About'
+          ],
+          url: [
+            'https://www.gamepadtest.tech/gamepad-tester',
+            'https://www.gamepadtest.tech/gpu-tester',
+            'https://www.gamepadtest.tech/mic-tester',
+            'https://www.gamepadtest.tech/midi-tester',
+            'https://www.gamepadtest.tech/blog',
+            'https://www.gamepadtest.tech/about'
+          ]
+        })}</script>
       </Helmet>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-20 sm:py-32">

@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import type { RecommendedProductItem } from '@/components/RecommendedProducts';
 
 interface AudioStats {
   level: number;
@@ -30,6 +32,31 @@ export default function MicTester() {
   const [selectedDevice, setSelectedDevice] = useState<string>('');
   const [sensitivity, setSensitivity] = useState([50]);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Recommended products for Mic Tester page (edit these items as needed)
+  const micProducts: RecommendedProductItem[] = [
+    {
+      name: "Logitech for Creators Blue Microphones Yeti USB Microphone (Blackout)",
+      description: "Studio-quality sound with multiple pickup patterns, perfect for streaming, podcasts, and voiceovers.",
+      href: "https://amzn.to/46sl4Xn",
+      imageSrc: "https://m.media-amazon.com/images/I/61KTMvS5JBL._AC_SL1500_.jpg",
+      alt: "Blue Yeti USB Microphone"
+    },
+    {
+      name: "HyperX SoloCast – USB Condenser Gaming Microphone, for PC, PS4, PS5 and Mac",
+      description: "Compact, plug-and-play mic with tap-to-mute and crisp sound for gaming, meetings, and streaming.",
+      href: "https://amzn.to/3IncdOu",
+      imageSrc: "https://m.media-amazon.com/images/I/71HnM5DFBBL._AC_SL1500_.jpg",
+      alt: "HyperX SoloCast – USB Condenser Gaming Microphone"
+    },
+    {
+      name: "Shure SM58 Pro Dynamic Microphone with 25-Foot XLR Cable",
+      description: "Legendary vocal mic with built-in pop filter and XLR cable, ideal for live performance and recording.",
+      href: "https://www.amazon.com/dp/B07QR6Z1JB",
+      imageSrc: "https://m.media-amazon.com/images/I/616y7aDplTL._AC_SL1500_.jpg",
+      alt: "Shure SM58 Pro Dynamic Microphone "
+    }
+  ];
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -273,13 +300,47 @@ export default function MicTester() {
     return { rating: 'Poor', color: 'text-red-600' };
   };
 
+  const micAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Online Mic Tester',
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Any',
+    url: 'https://www.gamepadtest.tech/mic-tester',
+    description: 'Instantly test your mic online—free & secure. Check sound levels in seconds and fix mic issues fast.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  } as const;
+
+  const micBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
+      { '@type': 'ListItem', position: 2, name: 'Mic Tester', item: 'https://www.gamepadtest.tech/mic-tester' }
+    ]
+  } as const;
+
+  const micFAQ = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'How to test my microphone online?', acceptedAnswer: { '@type': 'Answer', text: 'Open the mic tester, allow mic permission, and speak. If the level bar moves, your mic works.' }},
+      { '@type': 'Question', name: 'How to test microphone on Windows 10?', acceptedAnswer: { '@type': 'Answer', text: 'Use Sound settings to monitor input, or run our mic tester online for quick verification.' }},
+      { '@type': 'Question', name: 'Why is my microphone not working?', acceptedAnswer: { '@type': 'Answer', text: 'Check mute switches, input selection, drivers, permissions, and cables.' }},
+      { '@type': 'Question', name: 'Best online microphone test?', acceptedAnswer: { '@type': 'Answer', text: 'Our browser-based tester is fast, secure, and requires no downloads.' }}
+    ]
+  } as const;
+
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
-        <title>Online Mic Tester | Check Microphone Instantly – GamepadTest</title>
-        <meta name="description" content="Instantly test your mic online—free & secure. Check sound levels in seconds, fix mic issues fast, and join calls with confidence on GamepadTest." />
+        <title>Free Mic Test Online – Test & Troubleshoot Your Microphone</title>
+        <meta name="description" content="Test your microphone online for free. Our mic tester lets you check sound input, troubleshoot issues, and quickly fix common mic problems." />
         <meta name="keywords" content="microphone tester, mic test, audio input test, microphone quality test, mic level test, audio analyzer, microphone sensitivity test" />
         <link rel="canonical" href="https://www.gamepadtest.tech/mic-tester" />
+        <script type="application/ld+json">{JSON.stringify(micAppSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(micBreadcrumb)}</script>
+        <script type="application/ld+json">{JSON.stringify(micFAQ)}</script>
       </Helmet>
       
       <div className="max-w-6xl mx-auto">
@@ -475,6 +536,7 @@ export default function MicTester() {
           </Card>
         )}
 
+        <RecommendedProductsSection title="Recommended Products" products={micProducts} />
         {/* Instructions */}
         <Card>
           <CardHeader>
@@ -505,175 +567,185 @@ export default function MicTester() {
           </CardContent>
         </Card>
 
-        {/* Comprehensive Guide & FAQs */}
-        <Card className="mt-10">
-          <CardHeader>
-            <CardTitle>Mic Testing Guide & FAQs</CardTitle>
-            <CardDescription>Everything you need to know about testing your microphone online</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-8 text-base leading-7">
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold">Online Mic Tester – Check If Your Microphone Works</h2>
-              <p>
-                A working microphone has become as important as the keyboard or the mouse. You need it for online meetings, virtual classes, voice chats while gaming, and recording content. Yet microphones fail more often than we expect. Sometimes your friends say your voice is too quiet, other times the mic does not respond at all. Before you buy a new one or spend hours adjusting settings, the easiest step is to run a quick mic test online free.
-              </p>
-              <p>
-                That is exactly what this tool does. Our mic tester online checks your microphone instantly in the browser. No software, no downloads, no complicated setup. You just open the page, give the browser permission to access the mic, and speak. If the sound levels move, your microphone is working. If not, you know where the problem starts.
-              </p>
-              <div className="pt-2">
-                <Button asChild className="gap-2">
-                  <Link to="/mic-tester">👉 Try it now: Mic Tester</Link>
-                </Button>
+        {/* Mic Tester: New SEO content */}
+        <article className="mt-10 space-y-10 text-base leading-7">
+          <section className="space-y-3" id="mic-tester-online">
+            <h2 className="text-2xl font-bold">Mic Tester Online – Check Your Microphone Instantly</h2>
+            <p>
+              If your microphone stops working, it can turn an important call, stream, or recording session into a frustrating mess. The good news is you can quickly run a mic tester online and figure out what’s wrong before wasting time in meetings or games with no audio.
+            </p>
+            <p>
+              This guide will help you use our mic test online free tool, troubleshoot common microphone issues, and even choose the best hardware if you need an upgrade.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="why-you-need-an-online-mic-tester">
+            <h3 className="text-xl font-semibold">Why You Need an Online Mic Tester</h3>
+            <p>
+              Microphones can fail for many reasons — wrong settings, software bugs, damaged cables, or even muted input devices. A simple online microphone test helps you:
+            </p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>Confirm if your mic is picking up sound</li>
+              <li>Troubleshoot whether the issue is hardware or software</li>
+              <li>Avoid embarrassment in video calls or streaming sessions</li>
+              <li>Test a new mic before recording</li>
+            </ul>
+            <p>
+              Instead of installing heavy programs or fiddling with drivers right away, start with a quick mic tester online and save time.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="instant-results">
+            <h3 className="text-xl font-semibold">Mic Tester Online – Instant Results</h3>
+            <p>
+              Our mic tester online tool is browser-based, meaning no installation is required. You just open the page, grant microphone access, and start speaking. You’ll see a real-time sound level bar move as you talk — if it reacts, your mic is working.
+            </p>
+            <p>This microphone test tool works on:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>Windows PCs</li>
+              <li>macOS laptops</li>
+              <li>Linux systems</li>
+              <li>Android phones</li>
+              <li>iOS devices</li>
+            </ul>
+            <p>
+              It’s perfect for testing headsets, USB microphones, gaming mics, and even built-in laptop microphones.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="free-online-mic-test">
+            <h3 className="text-xl font-semibold">Free Online Mic Test – No Downloads</h3>
+            <p>One of the best things about a free online mic test is that it runs entirely in your browser. That means:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>No software to install</li>
+              <li>No risk of malware</li>
+              <li>Instant results</li>
+              <li>Works across browsers like Chrome, Edge, Firefox, and Safari</li>
+            </ul>
+            <p>
+              This makes it an excellent choice if you just want a quick mic check before joining a Zoom call or starting a stream.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="test-microphone-online">
+            <h3 className="text-xl font-semibold">Test Microphone Online – Step by Step</h3>
+            <p>Here’s how to test microphone online quickly and accurately:</p>
+            <ol className="list-decimal pl-6 text-muted-foreground space-y-1">
+              <li>Make sure your microphone is plugged in or enabled</li>
+              <li>Close other apps that might be using the mic</li>
+              <li>
+                Open our <Link to="/mic-tester" className="text-primary underline">mic test online</Link> page
+              </li>
+              <li>Allow microphone access when prompted</li>
+              <li>Speak normally and watch the sound level meter move</li>
+            </ol>
+            <p>
+              If you see movement, your microphone is working. If not, check your system settings or try a different input device.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="benefits-of-online-mic-test">
+            <h3 className="text-xl font-semibold">Benefits of Using an Online Microphone Test</h3>
+            <p>Running an online microphone test gives you peace of mind before important events. It helps with:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>Remote meetings (Zoom, Google Meet, Teams)</li>
+              <li>Online classes and webinars</li>
+              <li>Voice chats in games (Discord, Steam, Xbox Live)</li>
+              <li>Streaming setups (Twitch, YouTube)</li>
+              <li>Podcast recording</li>
+            </ul>
+            <p>
+              Instead of joining a call and wasting time saying “Can you hear me?” — run a test microphone online first.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="advanced-features">
+            <h3 className="text-xl font-semibold">Advanced Features of a Microphone Test Tool</h3>
+            <p>A good microphone test tool is more than just a basic checker. You can:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>Detect background noise and interference</li>
+              <li>Check left/right audio balance on stereo mics</li>
+              <li>Test sensitivity for singing or ASMR recording</li>
+              <li>Verify multiple input devices before switching</li>
+            </ul>
+            <p>If you’re serious about content creation, testing often helps catch issues early.</p>
+          </section>
+
+          <section className="space-y-3" id="common-problems-and-fixes">
+            <h3 className="text-xl font-semibold">Common Microphone Problems and Fixes</h3>
+            <p>Sometimes a mic test online shows no input. Here’s what to check:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li><span className="font-medium">Muted microphone</span> – Look for a physical mute switch or mute button in your software</li>
+              <li><span className="font-medium">Wrong input selected</span> – Choose the correct device in system settings</li>
+              <li><span className="font-medium">Driver issues</span> – Update audio drivers</li>
+              <li><span className="font-medium">Damaged cable</span> – Try a different cable or USB port</li>
+              <li><span className="font-medium">Permissions blocked</span> – Make sure your browser has mic access enabled</li>
+            </ul>
+            <p>
+              If your mic passes the mic tester online but you still have issues in apps, check each app’s input settings individually.
+            </p>
+          </section>
+
+          <section className="space-y-3" id="internal-links">
+            <h3 className="text-xl font-semibold">Internal Links to Other Tools</h3>
+            <p>You can keep your setup running smoothly with our other tools too:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>
+                <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> – Diagnose controller input issues
+              </li>
+              <li>
+                <Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> �� Run a GPU test online to check graphics card performance
+              </li>
+              <li>
+                <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> – Test MIDI keyboards and controllers
+              </li>
+            </ul>
+            <p>Internal linking helps users troubleshoot their full system without leaving your site.</p>
+          </section>
+
+          <section className="space-y-3" id="choosing-the-best-microphone">
+            <h3 className="text-xl font-semibold">Choosing the Best Microphone</h3>
+            <p>If your microphone fails even after troubleshooting, it may be time to replace it. Look for:</p>
+            <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+              <li>USB plug-and-play mics – great for calls and streaming</li>
+              <li>XLR microphones – best for studio setups</li>
+              <li>Headset mics – convenient for gaming and meetings</li>
+            </ul>
+            <p>Adding a buying guide on your page lets visitors buy microphones online directly after testing.</p>
+          </section>
+
+          <section className="space-y-4" id="faqs">
+            <h3 className="text-xl font-semibold">FAQs</h3>
+            <div className="space-y-3">
+              <div>
+                <h4 className="font-semibold">How to test my microphone online?</h4>
+                <p>Just open our mic tester online, grant browser permission, and start speaking. If you see the bar move, your mic is working.</p>
               </div>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Why You Need a Mic Tester</h3>
-              <p>You may think you can test a mic by simply joining a call. The trouble is that it often wastes time. You only realize something is wrong when the meeting has already begun. A proper mic test online lets you confirm everything in advance.</p>
-              <p>There are many situations where a mic tester helps:</p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Before starting a video call for work or school</li>
-                <li>When preparing to record a podcast, lecture, or song</li>
-                <li>While setting up a gaming headset before streaming</li>
-                <li>After updating your operating system or audio drivers</li>
-                <li>When switching from a laptop mic to a USB or Bluetooth microphone</li>
-              </ul>
-              <p>Instead of guessing, you get a clear answer in seconds.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">How the Online Mic Tester Works</h3>
-              <p>The tool is designed to be simple. Here is what happens when you use it.</p>
-              <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
-                <li>You open the <Link to="/mic-tester" className="text-primary underline">Mic Tester</Link> page.</li>
-                <li>Your browser asks for permission to access the microphone.</li>
-                <li>Once allowed, the tool listens to your input and shows activity on screen.</li>
-                <li>You speak into the mic, clap, or make any sound. The tool shows movement if audio is detected.</li>
-              </ol>
-              <p>There is no recording or storage involved. The test only shows whether sound is reaching your device in real time.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Benefits of Testing Your Mic Online</h3>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Instant feedback – no need to record, save, and play back.</li>
-                <li>Works on any device – desktop, laptop, or phone.</li>
-                <li>Free forever – run a mic test online free anytime.</li>
-                <li>Safe – runs in your browser, nothing gets downloaded.</li>
-              </ul>
-              <p>This is why many streamers, teachers, and office workers check their microphone here before going live.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">When to Run a Mic Test</h3>
-              <p>You do not need to wait until your microphone fails completely. In fact, regular checks prevent surprises. Here are some good times to use the tester:</p>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Right before an online exam or job interview</li>
-                <li>When setting up new equipment such as a headset or USB mic</li>
-                <li>After a system crash or sudden sound problem</li>
-                <li>Before important gaming sessions where communication matters</li>
-                <li>When others say your voice sounds muffled or unclear</li>
-              </ul>
-              <p>Running a mic test online takes less than a minute but saves you from stress later.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Troubleshooting Microphone Problems</h3>
-              <div className="space-y-2">
-                <div>
-                  <h4 className="font-semibold">Check connections</h4>
-                  <p>Make sure the microphone is properly plugged in. For Bluetooth devices, confirm they are paired.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Check permissions</h4>
-                  <p>Browsers and apps often block access to microphones until you allow it manually.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Adjust system settings</h4>
-                  <p>Open your computer’s sound settings and increase input volume.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Update drivers</h4>
-                  <p>Outdated drivers can prevent your system from detecting the microphone.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Test another app or device</h4>
-                  <p>Running the mic test online free on another computer helps confirm if the issue is with the mic or the system.</p>
-                </div>
+              <div>
+                <h4 className="font-semibold">How to test microphone on Windows 10?</h4>
+                <p>Right-click the sound icon, go to “Sounds,” then “Recording.” Select your mic, click “Properties,” then “Listen.” Or simply run our mic test online free tool for quicker results.</p>
               </div>
-              <p>If none of these work, the microphone may indeed be faulty.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Types of Microphones You Can Test</h3>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li>Built-in laptop microphones – check before joining online classes or meetings</li>
-                <li>USB microphones – ideal for podcasters, streamers, and voice-over artists</li>
-                <li>Headset microphones – make sure your gaming headset mic is working properly</li>
-                <li>Bluetooth microphones – quickly confirm wireless devices are connected</li>
-                <li>External audio interfaces – verify connected professional microphones</li>
-              </ul>
-              <p>No matter which mic you use, the tester works the same way.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Mic Tester Online vs Recording Software</h3>
-              <p>Recording apps require you to capture a sound clip, save it, and then play it back. That process is slower and less convenient. An online mic tester shows instant feedback. You can see the sound activity as you speak, without creating unnecessary files.</p>
-              <p>It is also safer. Many recording programs ask for installation or access to files on your computer. The tester here runs only in your browser and disappears as soon as you close the tab.</p>
-            </section>
-
-            <section className="space-y-3">
-              <h3 className="text-xl font-semibold">Other Free Tools on Our Website</h3>
-              <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                <li><Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> – lets you check PlayStation, Xbox, and PC controllers</li>
-                <li><Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> – helps you run a gpu test online to verify graphics card performance</li>
-                <li><Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> – designed for musicians who want to test MIDI keyboards and devices</li>
-              </ul>
-              <p>
-                You can also visit our <Link to="/about" className="text-primary underline">About</Link> page to learn more about the project, use <Link to="/contact" className="text-primary underline">Contact</Link> to reach out, or explore tips and tutorials on our <Link to="/blog" className="text-primary underline">Blog</Link>.
-              </p>
-            </section>
-
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold">How do I test my mic online free</h3>
-                  <p>Open the <Link to="/mic-tester" className="text-primary underline">Mic Tester</Link>, allow microphone access, and speak. If the input levels move, your mic works.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Does the mic tester online record my voice</h3>
-                  <p>No. The tool only checks live audio levels in your browser. Nothing is stored or shared.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Can I use this on my phone</h3>
-                  <p>Yes. You can open the tester in your mobile browser and check built-in or external microphones.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Why does my mic not show any response</h3>
-                  <p>Check your connection, allow permissions, and adjust system input settings. If it still does not work, the microphone may be faulty.</p>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Can this tool improve microphone quality</h3>
-                  <p>No. It only shows if the mic is working. For higher quality, you may need better hardware or software filters.</p>
-                </div>
+              <div>
+                <h4 className="font-semibold">Why is my microphone not working?</h4>
+                <p>Common reasons include muted hardware, wrong input device selected, outdated drivers, or blocked permissions. Try our test microphone online tool to confirm if the issue is hardware or software.</p>
               </div>
-            </section>
+              <div>
+                <h4 className="font-semibold">Best online microphone test?</h4>
+                <p>Our tool is one of the fastest and most reliable ways to run a free online mic test — no downloads, no account needed.</p>
+              </div>
+            </div>
+          </section>
 
-            <section className="space-y-3">
-              <h2 className="text-2xl font-bold">Conclusion</h2>
-              <p>
-                Your microphone is the voice of your digital life. It allows you to speak, teach, perform, and connect. But when it fails, the impact is immediate and frustrating. Instead of waiting until you are already in a call or stream, use our mic test online free to confirm everything in advance.
-              </p>
-              <p>
-                It takes less than a minute. Open the <Link to="/mic-tester" className="text-primary underline">Mic Tester</Link>, speak into your microphone, and get instant confirmation. No downloads, no hassle, just a clear answer.
-              </p>
-              <p>
-                And if you want to make sure the rest of your setup is in top shape, try our <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link>, <Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link>, and <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> as well. Our goal is to give you simple tools that keep your devices working when you need them most.
-              </p>
-            </section>
-          </CardContent>
-        </Card>
+          <section className="space-y-3" id="final-thoughts">
+            <h3 className="text-xl font-semibold">Final Thoughts</h3>
+            <p>
+              Running a mic tester online takes just seconds but can save you from wasted calls, failed recordings, or awkward silences. Whether you’re testing a headset, a podcasting mic, or your laptop’s built-in microphone, our mic test online tool gives instant feedback.
+            </p>
+            <p>
+              Pair this tool with our <Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> and <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> to make sure every part of your setup works smoothly. A quick microphone test tool now means fewer tech headaches later — and more time focusing on your calls, streams, or creative work.
+            </p>
+          </section>
+        </article>
       </div>
     </div>
   );
