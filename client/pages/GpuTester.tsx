@@ -272,6 +272,26 @@ export default function GpuTester() {
     },
   ];
 
+  const gpuAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Online GPU Tester',
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'Any',
+    url: 'https://www.gamepadtest.tech/gpu-tester',
+    description: 'Test your GPU online free. Detect overheating, glitches & performance issues in seconds.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  } as const;
+
+  const gpuBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
+      { '@type': 'ListItem', position: 2, name: 'GPU Tester', item: 'https://www.gamepadtest.tech/gpu-tester' }
+    ]
+  } as const;
+
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
@@ -279,6 +299,8 @@ export default function GpuTester() {
         <meta name="description" content="Test your GPU online free. Detect overheating, glitches & performance issues in seconds. Safe, browser-based graphics card checker—try it now on GamepadTest." />
         <meta name="keywords" content="gpu tester, graphics card test, webgl benchmark, gpu performance test, graphics performance, hardware testing, gpu specs, rendering test" />
         <link rel="canonical" href="https://www.gamepadtest.tech/gpu-tester" />
+        <script type="application/ld+json">{JSON.stringify(gpuAppSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(gpuBreadcrumb)}</script>
       </Helmet>
       
       <div className="max-w-6xl mx-auto">
