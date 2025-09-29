@@ -181,7 +181,7 @@ export default function Index() {
               <span className="text-gray-700 animate-scale-in">GamepadTest</span> – Free Online Gamepad & Controller Tester
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground animate-fade-in-up animate-stagger-1">
-              Professional-grade gamepad testing tool trusted by millions. Test Xbox, PlayStation, and PC controllers with instant real-time results. 100% free, no downloads required.
+             GamepadTest lets you test controllers, GPU, mic, and MIDI online. Find stick drift, verify inputs, run benchmarks, and fix issues — free, no download.  required.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up animate-stagger-2">
               <Button asChild size="lg" className="gap-2 hover-lift hover-glow">
