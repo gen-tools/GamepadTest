@@ -72,72 +72,102 @@ export default function GamepadTester() {
 
     for (let i = 0; i < gamepadList.length; i++) {
       const gamepad = gamepadList[i];
-      if (gamepad) {
-        const currentButtons = gamepad.buttons.map(button => button.pressed);
-        const previousButtons = prevButtonsRef.current || new Array(currentButtons.length).fill(false);
+      if (!gamepad) continue;
 
-        let newPresses = 0;
-        for (let b = 0; b < currentButtons.length; b++) {
-          if (currentButtons[b] && !previousButtons[b]) newPresses++;
+      const currentButtons = gamepad.buttons.map(button => button.pressed);
+      const previousButtons = prevButtonsRef.current[gamepad.index] || new Array(currentButtons.length).fill(false);
+
+      const pressedButtons: number[] = [];
+      const releasedButtons: number[] = [];
+      for (let b = 0; b < currentButtons.length; b++) {
+        if (currentButtons[b] && !previousButtons[b]) pressedButtons.push(b);
+        if (!currentButtons[b] && previousButtons[b]) releasedButtons.push(b);
+      }
+
+      if (pressedButtons.length > 0) {
+        setInputStats(prev => ({
+          ...prev,
+          buttonPresses: prev.buttonPresses + pressedButtons.length,
+          totalInputTime: prev.totalInputTime + dtMs,
+        }));
+
+        if (isLatencyTest && latencyTestStart > 0) {
+          const latency = Date.now() - latencyTestStart;
+          setLatencyResults(prev => [...prev, latency]);
+          setIsLatencyTest(false);
+          setLatencyTestStart(0);
+          setInputStats(prev => ({ ...prev, averageReactionTime: prev.averageReactionTime === 0 ? latency : (prev.averageReactionTime + latency) / 2 }));
         }
+      } else {
+        setInputStats(prev => ({ ...prev, totalInputTime: prev.totalInputTime + dtMs }));
+      }
 
-        if (newPresses > 0) {
-          setInputStats(prev => ({
-            ...prev,
-            buttonPresses: prev.buttonPresses + newPresses,
-            totalInputTime: prev.totalInputTime + dtMs,
-          }));
+      if (pressedButtons.length > 0 || releasedButtons.length > 0) {
+        const timestamp = Date.now();
+        const events: InputEvent[] = [
+          ...pressedButtons.map(button => ({ type: 'press' as const, button, gamepadIndex: gamepad.index, timestamp })),
+          ...releasedButtons.map(button => ({ type: 'release' as const, button, gamepadIndex: gamepad.index, timestamp })),
+        ];
+        setRecentInputs(prev => [...events, ...prev].slice(0, 14));
+      }
 
-          if (isLatencyTest && latencyTestStart > 0) {
-            const latency = Date.now() - latencyTestStart;
-            setLatencyResults(prev => [...prev, latency]);
-            setIsLatencyTest(false);
-            setLatencyTestStart(0);
-            setInputStats(prev => ({ ...prev, averageReactionTime: (prev.averageReactionTime + latency) / 2 }));
-          }
-        } else {
-          setInputStats(prev => ({ ...prev, totalInputTime: prev.totalInputTime + dtMs }));
-        }
-
-        let normalizedAxes = Array.from(gamepad.axes, v => applyDeadzone(v));
-
-        // Build triggers as -1..1 values. If axes provide them, use those; else fallback to button analog values (e.g., indices 6,7)
-        let triggers: number[] | undefined;
-        if (gamepad.axes.length > 4) {
-          triggers = gamepad.axes.slice(4).map(v => Math.max(-1, Math.min(1, v)));
-        } else if (gamepad.buttons.length >= 8) {
-          const l2 = gamepad.buttons[6]?.value ?? 0; // 0..1
-          const r2 = gamepad.buttons[7]?.value ?? 0;
-          // convert 0..1 to -1..1 like axes
-          triggers = [l2 * 2 - 1, r2 * 2 - 1];
-        }
-
-        if (gamepad.axes.length >= 2) {
-          const x = normalizedAxes[0] ?? 0;
-          const y = normalizedAxes[1] ?? 0;
-          const stickDistance = Math.sqrt(x * x + y * y);
-          setInputStats(prev => ({
-            ...prev,
-            maxStickDistance: Math.max(prev.maxStickDistance, stickDistance),
-          }));
-        }
-
-        prevButtonsRef.current = currentButtons;
-
-        newGamepads.push({
-          connected: gamepad.connected,
-          id: gamepad.id,
-          index: gamepad.index,
-          buttons: currentButtons,
-          axes: normalizedAxes,
-          timestamp: gamepad.timestamp,
-          triggers,
+      if (pressedButtons.length > 0) {
+        setButtonUsage(prev => {
+          const existing = prev[gamepad.index] ? [...prev[gamepad.index]] : new Array(currentButtons.length).fill(0);
+          pressedButtons.forEach(button => {
+            if (button >= existing.length) {
+              const extendBy = button - existing.length + 1;
+              existing.push(...new Array(extendBy).fill(0));
+            }
+            existing[button] = (existing[button] ?? 0) + 1;
+          });
+          return { ...prev, [gamepad.index]: existing };
         });
       }
+
+      if (releasedButtons.length > 0 && isLatencyTest) {
+        setIsLatencyTest(false);
+        setLatencyTestStart(0);
+      }
+
+      const normalizedAxes = Array.from(gamepad.axes, v => applyDeadzone(v));
+
+      // Build triggers as -1..1 values. If axes provide them, use those; else fallback to button analog values (e.g., indices 6,7)
+      let triggers: number[] | undefined;
+      if (gamepad.axes.length > 4) {
+        triggers = gamepad.axes.slice(4).map(v => Math.max(-1, Math.min(1, v)));
+      } else if (gamepad.buttons.length >= 8) {
+        const l2 = gamepad.buttons[6]?.value ?? 0; // 0..1
+        const r2 = gamepad.buttons[7]?.value ?? 0;
+        // convert 0..1 to -1..1 like axes
+        triggers = [l2 * 2 - 1, r2 * 2 - 1];
+      }
+
+      if (gamepad.axes.length >= 2) {
+        const x = normalizedAxes[0] ?? 0;
+        const y = normalizedAxes[1] ?? 0;
+        const stickDistance = Math.sqrt(x * x + y * y);
+        setInputStats(prev => ({
+          ...prev,
+          maxStickDistance: Math.max(prev.maxStickDistance, stickDistance),
+        }));
+      }
+
+      prevButtonsRef.current[gamepad.index] = currentButtons;
+
+      newGamepads.push({
+        connected: gamepad.connected,
+        id: gamepad.id,
+        index: gamepad.index,
+        buttons: currentButtons,
+        axes: normalizedAxes,
+        timestamp: gamepad.timestamp,
+        triggers,
+      });
     }
 
     setGamepads(newGamepads);
-  }, [isLatencyTest, latencyTestStart]);
+  }, [applyDeadzone, isLatencyTest, latencyTestStart]);
 
   const testVibration = async (gamepadIndex: number) => {
     const gamepad = navigator.getGamepads()[gamepadIndex];
