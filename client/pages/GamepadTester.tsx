@@ -209,6 +209,50 @@ export default function GamepadTester() {
     : 0;
 
   useEffect(() => {
+    return () => {
+      if (snapshotTimeoutRef.current) {
+        window.clearTimeout(snapshotTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const primaryPadIndex = gamepads[0]?.index;
+  const primaryButtonUsage = primaryPadIndex !== undefined ? buttonUsage[primaryPadIndex] : undefined;
+
+  const exportSnapshot = async () => {
+    const summary = [
+      `Controllers detected: ${gamepads.length}`,
+      `Button presses: ${inputStats.buttonPresses}`,
+      `Average latency: ${averageLatency ? `${averageLatency.toFixed(0)}ms` : 'n/a'}`,
+      `Max stick range: ${(inputStats.maxStickDistance * 100).toFixed(1)}%`,
+      `Deadzone: ${deadzone}%`,
+    ];
+
+    if (primaryButtonUsage) {
+      const topButtons = primaryButtonUsage
+        .map((count, index) => ({ index, count }))
+        .filter(entry => entry.count > 0)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 5)
+        .map(entry => `Button ${entry.index + 1}: ${entry.count}`);
+      if (topButtons.length > 0) {
+        summary.push('Top buttons:', ...topButtons);
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(summary.join('\n'));
+      setSnapshotCopied(true);
+      if (snapshotTimeoutRef.current) {
+        window.clearTimeout(snapshotTimeoutRef.current);
+      }
+      snapshotTimeoutRef.current = window.setTimeout(() => setSnapshotCopied(false), 2500);
+    } catch (error) {
+      console.error('Clipboard copy failed', error);
+    }
+  };
+
+  useEffect(() => {
     const handleGamepadConnected = (e: GamepadEvent) => {
       console.log('Gamepad connected:', e.gamepad.id);
     };
@@ -622,7 +666,7 @@ export default function GamepadTester() {
               Gaming feels effortless when your controller works perfectly. When something is off — drifting joystick, sticky button, or unresponsive trigger — a gamepad tester becomes essential.
             </p>
             <p>
-              Our tool lets you run a <Link to="/gamepad-tester" className="text-primary underline">controller tester online free</Link> in seconds. You’ll see real-time feedback for every button, trigger, and stick. This guide explains how to use the tester, fix common issues, and choose a replacement if needed.
+              Our tool lets you run a <Link to="/gamepad-tester" className="text-primary underline">controller tester online free</Link> in seconds. You���ll see real-time feedback for every button, trigger, and stick. This guide explains how to use the tester, fix common issues, and choose a replacement if needed.
             </p>
           </header>
 
