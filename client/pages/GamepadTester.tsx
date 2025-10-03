@@ -49,15 +49,22 @@ export default function GamepadTester() {
   const [isLatencyTest, setIsLatencyTest] = useState(false);
   const [latencyTestStart, setLatencyTestStart] = useState<number>(0);
   const [latencyResults, setLatencyResults] = useState<number[]>([]);
+  const [deadzone, setDeadzone] = useState(8);
+  const [recentInputs, setRecentInputs] = useState<InputEvent[]>([]);
+  const [buttonUsage, setButtonUsage] = useState<Record<number, number[]>>({});
+  const [snapshotCopied, setSnapshotCopied] = useState(false);
 
-  const prevButtonsRef = useRef<boolean[] | null>(null);
+  const prevButtonsRef = useRef<Record<number, boolean[]>>({});
   const lastTimeRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
+  const snapshotTimeoutRef = useRef<number | null>(null);
 
-  const applyDeadzone = (value: number, threshold = 0.08) => {
-    if (Math.abs(value) < threshold) return 0;
-    return (value - Math.sign(value) * threshold) / (1 - threshold);
-  };
+  const applyDeadzone = useCallback((value: number) => {
+    const threshold = Math.min(Math.max(deadzone / 100, 0), 0.95);
+    if (Math.abs(value) <= threshold) return 0;
+    const normalized = (Math.abs(value) - threshold) / (1 - threshold);
+    return Math.sign(value) * Math.min(normalized, 1);
+  }, [deadzone]);
 
   const updateGamepadState = useCallback((dtMs: number) => {
     const gamepadList = navigator.getGamepads();
@@ -692,7 +699,7 @@ export default function GamepadTester() {
             <h3 className="text-xl font-semibold">Recommended Picks</h3>
             <ul className="list-disc pl-6 space-y-1">
               <li><Link to="/gamepad-tester" className="text-primary underline">Buy Xbox Controller</Link> – Official Series X|S for PC/console</li>
-              <li><Link to="/gamepad-tester" className="text-primary underline">Buy PlayStation Controller PS5</Link> – DualSense for PS5/PC</li>
+              <li><Link to="/gamepad-tester" className="text-primary underline">Buy PlayStation Controller PS5</Link> ��� DualSense for PS5/PC</li>
               <li><Link to="/gamepad-tester" className="text-primary underline">Buy Joystick for PC</Link> – Great for flight/retro games</li>
               <li><Link to="/gamepad-tester" className="text-primary underline">Buy Amazon Luna Controller</Link> – Cloud‑gaming ready</li>
             </ul>
