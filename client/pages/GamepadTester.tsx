@@ -412,6 +412,82 @@ export default function GamepadTester() {
           </CardHeader>
         </Card>
 
+        <Card className="mb-8 animate-fade-in-up">
+          <CardHeader>
+            <CardTitle>Input Lab</CardTitle>
+            <CardDescription>Tune dead zones, review input history, and export diagnostics.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="p-4 rounded-lg border bg-slate-50 dark:bg-slate-900">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">Analog Deadzone</span>
+                  <span className="text-xs text-muted-foreground">{deadzone}%</span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={30}
+                  step={1}
+                  value={deadzone}
+                  onChange={(event) => setDeadzone(Number(event.target.value))}
+                  className="w-full mt-3"
+                />
+                <p className="text-xs text-muted-foreground mt-2">
+                  Reduce drift by increasing the deadzone or set it low for competitive play.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-lg border bg-slate-50 dark:bg-slate-900">
+                <span className="text-sm font-medium">Recent Inputs</span>
+                <div className="mt-3 max-h-36 overflow-y-auto space-y-2 text-xs">
+                  {recentInputs.length === 0 && (
+                    <p className="text-muted-foreground">No inputs yet. Press any button to capture diagnostics.</p>
+                  )}
+                  {recentInputs.map((event, idx) => (
+                    <div key={`${event.timestamp}-${event.button}-${idx}`} className="flex items-center justify-between gap-3 px-2 py-1 rounded bg-white dark:bg-slate-800">
+                      <span className="font-medium">#{event.gamepadIndex} · B{event.button + 1}</span>
+                      <span className={event.type === 'press' ? 'text-green-600' : 'text-red-500'}>{event.type === 'press' ? 'Pressed' : 'Released'}</span>
+                      <span className="text-muted-foreground">{new Date(event.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border bg-slate-50 dark:bg-slate-900">
+                <span className="text-sm font-medium">Most Used Buttons</span>
+                <div className="mt-3 space-y-2 text-sm">
+                  {!primaryButtonUsage || primaryButtonUsage.every(count => count === 0) ? (
+                    <p className="text-xs text-muted-foreground">Press buttons to build usage stats.</p>
+                  ) : (
+                    primaryButtonUsage
+                      .map((count, index) => ({ index, count }))
+                      .filter(entry => entry.count > 0)
+                      .sort((a, b) => b.count - a.count)
+                      .slice(0, 5)
+                      .map(entry => (
+                        <div key={entry.index} className="flex items-center justify-between rounded bg-white dark:bg-slate-800 px-3 py-1 text-xs">
+                          <span>Button {entry.index + 1}</span>
+                          <span className="font-semibold">{entry.count}</span>
+                        </div>
+                      ))
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              <Button variant="outline" size="sm" onClick={exportSnapshot} className="gap-2">
+                <Zap className="h-4 w-4" />
+                Copy Diagnostic Snapshot
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => setRecentInputs([])}>
+                Clear Input History
+              </Button>
+              {snapshotCopied && <span className="text-sm text-green-600">Snapshot copied to clipboard.</span>}
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Unique Testing Features */}
         {gamepads.length > 0 && (
           <Card className="mb-8 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950 animate-fade-in-up animate-stagger-4 hover-glow">
