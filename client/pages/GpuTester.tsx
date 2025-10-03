@@ -25,11 +25,23 @@ interface GPUInfo {
   aliasedPointSizeRange: number[];
 }
 
+interface DisplayMetrics {
+  width: number;
+  height: number;
+  effectiveWidth: number;
+  effectiveHeight: number;
+  colorDepth: number;
+  pixelRatio: number;
+}
+
 interface BenchmarkResult {
   trianglesPerSecond: number;
   fps: number;
   duration: number;
   score: number;
+  fillRate: number;
+  renderWidth: number;
+  renderHeight: number;
 }
 
 export default function GpuTester() {
@@ -39,6 +51,37 @@ export default function GpuTester() {
   const [benchmarkResult, setBenchmarkResult] = useState<BenchmarkResult | null>(null);
   const [testProgress, setTestProgress] = useState(0);
   const [webglSupported, setWebglSupported] = useState(true);
+  const [displayMetrics, setDisplayMetrics] = useState<DisplayMetrics>({
+    width: 0,
+    height: 0,
+    effectiveWidth: 0,
+    effectiveHeight: 0,
+    colorDepth: 0,
+    pixelRatio: 1,
+  });
+
+  useEffect(() => {
+    const updateMetrics = () => {
+      const pixelRatio = window.devicePixelRatio || 1;
+      const width = Math.round(window.innerWidth);
+      const height = Math.round(window.innerHeight);
+      setDisplayMetrics({
+        width,
+        height,
+        effectiveWidth: Math.round(width * pixelRatio),
+        effectiveHeight: Math.round(height * pixelRatio),
+        colorDepth: window.screen?.colorDepth || 24,
+        pixelRatio,
+      });
+    };
+
+    updateMetrics();
+    window.addEventListener('resize', updateMetrics);
+
+    return () => {
+      window.removeEventListener('resize', updateMetrics);
+    };
+  }, []);
 
   useEffect(() => {
     detectGPU();
@@ -64,6 +107,9 @@ export default function GpuTester() {
       canvas.removeEventListener('webglcontextrestored', onRestored as EventListener);
     };
   }, []);
+
+  const formatCompactNumber = (value: number) =>
+    new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
 
   const getGL = (canvas: HTMLCanvasElement) => {
     // Prefer high-performance GPU if available
@@ -235,12 +281,16 @@ export default function GpuTester() {
         const fps = (frameCount / actualDuration) * 1000;
         const trianglesPerSecond = (triangleCount * frameCount / actualDuration) * 1000;
         const score = Math.min(Math.round(fps * trianglesPerSecond / 10000), 10000);
+        const fillRate = fps * canvas.width * canvas.height;
 
         setBenchmarkResult({
           trianglesPerSecond: Math.round(trianglesPerSecond),
           fps: Math.round(fps),
           duration: Math.round(actualDuration),
-          score
+          score,
+          fillRate: Math.round(fillRate),
+          renderWidth: canvas.width,
+          renderHeight: canvas.height,
         });
 
         setIsTesting(false);
@@ -381,6 +431,54 @@ export default function GpuTester() {
               </Card>
             )}
 
+            <Card className="mb-8 animate-fade-in-up">
+              <CardHeader>
+                <CardTitle>Live Metrics Overview</CardTitle>
+                <CardDescription>
+                  Current display settings and your most recent benchmark highlights.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                  <div className="bg-slate-50 p-4 rounded-lg shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-slate-500">Current Resolution</p>
+                    <p className="text-lg font-semibold text-slate-800">
+                      {displayMetrics.width ? `${displayMetrics.width} x ${displayMetrics.height}px` : 'Detecting...'}
+                    </p>
+                    {displayMetrics.width ? (
+                      <p className="text-xs text-slate-500">
+                        Effective {displayMetrics.effectiveWidth} x {displayMetrics.effectiveHeight}px @ {displayMetrics.pixelRatio.toFixed(2)}x
+                      </p>
+                    ) : null}
+                  </div>
+                  <div className="bg-emerald-50 p-4 rounded-lg shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-emerald-600">Color Depth</p>
+                    <p className="text-lg font-semibold text-emerald-700">
+                      {displayMetrics.colorDepth ? `${displayMetrics.colorDepth}-bit` : 'Detecting...'}
+                    </p>
+                  </div>
+                  <div className="bg-blue-50 p-4 rounded-lg shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-blue-600">Max Texture Size</p>
+                    <p className="text-lg font-semibold text-blue-700">
+                      {gpuInfo ? `${gpuInfo.maxTextureSize}px` : 'Enable WebGL'}
+                    </p>
+                  </div>
+                  <div className="bg-violet-50 p-4 rounded-lg shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-violet-600">Last Measured FPS</p>
+                    <p className="text-lg font-semibold text-violet-700">
+                      {benchmarkResult ? `${benchmarkResult.fps}` : 'Run the benchmark'}
+                    </p>
+                  </div>
+                  <div className="bg-orange-50 p-4 rounded-lg shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-orange-600">Fill Rate</p>
+                    <p className="text-lg font-semibold text-orange-700">
+                      {benchmarkResult ? `${formatCompactNumber(benchmarkResult.fillRate)} px/s` : 'Run the benchmark'}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Benchmark Test */}
             <Card className="mb-8 animate-fade-in-up animate-stagger-4 hover-glow">
               <CardHeader>
@@ -434,7 +532,7 @@ export default function GpuTester() {
 
                 {/* Results */}
                 {benchmarkResult && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-6">
                     <div className="bg-green-50 p-4 rounded-lg text-center">
                       <div className="text-2xl font-bold text-green-600">
                         {benchmarkResult.score}
@@ -452,6 +550,12 @@ export default function GpuTester() {
                         {(benchmarkResult.trianglesPerSecond / 1000).toFixed(1)}K
                       </div>
                       <div className="text-sm text-purple-700">Triangles/sec</div>
+                    </div>
+                    <div className="bg-teal-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-teal-600">
+                        {formatCompactNumber(benchmarkResult.fillRate)}
+                      </div>
+                      <div className="text-sm text-teal-700">Pixels/sec Fill Rate</div>
                     </div>
                     <div className="bg-orange-50 p-4 rounded-lg text-center">
                       <div className="text-2xl font-bold text-orange-600">
