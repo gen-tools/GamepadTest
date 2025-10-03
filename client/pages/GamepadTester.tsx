@@ -199,7 +199,9 @@ export default function GamepadTester() {
       maxStickDistance: 0,
     });
     setLatencyResults([]);
-    prevButtonsRef.current = null;
+    prevButtonsRef.current = {};
+    setButtonUsage({});
+    setRecentInputs([]);
   };
 
   const averageLatency = latencyResults.length > 0
