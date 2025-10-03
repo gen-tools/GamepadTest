@@ -30,6 +30,13 @@ interface InputStats {
   maxStickDistance: number;
 }
 
+interface InputEvent {
+  type: 'press' | 'release';
+  button: number;
+  gamepadIndex: number;
+  timestamp: number;
+}
+
 export default function GamepadTester() {
   const [gamepads, setGamepads] = useState<GamepadState[]>([]);
   const [isVibrating, setIsVibrating] = useState(false);
