@@ -70,6 +70,13 @@ export default function MicTester() {
   const animationRef = useRef<number>(0);
   const dataArrayRef = useRef<Uint8Array | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const calibrationRef = useRef<{ active: boolean; sum: number; samples: number; start: number }>({
+    active: false,
+    sum: 0,
+    samples: 0,
+    start: 0
+  });
+  const summaryTimeoutRef = useRef<number | null>(null);
 
   const getDevices = useCallback(async () => {
     try {
