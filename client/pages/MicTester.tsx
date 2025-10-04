@@ -183,6 +183,7 @@ export default function MicTester() {
 
     calibrationRef.current = { active: false, sum: 0, samples: 0, start: 0 };
     setIsRecording(false);
+    setCalibrationStatus(ambientNoise !== null ? 'complete' : 'idle');
     setSpeechDetected(false);
     setLevelHistory([]);
     setPeakHold(0);
