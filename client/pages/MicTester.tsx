@@ -32,6 +32,12 @@ export default function MicTester() {
   const [selectedDevice, setSelectedDevice] = useState<string>('');
   const [sensitivity, setSensitivity] = useState([50]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [ambientNoise, setAmbientNoise] = useState<number | null>(null);
+  const [calibrationStatus, setCalibrationStatus] = useState<'idle' | 'running' | 'complete'>('idle');
+  const [peakHold, setPeakHold] = useState(0);
+  const [levelHistory, setLevelHistory] = useState<number[]>([]);
+  const [speechDetected, setSpeechDetected] = useState(false);
+  const [summaryCopied, setSummaryCopied] = useState(false);
 
   // Recommended products for Mic Tester page (edit these items as needed)
   const micProducts: RecommendedProductItem[] = [
