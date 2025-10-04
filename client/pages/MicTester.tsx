@@ -243,6 +243,28 @@ export default function MicTester() {
     // Calculate signal-to-noise ratio
     const signalToNoise = level > 0 && noiseFloor > 0 ? 20 * Math.log10(level / noiseFloor) : 0;
 
+    if (calibrationRef.current.active) {
+      calibrationRef.current.sum += noiseFloor;
+      calibrationRef.current.samples += 1;
+      if (performance.now() - calibrationRef.current.start >= 2000) {
+        const baseline = calibrationRef.current.sum / Math.max(calibrationRef.current.samples, 1);
+        setAmbientNoise(Number(baseline.toFixed(1)));
+        setCalibrationStatus('complete');
+        calibrationRef.current = { active: false, sum: 0, samples: 0, start: 0 };
+      } else {
+        setCalibrationStatus('running');
+      }
+    }
+
+    setPeakHold(prev => Math.max(prev, peak * 100));
+    setLevelHistory(prev => {
+      const next = [...prev.slice(-119), Math.min(100, level)];
+      return next;
+    });
+
+    const speechThreshold = ambientNoise !== null ? ambientNoise + 8 : 25;
+    setSpeechDetected(level > speechThreshold);
+
     setAudioStats({
       level: Math.min(level, 100),
       peak: peak * 100,
