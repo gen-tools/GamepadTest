@@ -123,7 +123,13 @@ export default function MicTester() {
   const startRecording = async () => {
     try {
       setError('');
-      
+      setSummaryCopied(false);
+      setSpeechDetected(false);
+      setPeakHold(0);
+      setLevelHistory([]);
+      setCalibrationStatus(ambientNoise !== null ? 'complete' : 'idle');
+      calibrationRef.current = { active: false, sum: 0, samples: 0, start: 0 };
+
       const constraints = {
         audio: {
           deviceId: selectedDevice ? { exact: selectedDevice } : undefined,
