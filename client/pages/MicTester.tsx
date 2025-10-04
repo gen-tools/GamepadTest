@@ -120,6 +120,14 @@ export default function MicTester() {
     };
   }, [getDevices]);
 
+  useEffect(() => {
+    return () => {
+      if (summaryTimeoutRef.current) {
+        window.clearTimeout(summaryTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const startRecording = async () => {
     try {
       setError('');
