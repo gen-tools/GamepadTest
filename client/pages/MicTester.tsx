@@ -179,12 +179,12 @@ export default function MicTester() {
       mediaStream.getTracks().forEach(track => track.stop());
       setMediaStream(null);
     }
-    
+
     if (audioContextRef.current) {
       audioContextRef.current.close();
       audioContextRef.current = null;
     }
-    
+
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
@@ -207,6 +207,44 @@ export default function MicTester() {
       signalToNoise: 0,
       frequency: 0
     });
+  };
+
+  const startCalibration = () => {
+    setAmbientNoise(null);
+    calibrationRef.current = {
+      active: true,
+      sum: 0,
+      samples: 0,
+      start: performance.now()
+    };
+    setCalibrationStatus('running');
+    setSummaryCopied(false);
+  };
+
+  const resetPeakHold = () => {
+    setPeakHold(0);
+  };
+
+  const copyQualitySummary = async () => {
+    const summaryLines = [
+      `Current level: ${Math.round(audioStats.level)}%`,
+      `Peak hold: ${Math.round(peakHold)}%`,
+      `Noise floor: ${audioStats.noiseFloor.toFixed(1)}%`,
+      `Signal-to-noise: ${audioStats.signalToNoise.toFixed(1)} dB`,
+      ambientNoise !== null ? `Ambient baseline: ${ambientNoise.toFixed(1)}%` : 'Ambient baseline: not calibrated',
+      `Speech detected: ${speechDetected ? 'Yes' : 'No'}`
+    ];
+
+    try {
+      await navigator.clipboard.writeText(summaryLines.join('\n'));
+      setSummaryCopied(true);
+      if (summaryTimeoutRef.current) {
+        window.clearTimeout(summaryTimeoutRef.current);
+      }
+      summaryTimeoutRef.current = window.setTimeout(() => setSummaryCopied(false), 2500);
+    } catch (err) {
+      console.error('Failed to copy session summary', err);
+    }
   };
 
   const analyzeAudio = () => {
