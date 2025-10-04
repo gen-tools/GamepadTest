@@ -180,8 +180,17 @@ export default function MicTester() {
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
-    
+
+    calibrationRef.current = { active: false, sum: 0, samples: 0, start: 0 };
     setIsRecording(false);
+    setSpeechDetected(false);
+    setLevelHistory([]);
+    setPeakHold(0);
+    if (summaryTimeoutRef.current) {
+      window.clearTimeout(summaryTimeoutRef.current);
+      summaryTimeoutRef.current = null;
+    }
+    setSummaryCopied(false);
     setAudioStats({
       level: 0,
       peak: 0,
