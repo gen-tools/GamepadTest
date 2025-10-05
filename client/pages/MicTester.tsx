@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { Mic, MicOff, Volume2, VolumeX, Play, Pause, RotateCcw, Activity, ClipboardSignature, ClipboardCheck } from 'lucide-react';
+import { Mic, MicOff, Volume2, VolumeX, RotateCcw, Activity, ClipboardCheck } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
