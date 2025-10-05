@@ -531,41 +531,42 @@ export default function MicTester() {
             <CardDescription>Real-time frequency spectrum and level meters</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <canvas 
+            <div className="space-y-5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                  <Activity className="h-4 w-4 text-primary" />
+                  Live Monitoring
+                </div>
+                <Badge variant={speechDetected ? "default" : "outline"} className={speechDetected ? "bg-emerald-600 text-white border-transparent" : ""}>
+                  {speechDetected ? 'Speech Detected' : 'Listening'}
+                </Badge>
+              </div>
+              <canvas
                 ref={canvasRef}
                 width={800}
                 height={200}
                 className="w-full border rounded-lg bg-gray-900"
                 style={{ maxWidth: '100%', height: '200px' }}
               />
-              
-              {/* Level Meter */}
-              <div className="bg-gray-100 rounded-lg p-4">
+
+              <div className="rounded-lg p-4 bg-gray-100 dark:bg-slate-900 border border-gray-200 dark:border-slate-800">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium">Input Level</span>
                   <span className="text-sm text-muted-foreground">{Math.round(audioStats.level)}%</span>
                 </div>
-                <div className="w-full bg-gray-300 rounded-full h-4 relative overflow-hidden">
-                  <div 
+                <div className="w-full bg-gray-200 dark:bg-slate-800 rounded-full h-4 relative overflow-hidden">
+                  <div
                     className={`h-full transition-all duration-100 ${getLevelColor(audioStats.level)}`}
                     style={{ width: `${Math.min(audioStats.level, 100)}%` }}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="flex space-x-1">
-                      {[20, 40, 60, 80].map(threshold => (
-                        <div 
-                          key={threshold}
-                          className="w-px h-2 bg-gray-600"
-                          style={{ marginLeft: `${threshold - 2}%` }}
-                        />
-                      ))}
-                    </div>
+                  <div className="absolute inset-0 flex items-center justify-between px-4 text-[10px] text-muted-foreground">
+                    {[25, 50, 75].map((threshold) => (
+                      <span key={threshold}>{threshold}%</span>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Sensitivity Control */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Sensitivity: {sensitivity[0]}%</label>
                 <Slider
@@ -577,6 +578,82 @@ export default function MicTester() {
                   className="w-full"
                 />
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+                <div className="rounded-lg border p-3 bg-background">
+                  <div className="text-muted-foreground">Ambient Baseline</div>
+                  <div className="text-lg font-semibold">{ambientNoise !== null ? `${ambientNoise.toFixed(1)}%` : 'Not calibrated'}</div>
+                </div>
+                <div className="rounded-lg border p-3 bg-background">
+                  <div className="text-muted-foreground">Peak Hold</div>
+                  <div className="text-lg font-semibold">{Math.round(peakHold)}%</div>
+                </div>
+                <div className="rounded-lg border p-3 bg-background">
+                  <div className="text-muted-foreground">Signal-to-Noise</div>
+                  <div className="text-lg font-semibold">{audioStats.signalToNoise.toFixed(1)} dB</div>
+                </div>
+                <div className="rounded-lg border p-3 bg-background">
+                  <div className="text-muted-foreground">Sensitivity</div>
+                  <div className="text-lg font-semibold">{sensitivity[0]}%</div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-xs text-muted-foreground">Level History (last 120 samples)</div>
+                <div className="flex items-end gap-[3px] h-16 rounded-md bg-muted/50 px-2 pb-2">
+                  {levelHistory.length === 0 ? (
+                    <div className="text-xs text-muted-foreground self-center">No history yet</div>
+                  ) : (
+                    levelHistory.slice(-60).map((value, index) => (
+                      <div
+                        key={index}
+                        className="w-[3px] bg-primary/40 rounded-sm"
+                        style={{ height: `${Math.min(100, value)}%` }}
+                      />
+                    ))
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <Button
+                  onClick={startCalibration}
+                  size="sm"
+                  variant="outline"
+                  className="gap-2"
+                  disabled={!isRecording}
+                >
+                  <Activity className="h-4 w-4" />
+                  {calibrationStatus === 'running' ? 'Calibrating…' : 'Start Calibration'}
+                </Button>
+                <Button onClick={resetPeakHold} size="sm" variant="ghost" className="gap-2">
+                  <RotateCcw className="h-4 w-4" />
+                  Reset Peak Hold
+                </Button>
+                <Button
+                  onClick={copyQualitySummary}
+                  size="sm"
+                  variant="outline"
+                  className="gap-2"
+                  disabled={!isRecording && levelHistory.length === 0}
+                >
+                  <ClipboardCheck className="h-4 w-4" />
+                  Copy Quality Summary
+                </Button>
+              </div>
+
+              {calibrationStatus === 'running' && (
+                <p className="text-xs text-amber-600">
+                  Hold quiet for two seconds to capture your ambient noise baseline.
+                </p>
+              )}
+
+              {summaryCopied && (
+                <p className="text-xs text-emerald-600 flex items-center gap-1">
+                  <ClipboardCheck className="h-4 w-4" />
+                  Quality summary copied.
+                </p>
+              )}
             </div>
           </CardContent>
         </Card>
