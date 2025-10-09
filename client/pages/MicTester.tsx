@@ -445,7 +445,7 @@ export default function MicTester() {
         <div className="text-center mb-12 animate-fade-in-down">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Mic className="h-8 w-8 text-red-600 animate-bounce-in" />
-            <h1 className="text-3xl font-bold animate-fade-in-right animate-stagger-1">Microphone Tester</h1>
+            <h1 className="text-3xl font-bold animate-fade-in-right animate-stagger-1">Mic Tester</h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-fade-in-up animate-stagger-2">
             Test your microphone with real-time audio visualization, level monitoring, and quality analysis.
