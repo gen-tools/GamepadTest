@@ -479,7 +479,7 @@ export default function MidiTester() {
       <Helmet>
         <title>MIDI Tester – Test Your Keyboard, Pads & Controllers Online</title>
         <meta name="description" content="Test your MIDI keyboard, drum pads, and controllers online. Get instant note feedback, troubleshoot connection issues, and ensure your gear works perfectly." />
-        <meta name="keywords" content="midi tester, midi device test, midi keyboard test, midi input monitor, midi controller test, midi message analyzer" />
+        <meta name="keywords" content="midi tester, midi device test, midi keyboard test, midi input monitor, midi controller test" />
         <link rel="canonical" href="https://www.gamepadtest.tech/midi-tester" />
         <script type="application/ld+json">{JSON.stringify(midiAppSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(midiBreadcrumb)}</script>
