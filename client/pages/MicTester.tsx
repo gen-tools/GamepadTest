@@ -745,7 +745,7 @@ export default function MicTester() {
         {/* Mic Tester: The Complete Guide to Checking Your Microphone Online */}
         <article className="mt-10 space-y-10 text-base leading-7">
           <section className="space-y-3" id="mic-tester-complete-guide">
-            <h2 className="text-2xl font-bold">Mic Tester: The Complete Guide to Checking Your Microphone Online</h2>
+            <h2 className="text-2xl font-bold">Mic Tester – Free Online Microphone Checker</h2>
             <p>
               When your mic starts glitching out right in the middle of a meeting, a heated game session, or a recording take, it's not just frustrating—it's a total buzzkill. That's why having a solid mic tester at your fingertips can be a game-changer.
             </p>
