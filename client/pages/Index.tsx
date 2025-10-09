@@ -178,7 +178,7 @@ export default function Index() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl animate-fade-in-down">
-              <span className="text-gray-700 animate-scale-in">GamepadTest</span> – Free Online Gamepad & Controller Tester
+              <span className="text-gray-700 animate-scale-in">GamepadTest</span> – Free Online Hardware Tester
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground animate-fade-in-up animate-stagger-1">
              GamepadTest lets you test controllers, GPU, mic, and MIDI online. Find stick drift, verify inputs, run benchmarks, and fix issues — free, no download.  required.
