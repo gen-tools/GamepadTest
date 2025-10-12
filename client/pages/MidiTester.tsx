@@ -805,7 +805,6 @@ export default function MidiTester() {
               <li><Link to="/gpu-tester" className="text-primary underline">GPU Tester</Link> – Verify your graphics card performance.</li>
               <li><Link to="/mic-tester" className="text-primary underline">Mic Tester Online</Link> – Ensure your microphone is working properly.</li>
             </ul>
-            <p>Internal linking makes it easy to navigate and helps SEO.</p>
           </section>
 
           <section className="space-y-3" id="final-thoughts">
