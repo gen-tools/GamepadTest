@@ -601,10 +601,10 @@ export default function GpuTester() {
           </>
         )}
         <RecommendedProductsSection products={recommendedProducts} />
-        {/* Guide: Test Your GPU Online Free – Benchmark & Check Graphics Card Health */}
+        {/* Guide: Online Free GPU Tester – Benchmark & Check Graphics Card Health */}
         <section className="mt-10 space-y-8 text-base leading-7">
           <header className="space-y-3">
-            <h2 className="text-2xl font-bold">Test Your GPU Online Free – Benchmark & Check Graphics Card Health</h2>
+            <h2 className="text-2xl font-bold">Online Free GPU Tester – Benchmark & Check Graphics Card Health</h2>
             <p>
               When you're deep into gaming, slicing through video edits, or firing up some heavy creative apps, your graphics card – that trusty GPU – is the real MVP pulling all the weight. But hey, just like any hardworking engine, it deserves a tune-up now and then to stay in peak form.
             </p>
