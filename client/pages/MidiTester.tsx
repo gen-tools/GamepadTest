@@ -694,12 +694,12 @@ export default function MidiTester() {
               If you're a musician, producer, or just someone who loves tinkering with gear, there's nothing worse than dealing with a keyboard, controller, or device that's acting up. Our MIDI tester lets you check every button, knob, and key in real-time without any hassle. No need for downloads or complicated setups—just a simple, free tool to make sure your setup is running smoothly.
             </p>
             <p>
-              Whether you're breaking in a new keyboard or figuring out what's wrong with an older controller, our free tester delivers quick feedback so you can get back to creating music instead of troubleshooting glitches.
+              Whether you're breaking in a new keyboard or figuring out what's wrong with an older controller, our free MIDI Tester delivers quick feedback so you can get back to creating music instead of troubleshooting glitches.
             </p>
           </section>
 
           <section className="space-y-3" id="why-you-need-a-tester">
-            <h3 className="text-xl font-semibold">Why You Need a Tester</h3>
+            <h3 className="text-xl font-semibold">Why You Need a MIDI Tester</h3>
             <p>
               Devices like these are at the core of so many music setups these days. Even one sticky key or unresponsive button can throw off your groove. That's where a keyboard checker online comes in handy—it helps you:
             </p>
@@ -727,7 +727,7 @@ export default function MidiTester() {
               </div>
               <div>
                 <h4 className="font-semibold">Works With Any Device</h4>
-                <p>Whether it's a high-end controller or a simple keyboard, our tester handles them all—across brands and models—without compatibility worries.</p>
+                <p>Whether it's a high-end controller or a simple keyboard, our MIDI Tester handles them all—across brands and models—without compatibility worries.</p>
               </div>
               <div>
                 <h4 className="font-semibold">Easy to Use</h4>
@@ -744,7 +744,7 @@ export default function MidiTester() {
             <h3 className="text-xl font-semibold">How to Test Your MIDI</h3>
             <ol className="list-decimal pl-6 text-muted-foreground space-y-1">
               <li>Hook up your keyboard or controller to your computer.</li>
-              <li>Open the <Link to="/midi-tester" className="text-primary underline">tester</Link> in your browser.</li>
+              <li>Open the <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> in your browser.</li>
               <li>Pick your device from the list of detected hardware.</li>
               <li>Hit the keys, tweak the knobs, or slide the faders, and watch the monitor for signals.</li>
               <li>If something doesn't show up, check our FAQs or try basic troubleshooting.</li>
@@ -765,7 +765,7 @@ export default function MidiTester() {
               </div>
               <div>
                 <h4 className="font-semibold">How Do I Test My Keyboard Online?</h4>
-                <p>Plug in your device, open our tester, and start pressing keys. The device tester shows real-time signals, highlighting what's working and what needs attention.</p>
+                <p>Plug in your device, open our MIDI Tester, and start pressing keys. The device tester shows real-time signals, highlighting what's working and what needs attention.</p>
               </div>
               <div>
                 <h4 className="font-semibold">Keyboard Troubleshooting Online</h4>
