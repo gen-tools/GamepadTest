@@ -8,12 +8,25 @@ export function createServer() {
 
   // Middleware
   app.use(cors());
-  app.use((_, res, next) => {
+  app.use((req, res, next) => {
     res.setHeader("X-Content-Type-Options", "nosniff");
     res.setHeader("Permissions-Policy", "midi=(self), microphone=(self)");
     if (process.env.NODE_ENV === "production") {
       res.setHeader("X-Frame-Options", "SAMEORIGIN");
     }
+
+    // Cache control for static assets
+    if (req.path.startsWith("/assets/")) {
+      // Immutable assets with content hash - cache for 1 year
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    } else if (req.path.match(/\.(js|css|woff2|woff|ttf|eot|svg)$/i)) {
+      // Other static files - cache for 1 hour
+      res.setHeader("Cache-Control", "public, max-age=3600");
+    } else {
+      // HTML and other files - cache for 5 minutes
+      res.setHeader("Cache-Control", "public, max-age=300, must-revalidate");
+    }
+
     next();
   });
   app.use(express.json());
@@ -53,7 +66,9 @@ export function createServer() {
         },
       });
       if (!resp.ok) {
-        return res.status(resp.status).json({ error: `Upstream ${resp.status}` });
+        return res
+          .status(resp.status)
+          .json({ error: `Upstream ${resp.status}` });
       }
       const contentType = resp.headers.get("content-type") || "image/jpeg";
       const buf = Buffer.from(await resp.arrayBuffer());
