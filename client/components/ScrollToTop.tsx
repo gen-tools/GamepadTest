@@ -8,8 +8,7 @@ export function ScrollToTop() {
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       try {
-        // @ts-expect-error - scrollRestoration is supported in modern browsers
-        window.history.scrollRestoration = 'manual';
+        (window.history as unknown as { scrollRestoration: string }).scrollRestoration = 'manual';
       } catch {}
     }
   }, []);
