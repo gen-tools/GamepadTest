@@ -40,18 +40,18 @@ export default function RootApp() {
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/gamepad-tester" element={<GamepadTester />} />
-              <Route path="/gpu-tester" element={<GpuTester />} />
-              <Route path="/mic-tester" element={<MicTester />} />
-              <Route path="/midi-tester" element={<MidiTester />} />
+              <Route path="/gamepad-tester" element={<Suspense fallback={<PageLoader />}><GamepadTester /></Suspense>} />
+              <Route path="/gpu-tester" element={<Suspense fallback={<PageLoader />}><GpuTester /></Suspense>} />
+              <Route path="/mic-tester" element={<Suspense fallback={<PageLoader />}><MicTester /></Suspense>} />
+              <Route path="/midi-tester" element={<Suspense fallback={<PageLoader />}><MidiTester /></Suspense>} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/privacy" element={<Privacy />} />
-              <Route path="/blog/gamepad-tester-guide" element={<GamepadTesterGuide />} />
-              <Route path="/blog/gpu-performance-testing" element={<GpuTesterGuide />} />
-              <Route path="/blog/microphone-testing-guide" element={<MicTesterGuide />} />
-              <Route path="/blog/midi-device-testing" element={<MidiTesterGuide />} />
+              <Route path="/blog/gamepad-tester-guide" element={<Suspense fallback={<PageLoader />}><GamepadTesterGuide /></Suspense>} />
+              <Route path="/blog/gpu-performance-testing" element={<Suspense fallback={<PageLoader />}><GpuTesterGuide /></Suspense>} />
+              <Route path="/blog/microphone-testing-guide" element={<Suspense fallback={<PageLoader />}><MicTesterGuide /></Suspense>} />
+              <Route path="/blog/midi-device-testing" element={<Suspense fallback={<PageLoader />}><MidiTesterGuide /></Suspense>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
