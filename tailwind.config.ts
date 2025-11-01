@@ -4,6 +4,24 @@ export default {
   darkMode: ["class"],
   content: ["./client/**/*.{ts,tsx}"],
   prefix: "",
+  safelist: [
+    // Only include animations that are actually used
+    "animate-fade-in",
+    "animate-fade-in-up",
+    "animate-fade-in-down",
+    "animate-fade-in-left",
+    "animate-fade-in-right",
+    "animate-scale-in",
+    "animate-bounce-in",
+    "animate-slide-up",
+    "animate-stagger-1",
+    "animate-stagger-2",
+    "animate-stagger-3",
+    "animate-stagger-4",
+    "hover-lift",
+    "hover-scale",
+    "hover-glow",
+  ],
   theme: {
     container: {
       center: true,
