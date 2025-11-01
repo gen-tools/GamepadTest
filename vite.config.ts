@@ -27,14 +27,8 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
     cssCodeSplit: true,
-    minify: 'terser',
+    minify: 'esbuild',
   },
   plugins: [react(), expressPlugin()],
   resolve: {
