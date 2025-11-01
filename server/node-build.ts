@@ -49,8 +49,22 @@ app.get("*", (req, res) => {
 
   // Inject Helmet head tags
   if (helmetContext.helmet) {
-    const { title, meta, link } = helmetContext.helmet;
-    const helmetTags = `${title.toString()}${meta.toString()}${link.toString()}`;
+    const { title, meta, link, script } = helmetContext.helmet;
+
+    // Replace title
+    if (title.toString()) {
+      html = html.replace(/<title>.*?<\/title>/, title.toString());
+    }
+
+    // Replace or inject meta tags - remove empty placeholders first
+    html = html.replace(/<meta\s+name="description"\s+content=""\s*\/?>/g, '');
+    html = html.replace(/<meta\s+property="og:title"\s+content=""\s*\/?>/g, '');
+    html = html.replace(/<meta\s+property="og:description"\s+content=""\s*\/?>/g, '');
+    html = html.replace(/<meta\s+property="twitter:title"\s+content=""\s*\/?>/g, '');
+    html = html.replace(/<meta\s+property="twitter:description"\s+content=""\s*\/?>/g, '');
+
+    // Inject Helmet tags before closing head
+    const helmetTags = `${meta.toString()}${link.toString()}${script.toString()}`;
     html = html.replace("</head>", `${helmetTags}</head>`);
   }
 
