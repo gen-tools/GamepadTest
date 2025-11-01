@@ -76,7 +76,7 @@ export default function MidiTester() {
 
   // Audio synth for optional sound feedback
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const activeOscRef = useRef<Map<number, { osc: OscillatorNode; gain: GainNode }>>(new Map());
+  const activeOscRef = useRef<Map<number, { osc: OscillatorNode; gain: GainNode; baseFreq: number }>>(new Map());
   const userInteractedRef = useRef<boolean>(false);
   const sustainRef = useRef<boolean>(false);
   const sustainedNotesRef = useRef<Set<number>>(new Set());
