@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import { GpuBenchmarkAnimation } from '@/components/GpuBenchmarkAnimation';
 
 interface GPUInfo {
   vendor: string;
