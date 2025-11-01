@@ -15,6 +15,26 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-popover', '@radix-ui/react-tabs', '@radix-ui/react-select', '@radix-ui/react-toast', '@radix-ui/react-tooltip'],
+          'vendor-charts': ['recharts'],
+          'vendor-3d': ['three', '@react-three/fiber', '@react-three/drei'],
+          'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          'vendor-other': ['framer-motion', 'embla-carousel-react', 'sonner', 'react-helmet-async', '@tanstack/react-query', 'next-themes', 'date-fns'],
+        },
+      },
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    cssCodeSplit: true,
+    minify: 'terser',
   },
   plugins: [react(), expressPlugin()],
   resolve: {
