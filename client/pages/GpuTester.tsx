@@ -523,12 +523,13 @@ export default function GpuTester() {
                 </div>
 
                 {/* Canvas */}
-                <div className="border rounded-lg overflow-hidden bg-gray-900">
-                  <canvas 
+                <div className="relative border rounded-lg overflow-hidden bg-gray-900">
+                  <canvas
                     ref={canvasRef}
                     className="w-full h-96 block"
                     style={{ maxWidth: '100%', height: '384px' }}
                   />
+                  <GpuBenchmarkAnimation isRunning={isTesting} progress={testProgress} />
                 </div>
 
                 {/* Results */}
