@@ -169,8 +169,8 @@ export default function Index() {
       </Helmet>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-20 sm:py-32">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Animated Background Elements - disabled on mobile for performance */}
+        <div className="absolute inset-0 overflow-hidden hidden sm:block">
           <div className="animate-pulse-glow absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="animate-pulse-glow absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" style={{ animationDelay: '1s' }}></div>
         </div>
