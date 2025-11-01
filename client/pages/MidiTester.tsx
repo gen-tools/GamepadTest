@@ -108,9 +108,8 @@ export default function MidiTester() {
     const ctx = audioCtxRef.current;
     if (!ctx) return;
     const ratio = Math.pow(2, bendSemitonesRef.current / 12);
-    activeOscRef.current.forEach((entry: any) => {
-      const base = entry.baseFreq as number;
-      entry.osc.frequency.setValueAtTime(base * ratio, ctx.currentTime);
+    activeOscRef.current.forEach((entry) => {
+      entry.osc.frequency.setValueAtTime(entry.baseFreq * ratio, ctx.currentTime);
     });
   };
 
