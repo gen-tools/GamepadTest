@@ -53,95 +53,15 @@
     <meta name="twitter:creator" content="@GamepadTest" />
     <meta name="twitter:image" content="https://www.gamepadtest.tech/twitter-image.jpg" />
 
-    <!-- Enhanced Structured Data -->
+    <!-- Minimal Structured Data - rest injected by React/Helmet -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.gamepadtest.tech/#organization",
-          "name": "GamepadTest",
-          "url": "https://www.gamepadtest.tech",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.gamepadtest.tech/gamepad-icon.svg"
-          },
-          "sameAs": [
-            "https://twitter.com/gamepadchecker",
-            "https://github.com/gamepadchecker"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://www.gamepadtest.tech/#website",
-          "url": "https://www.gamepadtest.tech",
-          "name": "GamepadTest",
-          "description": "The #1 professional gamepad testing tool. Test Xbox, PlayStation & PC controllers with real-time input detection and performance analysis.",
-          "publisher": {
-            "@id": "https://www.gamepadtest.tech/#organization"
-          },
-          "potentialAction": [
-            {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://www.gamepadtest.tech/search?q={search_term_string}"
-              },
-              "query-input": "required name=search_term_string"
-            }
-          ]
-        },
-        {
-          "@type": "WebApplication",
-          "@id": "https://www.gamepadtest.tech/#webapp",
-          "name": "GamepadTest",
-          "alternateName": ["Gamepad Tester", "Controller Tester", "Gamepad Checker"],
-          "description": "Professional-grade gamepad testing tool. Test Xbox, PlayStation, Nintendo Switch, and PC controllers with instant real-time results and performance analysis.",
-          "url": "https://www.gamepadtest.tech",
-          "applicationCategory": ["UtilitiesApplication", "GameApplication"],
-          "operatingSystem": ["Windows", "macOS", "Linux", "Android", "iOS"],
-          "browserRequirements": "Requires JavaScript and modern browser with Gamepad API support",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          },
-          "featureList": [
-            "Real-time gamepad input detection",
-            "Button mapping and calibration",
-            "Stick drift detection",
-            "Dead zone analysis",
-            "Latency testing",
-            "Vibration testing",
-            "Multi-controller support"
-          ],
-          "creator": {
-            "@id": "https://www.gamepadtest.tech/#organization"
-          },
-          "isAccessibleForFree": true
-        },
-        {
-          "@type": "SoftwareApplication",
-          "@id": "https://www.gamepadtest.tech/#software",
-          "name": "GamepadTest",
-          "applicationCategory": "UtilitiesApplication",
-          "operatingSystem": "Cross-platform web application",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "ratingCount": "2547",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        }
-      ]
+      "@type": "WebApplication",
+      "name": "GamepadTest",
+      "url": "https://www.gamepadtest.tech",
+      "applicationCategory": "UtilitiesApplication",
+      "isAccessibleForFree": true
     }
     </script>
 
