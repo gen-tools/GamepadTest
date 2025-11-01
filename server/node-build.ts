@@ -37,14 +37,18 @@ app.get("*", (req, res) => {
     React.createElement(
       HelmetProvider as any,
       { context: helmetContext },
-      React.createElement(StaticRouter as any, { location: req.url }, React.createElement(RootApp))
-    )
+      React.createElement(
+        StaticRouter as any,
+        { location: req.url },
+        React.createElement(RootApp),
+      ),
+    ),
   );
 
   // Inject SSR content
   let html = template.replace(
     '<div id="root"></div>',
-    `<div id=\"root\">${appHtml}</div>`
+    `<div id=\"root\">${appHtml}</div>`,
   );
 
   // Inject Helmet head tags
@@ -57,11 +61,20 @@ app.get("*", (req, res) => {
     }
 
     // Replace or inject meta tags - remove empty placeholders first
-    html = html.replace(/<meta\s+name="description"\s+content=""\s*\/?>/g, '');
-    html = html.replace(/<meta\s+property="og:title"\s+content=""\s*\/?>/g, '');
-    html = html.replace(/<meta\s+property="og:description"\s+content=""\s*\/?>/g, '');
-    html = html.replace(/<meta\s+property="twitter:title"\s+content=""\s*\/?>/g, '');
-    html = html.replace(/<meta\s+property="twitter:description"\s+content=""\s*\/?>/g, '');
+    html = html.replace(/<meta\s+name="description"\s+content=""\s*\/?>/g, "");
+    html = html.replace(/<meta\s+property="og:title"\s+content=""\s*\/?>/g, "");
+    html = html.replace(
+      /<meta\s+property="og:description"\s+content=""\s*\/?>/g,
+      "",
+    );
+    html = html.replace(
+      /<meta\s+property="twitter:title"\s+content=""\s*\/?>/g,
+      "",
+    );
+    html = html.replace(
+      /<meta\s+property="twitter:description"\s+content=""\s*\/?>/g,
+      "",
+    );
 
     // Inject Helmet tags before closing head
     const helmetTags = `${meta.toString()}${link.toString()}${script.toString()}`;

@@ -66,7 +66,9 @@ export function createServer() {
         },
       });
       if (!resp.ok) {
-        return res.status(resp.status).json({ error: `Upstream ${resp.status}` });
+        return res
+          .status(resp.status)
+          .json({ error: `Upstream ${resp.status}` });
       }
       const contentType = resp.headers.get("content-type") || "image/jpeg";
       const buf = Buffer.from(await resp.arrayBuffer());

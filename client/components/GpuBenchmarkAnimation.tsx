@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface GpuAnimationProps {
   isRunning: boolean;
   progress: number;
 }
 
-export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps) {
+export function GpuBenchmarkAnimation({
+  isRunning,
+  progress,
+}: GpuAnimationProps) {
   const [fps, setFps] = useState(0);
   const [gpuLoad, setGpuLoad] = useState(0);
   const [temp, setTemp] = useState(40);
@@ -25,32 +28,37 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
     let lastTime = performance.now();
     let tempFrameCount = 0;
 
-    const animationFrameId = requestAnimationFrame(function countFrames(currentTime) {
-      tempFrameCount++;
+    const animationFrameId = requestAnimationFrame(
+      function countFrames(currentTime) {
+        tempFrameCount++;
 
-      const deltaTime = currentTime - lastTime;
-      if (deltaTime >= 1000) {
-        const calculatedFps = Math.round((tempFrameCount * 1000) / deltaTime);
-        setFps(calculatedFps);
-        setFrameCount(tempFrameCount);
-        lastTime = currentTime;
-        tempFrameCount = 0;
-      }
+        const deltaTime = currentTime - lastTime;
+        if (deltaTime >= 1000) {
+          const calculatedFps = Math.round((tempFrameCount * 1000) / deltaTime);
+          setFps(calculatedFps);
+          setFrameCount(tempFrameCount);
+          lastTime = currentTime;
+          tempFrameCount = 0;
+        }
 
-      // Simulate GPU metrics
-      const loadValue = Math.min(60 + Math.random() * 35 + (progress * 0.3), 98);
-      setGpuLoad(loadValue);
+        // Simulate GPU metrics
+        const loadValue = Math.min(
+          60 + Math.random() * 35 + progress * 0.3,
+          98,
+        );
+        setGpuLoad(loadValue);
 
-      const tempValue = Math.min(40 + (progress * 0.6) + Math.random() * 5, 85);
-      setTemp(tempValue);
+        const tempValue = Math.min(40 + progress * 0.6 + Math.random() * 5, 85);
+        setTemp(tempValue);
 
-      const memoryValue = Math.min((progress / 100) * 90, 85);
-      setMemory(memoryValue);
+        const memoryValue = Math.min((progress / 100) * 90, 85);
+        setMemory(memoryValue);
 
-      if (isRunning) {
-        requestAnimationFrame(countFrames);
-      }
-    });
+        if (isRunning) {
+          requestAnimationFrame(countFrames);
+        }
+      },
+    );
 
     return () => cancelAnimationFrame(animationFrameId);
   }, [isRunning, progress]);
@@ -58,21 +66,21 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
   if (!isRunning) return null;
 
   const getTempColor = (temp: number) => {
-    if (temp < 60) return 'text-green-400';
-    if (temp < 75) return 'text-yellow-400';
-    return 'text-red-400';
+    if (temp < 60) return "text-green-400";
+    if (temp < 75) return "text-yellow-400";
+    return "text-red-400";
   };
 
   const getTempBgColor = (temp: number) => {
-    if (temp < 60) return 'bg-green-500';
-    if (temp < 75) return 'bg-yellow-500';
-    return 'bg-red-500';
+    if (temp < 60) return "bg-green-500";
+    if (temp < 75) return "bg-yellow-500";
+    return "bg-red-500";
   };
 
   const getLoadColor = (load: number) => {
-    if (load < 50) return 'bg-blue-500';
-    if (load < 75) return 'bg-cyan-500';
-    return 'bg-emerald-500';
+    if (load < 50) return "bg-blue-500";
+    if (load < 75) return "bg-cyan-500";
+    return "bg-emerald-500";
   };
 
   return (
@@ -82,8 +90,8 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
         <div
           className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500 to-transparent"
           style={{
-            animation: 'scanlines 3s linear infinite',
-            backgroundSize: '100% 4px',
+            animation: "scanlines 3s linear infinite",
+            backgroundSize: "100% 4px",
           }}
         />
       </div>
@@ -109,8 +117,12 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
         {/* GPU Load */}
         <div className="bg-black/60 backdrop-blur-sm border border-emerald-500/50 rounded px-3 py-2">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-emerald-400 text-xs tracking-wider">GPU LOAD</span>
-            <span className="text-emerald-300 font-bold text-sm">{gpuLoad.toFixed(1)}%</span>
+            <span className="text-emerald-400 text-xs tracking-wider">
+              GPU LOAD
+            </span>
+            <span className="text-emerald-300 font-bold text-sm">
+              {gpuLoad.toFixed(1)}%
+            </span>
           </div>
           <div className="w-24 h-1.5 bg-black/40 rounded-full overflow-hidden border border-emerald-500/30">
             <div
@@ -139,8 +151,12 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
         {/* Memory */}
         <div className="bg-black/60 backdrop-blur-sm border border-purple-500/50 rounded px-3 py-2">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-purple-400 text-xs tracking-wider">MEMORY</span>
-            <span className="text-purple-300 font-bold text-sm">{memory.toFixed(1)}%</span>
+            <span className="text-purple-400 text-xs tracking-wider">
+              MEMORY
+            </span>
+            <span className="text-purple-300 font-bold text-sm">
+              {memory.toFixed(1)}%
+            </span>
           </div>
           <div className="w-24 h-1.5 bg-black/40 rounded-full overflow-hidden border border-purple-500/30">
             <div
@@ -157,7 +173,7 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
           <div
             className="inline-block w-16 h-16 rounded-full border-4 border-transparent border-t-cyan-400 border-r-purple-400"
             style={{
-              animation: 'spin 2s linear infinite',
+              animation: "spin 2s linear infinite",
             }}
           />
           <p className="mt-4 text-white font-mono text-sm tracking-widest opacity-70">
@@ -173,26 +189,47 @@ export function GpuBenchmarkAnimation({ isRunning, progress }: GpuAnimationProps
       <div className="absolute top-4 right-4 space-y-2 text-white font-mono text-xs">
         <div className="bg-black/60 backdrop-blur-sm border border-pink-500/50 rounded px-2 py-1">
           <span className="text-pink-400">THREADS:</span>
-          <span className="ml-1 text-pink-300 font-bold">{Math.floor(Math.random() * 16) + 8}</span>
+          <span className="ml-1 text-pink-300 font-bold">
+            {Math.floor(Math.random() * 16) + 8}
+          </span>
         </div>
         <div className="bg-black/60 backdrop-blur-sm border border-blue-500/50 rounded px-2 py-1">
           <span className="text-blue-400">VRAM:</span>
-          <span className="ml-1 text-blue-300 font-bold">{(4 + Math.random() * 8).toFixed(1)}GB</span>
+          <span className="ml-1 text-blue-300 font-bold">
+            {(4 + Math.random() * 8).toFixed(1)}GB
+          </span>
         </div>
         <div className="bg-black/60 backdrop-blur-sm border border-green-500/50 rounded px-2 py-1">
           <span className="text-green-400">CLOCK:</span>
-          <span className="ml-1 text-green-300 font-bold">{(1.5 + Math.random() * 1.0).toFixed(1)}GHz</span>
+          <span className="ml-1 text-green-300 font-bold">
+            {(1.5 + Math.random() * 1.0).toFixed(1)}GHz
+          </span>
         </div>
       </div>
 
       {/* Animated grid background */}
       <svg className="absolute inset-0 w-full h-full opacity-5 pointer-events-none">
         <defs>
-          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" />
+          <pattern
+            id="grid"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M 20 0 L 0 0 0 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+            />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" className="text-cyan-500" />
+        <rect
+          width="100%"
+          height="100%"
+          fill="url(#grid)"
+          className="text-cyan-500"
+        />
       </svg>
 
       {/* Animated particles */}
