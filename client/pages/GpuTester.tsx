@@ -758,7 +758,6 @@ export default function GpuTester() {
         {/* Guide: Online GPU Tester – Free GPU Stress Test & Graphics Card Checker */}
         <section className="mt-10 space-y-8 text-base leading-7">
           <header className="space-y-3">
- ai_main_c48b3912c1f5
             <h2 className="text-2xl font-bold">
               Online GPU Tester – Free GPU Stress Test & Graphics Card Checker
             </h2>
