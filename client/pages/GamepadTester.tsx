@@ -377,7 +377,7 @@ export default function GamepadTester() {
     <div className="container mx-auto px-6 py-12">
       <Helmet>
         <title>Gamepad Tester Online – Free Controller & Joystick Checker</title>
-        <meta name="description" content="Test your controller online free with our gamepad tester. Instantly check PS4, PS5, Xbox & PC controllers for stick drift, buttons, triggers, and joysticks." />
+        <meta name="description" content="Gamepad tester online to test buttons, joysticks, and stick drift. Works with PS, Xbox, and PC—free, secure, no download needed." />
         <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker" />
         <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
         <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
