@@ -422,11 +422,11 @@ export default function GpuTester() {
         </title>
         <meta
           name="description"
-          content="Run a quick GPU test online to check performance, temps, FPS, and stability. Works with NVIDIA, AMD, and integrated graphics — no download needed."
+          content="GPU tester for quick, reliable graphics card checks. Run free online GPU stress tests to measure performance, stability, and FPS—no installation needed."
         />
         <meta
           name="keywords"
-          content="gpu tester, graphics card test, webgl benchmark, gpu performance test, graphics performance, hardware testing, gpu specs, rendering test"
+          content="gpu tester, graphics card test, webgl benchmark, gpu performance test, graphics performance"
         />
         <link rel="canonical" href="https://www.gamepadtest.tech/gpu-tester" />
         <script type="application/ld+json">
