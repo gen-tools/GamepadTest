@@ -431,8 +431,8 @@ export default function MicTester() {
   return (
     <div className="container mx-auto px-6 py-12">
       <Helmet>
-        <title>Mic Tester Online – Free Microphone Test Tool</title>
-        <meta name="description" content="Test your microphone online free with our mic tester. Check audio input, detect issues, and ensure clear sound quality without downloads." />
+        <title>Online Mic Tester – Free and Secure Microphone Testing Tool</title>
+        <meta name="description" content="Our mic tester is a free online tool to check your microphone’s sound quality and volume in real time. Secure and works on all devices." />
         <meta name="keywords" content="microphone tester, mic test, audio input test, microphone quality test, mic level test, audio analyzer, microphone sensitivity test" />
         <link rel="canonical" href="https://www.gamepadtest.tech/mic-tester" />
         <script type="application/ld+json">{JSON.stringify(micAppSchema)}</script>
