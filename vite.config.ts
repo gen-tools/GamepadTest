@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
+    target: "ES2020",
     rollupOptions: {
       output: {
         manualChunks: {
@@ -45,6 +46,8 @@ export default defineConfig(({ mode }) => ({
     },
     cssCodeSplit: true,
     minify: "esbuild",
+    sourcemap: false,
+    reportCompressedSize: false,
   },
   plugins: [react(), expressPlugin()],
   resolve: {
