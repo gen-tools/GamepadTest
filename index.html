@@ -94,19 +94,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Resource Hints for better performance -->
+    <!-- Font optimization -->
+    <link rel="prefetch" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
     <link
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       as="style"
-      media="print"
-      onload="this.media='all'"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <noscript
-      ><link
+    <noscript>
+      <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
         rel="stylesheet"
-    /></noscript>
+      />
+    </noscript>
+
+    <!-- Preload main bundle for faster load -->
+    <link rel="modulepreload" href="/client/App.tsx" />
 
     <!-- Security Headers -->
     <meta
