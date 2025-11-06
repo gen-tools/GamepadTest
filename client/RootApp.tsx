@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Layout } from "@/components/Layout";
 
@@ -33,6 +33,15 @@ const PageLoader = () => (
     </div>
   </div>
 );
+
+// Prefetch route on link hover
+const usePrefetchRoute = (routeLoader: () => Promise<any>) => {
+  return () => {
+    routeLoader().catch(() => {
+      // Silently handle prefetch errors
+    });
+  };
+};
 
 const queryClient = new QueryClient();
 
