@@ -46,8 +46,13 @@ export default defineConfig(({ mode }) => ({
           ],
         },
       },
+      warn() {
+        // Suppress chunk size warnings for better build feedback
+        return null;
+      },
     },
     cssCodeSplit: true,
+    chunkSizeWarningLimit: 1500,
     minify: "esbuild",
     sourcemap: false,
     reportCompressedSize: false,
