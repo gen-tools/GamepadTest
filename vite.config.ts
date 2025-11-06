@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => ({
       allow: ["./client", "./shared"],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
+    // Optimize middleware performance
+    middlewareMode: false,
+    preTransformRequests: ["/index.html"],
   },
   build: {
     outDir: "dist/spa",
