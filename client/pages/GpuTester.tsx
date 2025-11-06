@@ -133,7 +133,6 @@ export default function GpuTester() {
     }).format(value);
 
   const getGL = (canvas: HTMLCanvasElement) => {
-    // Prefer high-performance GPU if available
     const attrs: WebGLContextAttributes = {
       alpha: false,
       antialias: false,
@@ -201,14 +200,12 @@ export default function GpuTester() {
     const gl = getGL(canvas);
     if (!gl) return;
 
-    // match canvas size to display size for crisp rendering
     const rect = canvas.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.floor(rect.width * dpr);
     canvas.height = Math.floor(384 * dpr);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    // Vertex shader
     const vertexShaderSource = `
       attribute vec2 a_position;
       attribute vec3 a_color;
@@ -226,7 +223,6 @@ export default function GpuTester() {
       }
     `;
 
-    // Fragment shader
     const fragmentShaderSource = `
       precision mediump float;
       varying vec3 v_color;
@@ -268,7 +264,6 @@ export default function GpuTester() {
     const buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 
-    // Generate triangles based on canvas size
     const triangleCount = 12000;
     const vertices: number[] = [];
 
@@ -308,7 +303,7 @@ export default function GpuTester() {
 
     const startTime = performance.now();
     let frameCount = 0;
-    const duration = 5000; // 5 seconds
+    const duration = 5000;
 
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
@@ -756,7 +751,7 @@ export default function GpuTester() {
         )}
         <RecommendedProductsSection products={recommendedProducts} />
 
-        {/* Guide: Online GPU Tester – Free GPU Stress Test & Graphics Card Checker */}
+        {/* Guide Content */}
         <section className="mt-10 space-y-8 text-base leading-7">
           <header className="space-y-3">
             <h2 className="text-2xl font-bold">
