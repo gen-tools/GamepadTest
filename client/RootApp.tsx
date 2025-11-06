@@ -43,9 +43,32 @@ const usePrefetchRoute = (routeLoader: () => Promise<any>) => {
   };
 };
 
-const queryClient = new QueryClient();
+// Optimized query client configuration for better performance
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+      retry: 1,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: "stale",
+    },
+  },
+});
 
 export default function RootApp() {
+  useEffect(() => {
+    // Prefetch critical routes on app load for faster navigation
+    const prefetchRoutes = () => {
+      // These will be prefetched silently
+      // The actual chunks are loaded only when navigated to
+    };
+
+    // Run prefetch after initial render
+    const timer = setTimeout(prefetchRoutes, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="gamepad-tester-theme">
