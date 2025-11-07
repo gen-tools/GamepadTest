@@ -834,7 +834,7 @@ export default function MicTester() {
               <li>Fancy external sound mixers and interfaces</li>
             </ul>
             <p>
-              Whatever OS you're rocking—Windows, macOS, Linux, or even ChromeOS—it hums along in Chrome, Safari, Firefox, or Edge without a hitch. Running a <Link to="/mic-tester" className="text-primary underline">laptop mic tester</Link>? It sniffs out your options and helps you lock in the best one before you dive into that important call.
+              Whatever OS you're rocking—Windows, macOS, Linux, or even ChromeOS—it hums along in Chrome, Safari, Firefox, or Edge without a hitch. Running a <Link to="/mic-tester" className="text-primary underline">laptop mic tester</Link>? It sniffs out your options and helps you lock in the best one before you dive into that important call. For music producers, pair microphone testing with <Link to="/midi-tester" className="text-primary underline">MIDI controller testing</Link> for complete audio setup validation.
             </p>
           </section>
 
