@@ -752,7 +752,7 @@ export default function MicTester() {
               It dives into your audio signal, checks the volume, and sniffs out any sneaky background noise—all happening live in your browser. You don't need to mess around with downloads or anything; just fire it up on your laptop, desktop, or phone.
             </p>
             <p>
-              Perfect timing if you're about to jump on a work call, lay down some podcast tracks, stream a gaming marathon, or catch up with buddies online. It makes sure your words come across crisp and true, without any weird fuzz or dropouts.
+              Perfect timing if you're about to jump on a work call, lay down some podcast tracks, stream a gaming marathon, or catch up with buddies online. It makes sure your words come across crisp and true, without any weird fuzz or dropouts. For streamers, also test your <Link to="/gamepad-tester" className="text-primary underline">controller</Link> and <Link to="/gpu-tester" className="text-primary underline">graphics card</Link> to ensure a smooth broadcast.
             </p>
           </section>
 
