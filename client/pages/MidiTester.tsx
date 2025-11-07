@@ -744,7 +744,7 @@ export default function MidiTester() {
             <h3 className="text-xl font-semibold">How to Test Your MIDI</h3>
             <ol className="list-decimal pl-6 text-muted-foreground space-y-1">
               <li>Hook up your keyboard or controller to your computer.</li>
-              <li>Open the <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> in your browser.</li>
+              <li>Open the MIDI Tester in your browser.</li>
               <li>Pick your device from the list of detected hardware.</li>
               <li>Hit the keys, tweak the knobs, or slide the faders, and watch the monitor for signals.</li>
               <li>If something doesn't show up, check our FAQs or try basic troubleshooting.</li>
