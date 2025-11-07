@@ -710,7 +710,7 @@ export default function MidiTester() {
               <li>Steer clear of those little errors that can derail a whole recording session</li>
             </ul>
             <p>
-              With our device checker, you've got an easy, dependable way to give your gear a quick once-over before you dive in, saving you time and sparing you the headache.
+              With our device checker, you've got an easy, dependable way to give your gear a quick once-over before you dive in, saving you time and sparing you the headache. For a complete audio setup, also test your <Link to="/mic-tester" className="text-primary underline">microphone</Link> for recording quality and your <Link to="/gpu-tester" className="text-primary underline">GPU</Link> if you're running demanding music production software.
             </p>
           </section>
 
