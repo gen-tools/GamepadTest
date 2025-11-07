@@ -770,7 +770,7 @@ export default function GamepadTester() {
       <li>Calibrate sticks and triggers for precision in competitive games</li>
       <li>Verify second-hand controllers before purchase</li>
     </ul>
-    <p className="text-muted-foreground">With our <Link to="/gamepad-tester" className="text-primary underline">online gamepad tester free</Link>, you can check everything in seconds, without installing any software.</p>
+    <p className="text-muted-foreground">With our <Link to="/gamepad-tester" className="text-primary underline">online gamepad tester free</Link>, you can check everything in seconds, without installing any software. If you're a streamer, also consider testing your <Link to="/mic-tester" className="text-primary underline">microphone</Link> and <Link to="/gpu-tester" className="text-primary underline">graphics card performance</Link> to ensure smooth broadcasts.</p>
   </section>
 
   <section className="space-y-2">
