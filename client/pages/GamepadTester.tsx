@@ -850,9 +850,10 @@ export default function GamepadTester() {
     <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
       <li>Test new or used controllers for stick drift, input lag, or unresponsive buttons</li>
       <li>Troubleshoot triggers or vibration issues</li>
-      <li>Verify controller compatibility before a game session</li>
+      <li>Verify controller compatibility before a game session or streaming setup</li>
       <li>Calibrate sticks and triggers for competitive play</li>
       <li>Evaluate <Link to="/gamepad-tester" className="text-primary underline">PS5 controller tester PC</Link>, <Link to="/gamepad-tester" className="text-primary underline">Xbox controller tester</Link>, or <Link to="/gamepad-tester" className="text-primary underline">PS4 controller tester</Link> functionality</li>
+      <li>For music producers and DJs, pair your gamepad testing with <Link to="/midi-tester" className="text-primary underline">MIDI device testing</Link> for complete hardware validation</li>
     </ul>
   </section>
 
