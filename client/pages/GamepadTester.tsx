@@ -830,7 +830,7 @@ export default function GamepadTester() {
       <li><strong>Stick Drift & Deadzone Detection:</strong> Identify worn sticks or misalignment before it affects gameplay</li>
       <li><strong>Vibration Testing:</strong> Check rumble motors on PS, Xbox, or third-party controllers</li>
       <li><strong>Battery & Connection Info:</strong> Monitor battery percentage, connection type, vendor ID, and product ID</li>
-      <li><strong>No Installation Required:</strong> Fully browser-based, nothing to download</li>
+      <li><strong>No Installation Required:</strong> Fully browser-based, nothing to download — just like our <Link to="/gpu-tester" className="text-primary underline">GPU tester</Link> and <Link to="/mic-tester" className="text-primary underline">microphone tester</Link></li>
     </ul>
   </section>
 
