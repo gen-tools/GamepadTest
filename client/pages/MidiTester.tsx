@@ -795,7 +795,7 @@ export default function MidiTester() {
               <li>Easy spotting of wonky keys or buttons</li>
               <li>Quick checks for DAW compatibility</li>
             </ul>
-            <p>Regular testing keeps your workflow smooth for top-notch productions.</p>
+            <p>Regular testing keeps your workflow smooth for top-notch productions. If you're also a gamer, check out our <Link to="/gamepad-tester" className="text-primary underline">gamepad tester</Link> for controller testing alongside your music equipment validation.</p>
           </section>
 
           <section className="space-y-3" id="internal-links">
