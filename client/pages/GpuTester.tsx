@@ -947,7 +947,7 @@ export default function GpuTester() {
             </ol>
             <p className="text-muted-foreground">
               The tool provides clear feedback on your GPU's performance under
-              stress, helping you identify any issues that need attention.
+              stress, helping you identify any issues that need attention. Whether you're a gamer, streamer, or music producer, comprehensive hardware testing includes GPU, <Link to="/gamepad-tester" className="text-primary underline">gamepad</Link>, and <Link to="/midi-tester" className="text-primary underline">MIDI controller</Link> diagnostics.
             </p>
           </section>
 
