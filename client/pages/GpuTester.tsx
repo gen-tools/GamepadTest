@@ -908,7 +908,7 @@ export default function GpuTester() {
               <Link to="/gpu-tester" className="text-primary underline">
                 Graphics adapter tester
               </Link>
-              , this online platform adapts to your hardware.
+              , this online platform adapts to your hardware. For streamers and content creators, also consider testing your <Link to="/gamepad-tester" className="text-primary underline">controller</Link> and <Link to="/mic-tester" className="text-primary underline">microphone</Link> for optimal broadcast quality.
             </p>
           </section>
 
