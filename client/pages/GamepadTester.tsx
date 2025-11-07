@@ -739,7 +739,7 @@ export default function GamepadTester() {
   <header className="space-y-3">
     <h2 className="text-2xl font-bold">Gamepad Tester – Instantly Check Your Controller Online</h2>
     <p>
-      Ever wondered if your controller is really working the way it should? Our online <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> is the fastest way to check every button, stick, trigger, and vibration motor — right in your browser.
+      Ever wondered if your controller is really working the way it should? Our online Gamepad Tester is the fastest way to check every button, stick, trigger, and vibration motor — right in your browser.
     </p>
     <p>
       No downloads, no installs, and no accounts needed. It works with PS4, PS5, Xbox, Xbox 360, Nintendo Switch Pro, and any USB or Bluetooth controller. Whether you're a casual gamer or a pro preparing for a tournament, testing your controller beforehand can save you from frustrating gameplay issues.
@@ -748,7 +748,7 @@ export default function GamepadTester() {
 
   <section className="space-y-2">
     <h3 className="text-xl font-semibold">What Is a Gamepad Tester?</h3>
-    <p>A <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> is a tool that reads your controller in real time using the browser Gamepad API. It shows every button press, stick movement, trigger pull, and vibration feedback, so you can see exactly how your controller responds.</p>
+    <p>A Gamepad Tester is a tool that reads your controller in real time using the browser Gamepad API. It shows every button press, stick movement, trigger pull, and vibration feedback, so you can see exactly how your controller responds.</p>
     <p>Here's what it can check:</p>
     <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
       <li>Button presses and releases</li>
@@ -757,7 +757,7 @@ export default function GamepadTester() {
       <li>Vibration functionality</li>
       <li>Connection type and battery level</li>
     </ul>
-    <p className="text-muted-foreground">Think of it as a <Link to="/gamepad-tester" className="text-primary underline">controller checker</Link> and <Link to="/gamepad-tester" className="text-primary underline">joypad tester</Link> all in one — perfect for diagnosing hardware issues or just making sure your controller is ready to play.</p>
+    <p className="text-muted-foreground">Think of it as a controller checker and joypad tester all in one — perfect for diagnosing hardware issues or just making sure your controller is ready to play.</p>
   </section>
 
   <section className="space-y-2">
@@ -770,7 +770,7 @@ export default function GamepadTester() {
       <li>Calibrate sticks and triggers for precision in competitive games</li>
       <li>Verify second-hand controllers before purchase</li>
     </ul>
-    <p className="text-muted-foreground">With our <Link to="/gamepad-tester" className="text-primary underline">online gamepad tester free</Link>, you can check everything in seconds, without installing any software. If you're a streamer, also consider testing your <Link to="/mic-tester" className="text-primary underline">microphone</Link> and <Link to="/gpu-tester" className="text-primary underline">graphics card performance</Link> to ensure smooth broadcasts.</p>
+    <p className="text-muted-foreground">With our free online gamepad tester, you can check everything in seconds, without installing any software. If you're a streamer, also consider testing your <Link to="/mic-tester" className="text-primary underline">microphone</Link> and <Link to="/gpu-tester" className="text-primary underline">graphics card performance</Link> to ensure smooth broadcasts.</p>
   </section>
 
   <section className="space-y-2">
@@ -815,7 +815,7 @@ export default function GamepadTester() {
     <h3 className="text-xl font-semibold">How to Use Gamepad Tester</h3>
     <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
       <li>Connect your controller via USB or Bluetooth</li>
-      <li>Open the <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> in your browser</li>
+      <li>Open the Gamepad Tester in your browser</li>
       <li>Press buttons, move sticks, or pull triggers</li>
       <li>Watch live feedback on button states, axes, and vibration</li>
       <li>Identify drift, dead zones, or calibration issues</li>
@@ -852,7 +852,7 @@ export default function GamepadTester() {
       <li>Troubleshoot triggers or vibration issues</li>
       <li>Verify controller compatibility before a game session or streaming setup</li>
       <li>Calibrate sticks and triggers for competitive play</li>
-      <li>Evaluate <Link to="/gamepad-tester" className="text-primary underline">PS5 controller tester PC</Link>, <Link to="/gamepad-tester" className="text-primary underline">Xbox controller tester</Link>, or <Link to="/gamepad-tester" className="text-primary underline">PS4 controller tester</Link> functionality</li>
+      <li>Evaluate PS5 controller tester PC, Xbox controller tester, or PS4 controller tester functionality</li>
       <li>For music producers and DJs, pair your gamepad testing with <Link to="/midi-tester" className="text-primary underline">MIDI device testing</Link> for complete hardware validation</li>
     </ul>
   </section>
@@ -888,7 +888,7 @@ export default function GamepadTester() {
       <li>Overall controller performance</li>
     </ul>
     <p>
-      Whether it's PS4, PS5, Xbox, Xbox 360, or a generic USB/Bluetooth controller, our <Link to="/gamepad-tester" className="text-primary underline">online gamepad tester</Link> gives you reliable results in seconds. Don't let controller issues ruin your gaming experience — test your hardware now and game with confidence.
+      Whether it's PS4, PS5, Xbox, Xbox 360, or a generic USB/Bluetooth controller, our online gamepad tester gives you reliable results in seconds. Don't let controller issues ruin your gaming experience — test your hardware now and game with confidence.
        </p>
        </section>
       </section>
