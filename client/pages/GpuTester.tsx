@@ -763,11 +763,7 @@ export default function GpuTester() {
               Online GPU Tester – Free GPU Stress Test & Graphics Card Checker
             </h2>
             <p>
-              A GPU tester — sometimes called a{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                graphics card checker
-              </Link>{" "}
-              — is a tool that evaluates the performance, stability, and health
+              A GPU tester — sometimes called a graphics card checker — is a tool that evaluates the performance, stability, and health
               of your graphics processing unit. Whether you're running a quick
               benchmark or a full-blown stress session, a Graphics Processing
               Unit tester gives you insights into how well your GPU handles
@@ -776,19 +772,8 @@ export default function GpuTester() {
             <p>
               These tests help detect issues like overheating, rendering errors,
               or under-utilization before they start affecting your gaming or
-              creative work. A{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                GPU tester online
-              </Link>
-              , or browser-based GPU checker, is especially helpful because it
-              doesn't require installation. You can run a{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                gpu stress test online
-              </Link>{" "}
-              or a simple{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                gpu test online
-              </Link>{" "}
+              creative work. A GPU tester online, or browser-based GPU checker, is especially helpful because it
+              doesn't require installation. You can run a gpu stress test online or a simple gpu test online
               using your web browser.
             </p>
           </header>
@@ -798,21 +783,14 @@ export default function GpuTester() {
               Why Choose Our GPU Tester?
             </h3>
             <p>
-              Choosing our{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                gpu tester tool
-              </Link>{" "}
+              Choosing our gpu tester tool
               means getting reliable, fast, and accessible diagnostics without
               the hassle. Our platform combines a free, browser-based approach
               with a professional-grade engine built on WebGL.
             </p>
             <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
               <li>
-                Run a{" "}
-                <Link to="/gpu-tester" className="text-primary underline">
-                  free GPU tester
-                </Link>{" "}
-                in just a few seconds with real-time metrics
+                Run a free GPU tester in just a few seconds with real-time metrics
               </li>
               <li>
                 No downloads or installations required — everything happens
@@ -826,10 +804,7 @@ export default function GpuTester() {
             </ul>
             <p className="text-muted-foreground">
               Whether you're a casual gamer, a developer, or someone who
-              recently overclocked their rig, our{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                GPU checker online
-              </Link>{" "}
+              recently overclocked their rig, our GPU checker online
               offers the clarity you need.
             </p>
           </section>
@@ -839,10 +814,7 @@ export default function GpuTester() {
               How Does a GPU Tester Work?
             </h3>
             <p>
-              Under the hood, our{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                graphic card checker
-              </Link>{" "}
+              Under the hood, our graphic card checker
               leverages WebGL (or WebGPU, when available) to render complex 3D
               scenes. As it runs, it measures frames per second (FPS), frame
               times, and workload consistency.
@@ -853,10 +825,7 @@ export default function GpuTester() {
                 real-world stress
               </li>
               <li>
-                Shows live charts for FPS and stability during the{" "}
-                <Link to="/gpu-tester" className="text-primary underline">
-                  pc graphics card test online
-                </Link>
+                Shows live charts for FPS and stability during the pc graphics card test online
               </li>
               <li>
                 Gradually increases rendering complexity to test performance
@@ -896,18 +865,7 @@ export default function GpuTester() {
               </li>
             </ul>
             <p className="text-muted-foreground">
-              Whether you want to run an{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                MSI GPU tester
-              </Link>
-              , an{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                NVIDIA GPU tester
-              </Link>
-              , or a general gaming{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                Graphics adapter tester
-              </Link>
+              Whether you want to run an MSI GPU tester, an NVIDIA GPU tester, or a general gaming Graphics adapter tester
               , this online platform adapts to your hardware. For streamers and content creators, also consider testing your <Link to="/gamepad-tester" className="text-primary underline">controller</Link> and <Link to="/mic-tester" className="text-primary underline">microphone</Link> for optimal broadcast quality.
             </p>
           </section>
@@ -917,10 +875,7 @@ export default function GpuTester() {
               How to Use a GPU Tester Online
             </h3>
             <p>
-              Using our{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                GPU performance test
-              </Link>{" "}
+              Using our GPU performance test
               is straightforward:
             </p>
             <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
@@ -962,10 +917,7 @@ export default function GpuTester() {
                   What Is a GPU Stress Test?
                 </h4>
                 <p className="text-muted-foreground">
-                  A{" "}
-                  <Link to="/gpu-tester" className="text-primary underline">
-                    gpu stress test online
-                  </Link>{" "}
+                  A gpu stress test online
                   forces your graphics card to operate at or near its capacity
                   for an extended period. This helps identify stability issues,
                   thermal throttling, or power delivery problems that might not
@@ -1025,10 +977,7 @@ export default function GpuTester() {
                 under load, measuring FPS, rendering capability, and stability
               </li>
               <li>
-                A{" "}
-                <Link to="/gpu-tester" className="text-primary underline">
-                  graphics card checker
-                </Link>{" "}
+                A graphics card checker
                 often includes hardware detection, driver info, and basic
                 diagnostics alongside performance metrics
               </li>
@@ -1100,10 +1049,7 @@ export default function GpuTester() {
               without any installation or cost.
             </p>
             <p className="text-muted-foreground">
-              Ready to test your GPU?{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                Start the GPU test now
-              </Link>{" "}
+              Ready to test your GPU? Start the GPU test now
               and see how your graphics card performs under pressure.
             </p>
           </section>
