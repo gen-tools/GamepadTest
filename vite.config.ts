@@ -12,13 +12,9 @@ export default defineConfig(({ mode }) => ({
       allow: ["./client", "./shared"],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
-    // Optimize middleware performance
-    middlewareMode: false,
-    preTransformRequests: ["/index.html"],
   },
   build: {
     outDir: "dist/spa",
-    target: "ES2020",
     rollupOptions: {
       output: {
         manualChunks: {
@@ -46,16 +42,9 @@ export default defineConfig(({ mode }) => ({
           ],
         },
       },
-      warn() {
-        // Suppress chunk size warnings for better build feedback
-        return null;
-      },
     },
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 1500,
     minify: "esbuild",
-    sourcemap: false,
-    reportCompressedSize: false,
   },
   plugins: [react(), expressPlugin()],
   resolve: {

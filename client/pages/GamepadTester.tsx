@@ -734,10 +734,9 @@ export default function GamepadTester() {
 
         <RecommendedProductsSection products={recommendedProducts} />
 
-       {/* Guide: Gamepad Tester – Instantly Check Your Controller Online */}
          {/* Guide: Gamepad Tester – Instantly Check Your Controller Online */}
-         <section className="mt-12 space-y-8 text-base leading-7 text-foreground">
-     <header className="space-y-3">
+<section className="mt-12 space-y-8 text-base leading-7 text-foreground">
+  <header className="space-y-3">
     <h2 className="text-2xl font-bold">Gamepad Tester – Instantly Check Your Controller Online</h2>
     <p>
       Ever wondered if your controller is really working the way it should? Our online Gamepad Tester is the fastest way to check every button, stick, trigger, and vibration motor — right in your browser.
