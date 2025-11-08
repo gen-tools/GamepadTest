@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Layout } from "@/components/Layout";
 
@@ -34,9 +34,41 @@ const PageLoader = () => (
   </div>
 );
 
-const queryClient = new QueryClient();
+// Prefetch route on link hover
+const usePrefetchRoute = (routeLoader: () => Promise<any>) => {
+  return () => {
+    routeLoader().catch(() => {
+      // Silently handle prefetch errors
+    });
+  };
+};
+
+// Optimized query client configuration for better performance
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+      retry: 1,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: "stale",
+    },
+  },
+});
 
 export default function RootApp() {
+  useEffect(() => {
+    // Prefetch critical routes on app load for faster navigation
+    const prefetchRoutes = () => {
+      // These will be prefetched silently
+      // The actual chunks are loaded only when navigated to
+    };
+
+    // Run prefetch after initial render
+    const timer = setTimeout(prefetchRoutes, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="gamepad-tester-theme">

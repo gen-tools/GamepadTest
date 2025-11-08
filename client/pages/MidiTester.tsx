@@ -710,7 +710,7 @@ export default function MidiTester() {
               <li>Steer clear of those little errors that can derail a whole recording session</li>
             </ul>
             <p>
-              With our device checker, you've got an easy, dependable way to give your gear a quick once-over before you dive in, saving you time and sparing you the headache.
+              With our device checker, you've got an easy, dependable way to give your gear a quick once-over before you dive in, saving you time and sparing you the headache. For a complete audio setup, also test your <Link to="/mic-tester" className="text-primary underline">microphone</Link> for recording quality and your <Link to="/gpu-tester" className="text-primary underline">GPU</Link> if you're running demanding music production software.
             </p>
           </section>
 
@@ -744,7 +744,7 @@ export default function MidiTester() {
             <h3 className="text-xl font-semibold">How to Test Your MIDI</h3>
             <ol className="list-decimal pl-6 text-muted-foreground space-y-1">
               <li>Hook up your keyboard or controller to your computer.</li>
-              <li>Open the <Link to="/midi-tester" className="text-primary underline">MIDI Tester</Link> in your browser.</li>
+              <li>Open the MIDI Tester in your browser.</li>
               <li>Pick your device from the list of detected hardware.</li>
               <li>Hit the keys, tweak the knobs, or slide the faders, and watch the monitor for signals.</li>
               <li>If something doesn't show up, check our FAQs or try basic troubleshooting.</li>
@@ -795,7 +795,7 @@ export default function MidiTester() {
               <li>Easy spotting of wonky keys or buttons</li>
               <li>Quick checks for DAW compatibility</li>
             </ul>
-            <p>Regular testing keeps your workflow smooth for top-notch productions.</p>
+            <p>Regular testing keeps your workflow smooth for top-notch productions. If you're also a gamer, check out our <Link to="/gamepad-tester" className="text-primary underline">gamepad tester</Link> for controller testing alongside your music equipment validation.</p>
           </section>
 
           <section className="space-y-3" id="internal-links">
