@@ -377,7 +377,7 @@ export default function GamepadTester() {
     <div className="container mx-auto px-6 py-12">
       <Helmet>
         <title>Gamepad Tester Online – Free Controller & Joystick Checker</title>
-        <meta name="description" content="Test your controller online free with our gamepad tester. Instantly check PS4, PS5, Xbox & PC controllers for stick drift, buttons, triggers, and joysticks." />
+        <meta name="description" content="Gamepad tester online to test buttons, joysticks, and stick drift. Works with PS, Xbox, and PC—free, secure, no download needed." />
         <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker" />
         <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
         <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
@@ -735,8 +735,9 @@ export default function GamepadTester() {
         <RecommendedProductsSection products={recommendedProducts} />
 
        {/* Guide: Gamepad Tester – Instantly Check Your Controller Online */}
-<section className="mt-12 space-y-8 text-base leading-7 text-foreground">
-  <header className="space-y-3">
+         {/* Guide: Gamepad Tester – Instantly Check Your Controller Online */}
+         <section className="mt-12 space-y-8 text-base leading-7 text-foreground">
+     <header className="space-y-3">
     <h2 className="text-2xl font-bold">Gamepad Tester – Instantly Check Your Controller Online</h2>
     <p>
       Ever wondered if your controller is really working the way it should? Our online Gamepad Tester is the fastest way to check every button, stick, trigger, and vibration motor — right in your browser.
