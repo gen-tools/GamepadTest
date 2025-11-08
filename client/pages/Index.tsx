@@ -142,7 +142,7 @@ export default function Index() {
     <div className="flex flex-col">
       <Helmet>
         <title>
-          GamepadTest | Free Online Controller, GPU, Mic & MIDI Tester
+          GamepadTest | Free Online Hardware Tester
         </title>
         <meta
           name="description"
