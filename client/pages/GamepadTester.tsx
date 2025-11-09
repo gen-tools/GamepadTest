@@ -332,7 +332,7 @@ export default function GamepadTester() {
   const gamepadAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Online Gamepad Tester',
+    name: 'Gamepad Tester',
     applicationCategory: 'WebApplication',
     operatingSystem: 'Any',
     url: 'https://www.gamepadtest.tech/gamepad-tester',
@@ -377,7 +377,7 @@ export default function GamepadTester() {
     <div className="container mx-auto px-6 py-12">
       <Helmet>
         <title>Gamepad Tester Online – Free Controller & Joystick Checker</title>
-        <meta name="description" content="Gamepad tester online to test buttons, joysticks, and stick drift. Works with PS, Xbox, and PC—free, secure, no download needed." />
+        <meta name="description" content="Our gamepad tester lets you check buttons, joysticks, triggers, and stick drift on PS5, Xbox, and PC controllers. Free, secure, and no download required." />
         <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker" />
         <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
         <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
