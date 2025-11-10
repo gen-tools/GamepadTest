@@ -9,7 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import RootApp from "@/RootApp";
 
 const app = createServer();
-const port = Number(process.env.PORT) || 8080;
+const port = Number(process.env.PORT) || 5000;
 
 // In production, serve the built SPA files
 const __dirname = import.meta.dirname;
@@ -85,7 +85,7 @@ app.get("*", (req, res) => {
   res.status(200).send(html);
 });
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`🚀 Fusion Starter server running on port ${port}`);
   console.log(`📱 Frontend: http://localhost:${port}`);
   console.log(`🔧 API: http://localhost:${port}/api`);
