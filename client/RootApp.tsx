@@ -7,19 +7,19 @@ import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Layout } from "@/components/Layout";
 
-// Pages - critical path
+// Pages - critical path (eager loaded for SSR and SEO)
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import GamepadTester from "./pages/GamepadTester";
+import GpuTester from "./pages/GpuTester";
+import MicTester from "./pages/MicTester";
+import MidiTester from "./pages/MidiTester";
 
-// Pages - lazy loaded for code splitting
-const GamepadTester = lazy(() => import("./pages/GamepadTester"));
-const GpuTester = lazy(() => import("./pages/GpuTester"));
-const MicTester = lazy(() => import("./pages/MicTester"));
-const MidiTester = lazy(() => import("./pages/MidiTester"));
+// Guide pages - lazy loaded for code splitting (less critical for SEO)
 const GamepadTesterGuide = lazy(() => import("./pages/GamepadTesterGuide"));
 const GpuTesterGuide = lazy(() => import("./pages/GpuTesterGuide"));
 const MicTesterGuide = lazy(() => import("./pages/MicTesterGuide"));
@@ -46,38 +46,10 @@ export default function RootApp() {
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route
-                path="/gamepad-tester"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <GamepadTester />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/gpu-tester"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <GpuTester />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/mic-tester"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <MicTester />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/midi-tester"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <MidiTester />
-                  </Suspense>
-                }
-              />
+              <Route path="/gamepad-tester" element={<GamepadTester />} />
+              <Route path="/gpu-tester" element={<GpuTester />} />
+              <Route path="/mic-tester" element={<MicTester />} />
+              <Route path="/midi-tester" element={<MidiTester />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />

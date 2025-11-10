@@ -15,13 +15,19 @@ const port = Number(process.env.PORT) || 5000;
 const __dirname = import.meta.dirname;
 const distPath = path.join(__dirname, "../spa");
 
-// Serve static files
-app.use(express.static(distPath));
+// Serve static files (excluding index.html which is handled by SSR)
+app.use(express.static(distPath, { index: false }));
 
 // Handle React Router with SSR - render HTML for all non-API routes
-app.get("*", (req, res) => {
+app.use((req, res, next) => {
+  // Skip API routes and static asset files
   if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
-    return res.status(404).json({ error: "API endpoint not found" });
+    return next();
+  }
+  
+  // Skip if it's a static asset file (has extension)
+  if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
+    return next();
   }
 
   const indexFile = path.join(distPath, "index.html");
@@ -44,6 +50,14 @@ app.get("*", (req, res) => {
       ),
     ),
   );
+  
+  console.log('📊 SSR Render:', {
+    path: req.url,
+    appHtmlLength: appHtml?.length || 0,
+    hasHelmetContext: !!helmetContext,
+    hasHelmet: !!helmetContext.helmet,
+    helmetKeys: helmetContext.helmet ? Object.keys(helmetContext.helmet) : []
+  });
 
   // Inject SSR content
   let html = template.replace(
@@ -54,6 +68,13 @@ app.get("*", (req, res) => {
   // Inject Helmet head tags
   if (helmetContext.helmet) {
     const { title, meta, link, script } = helmetContext.helmet;
+    
+    console.log('🔍 SSR Debug:', {
+      path: req.url,
+      hasHelmet: !!helmetContext.helmet,
+      titleLength: title?.toString()?.length || 0,
+      metaLength: meta?.toString()?.length || 0
+    });
 
     // Replace title
     if (title.toString()) {

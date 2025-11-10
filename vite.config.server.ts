@@ -41,6 +41,9 @@ export default defineConfig({
     minify: false, // Keep readable for debugging
     sourcemap: true,
   },
+  ssr: {
+    noExternal: ['react-helmet-async'],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
