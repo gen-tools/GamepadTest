@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { Gamepad2, Zap, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,7 +18,7 @@ interface GamepadState {
   buttons: boolean[];
   axes: number[];
   timestamp: number;
-  triggers?: number[]; // normalized -1..1 values, fallback to button analog if axes not available
+  triggers?: number[];
   hapticActuators?: any[];
   pose?: any;
   hand?: string;
@@ -132,14 +133,12 @@ export default function GamepadTester() {
 
       const normalizedAxes = Array.from(gamepad.axes, v => applyDeadzone(v));
 
-      // Build triggers as -1..1 values. If axes provide them, use those; else fallback to button analog values (e.g., indices 6,7)
       let triggers: number[] | undefined;
       if (gamepad.axes.length > 4) {
         triggers = gamepad.axes.slice(4).map(v => Math.max(-1, Math.min(1, v)));
       } else if (gamepad.buttons.length >= 8) {
-        const l2 = gamepad.buttons[6]?.value ?? 0; // 0..1
+        const l2 = gamepad.buttons[6]?.value ?? 0;
         const r2 = gamepad.buttons[7]?.value ?? 0;
-        // convert 0..1 to -1..1 like axes
         triggers = [l2 * 2 - 1, r2 * 2 - 1];
       }
 
@@ -327,8 +326,6 @@ export default function GamepadTester() {
     }
   ];
 
-  const faqStructuredData = faqData;
-
   const gamepadAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -338,7 +335,7 @@ export default function GamepadTester() {
     url: 'https://www.gamepadtest.tech/gamepad-tester',
     description: 'Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest.',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
-  } as const;
+  };
 
   const gamepadBreadcrumb = {
     '@context': 'https://schema.org',
@@ -347,7 +344,7 @@ export default function GamepadTester() {
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
       { '@type': 'ListItem', position: 2, name: 'Gamepad Tester', item: 'https://www.gamepadtest.tech/gamepad-tester' }
     ]
-  } as const;
+  };
 
   const recommendedProducts = [
     {
@@ -375,15 +372,48 @@ export default function GamepadTester() {
 
   return (
     <div className="container mx-auto px-6 py-12">
+      {/* SEO Meta Tags - Fixed Structure */}
       <Helmet>
         <title>Gamepad Tester Online – Free Controller & Joypad Checker</title>
-        <meta name="description" content="Our gamepad tester lets you check buttons, joysticks, triggers, and stick drift on PS5, Xbox, and PC controllers. Free, secure, and no download required." />
-        <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker" />
+        <meta 
+          name="description" 
+          content="Our gamepad tester lets you check buttons, joysticks, triggers, and stick drift on PS5, Xbox, and PC controllers. Free, secure, and no download required." 
+        />
+        <meta 
+          name="keywords" 
+          content="gamepad tester, controller tester, joystick test, gamepad checker, ps4 controller test, xbox controller test, stick drift test" 
+        />
         <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
-        <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(gamepadBreadcrumb)}</script>
-        <script type="application/ld+json">{JSON.stringify(howToStructuredData)}</script>
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
+        <meta 
+          property="og:description" 
+          content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." 
+        />
+        <meta property="og:url" content="https://www.gamepadtest.tech/gamepad-tester" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
+        <meta 
+          name="twitter:description" 
+          content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." 
+        />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(gamepadAppSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(gamepadBreadcrumb)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(howToStructuredData)}
+        </script>
       </Helmet>
+
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
@@ -488,7 +518,7 @@ export default function GamepadTester() {
           </CardContent>
         </Card>
 
-        {/* Unique Testing Features */}
+        {/* Rest of the component remains the same */}
         {gamepads.length > 0 && (
           <Card className="mb-8 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950 animate-fade-in-up animate-stagger-4 hover-glow">
             <CardHeader>
@@ -711,7 +741,7 @@ export default function GamepadTester() {
                 </div>
               )}
 
-              {/* Triggers (uses axes if present, otherwise analog buttons 6/7) */}
+              {/* Triggers */}
               {((gamepad.triggers && gamepad.triggers.length > 0) || gamepad.axes.length > 4) && (
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Triggers</h3>
