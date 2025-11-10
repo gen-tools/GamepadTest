@@ -373,46 +373,32 @@ export default function GamepadTester() {
   return (
     <div className="container mx-auto px-6 py-12">
       {/* SEO Meta Tags - Fixed Structure */}
-      <Helmet>
-        <title>Gamepad Tester Online – Free Controller & Joypad Checker</title>
-        <meta 
-          name="description" 
-          content="Our gamepad tester lets you check buttons, joysticks, triggers, and stick drift on PS5, Xbox, and PC controllers. Free, secure, and no download required." 
-        />
-        <meta 
-          name="keywords" 
-          content="gamepad tester, controller tester, joystick test, gamepad checker, ps4 controller test, xbox controller test, stick drift test" 
-        />
-        <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
-        
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
-        <meta 
-          property="og:description" 
-          content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." 
-        />
-        <meta property="og:url" content="https://www.gamepadtest.tech/gamepad-tester" />
-        <meta property="og:type" content="website" />
-        
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
-        <meta 
-          name="twitter:description" 
-          content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." 
-        />
-
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(gamepadAppSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(gamepadBreadcrumb)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(howToStructuredData)}
-        </script>
-      </Helmet>
+     <Helmet>
+  <html lang="en" />
+  <title>Gamepad Tester Online – Free Controller & Joypad Checker</title>
+  <meta name="description" content="Our gamepad tester lets you check buttons, joysticks, triggers, and stick drift on PS5, Xbox, and PC controllers. Free, secure, and no download required." />
+  <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker, PS5 controller test, Xbox controller test, stick drift test, controller diagnostic" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
+  
+  {/* Open Graph / Facebook */}
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.gamepadtest.tech/gamepad-tester" />
+  <meta property="og:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
+  <meta property="og:description" content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." />
+  <meta property="og:image" content="https://www.gamepadtest.tech/og-image.jpg" />
+  
+  {/* Twitter */}
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://www.gamepadtest.tech/gamepad-tester" />
+  <meta property="twitter:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
+  <meta property="twitter:description" content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." />
+  <meta property="twitter:image" content="https://www.gamepadtest.tech/twitter-image.jpg" />
+  
+  <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
+  <script type="application/ld+json">{JSON.stringify(gamepadBreadcrumb)}</script>
+  <script type="application/ld+json">{JSON.stringify(howToStructuredData)}</script>
+</Helmet>
 
       <div className="max-w-4xl mx-auto">
         {/* Header */}
