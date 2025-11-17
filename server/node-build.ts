@@ -2,11 +2,8 @@ import path from "path";
 import fs from "fs";
 import { createServer } from "./index";
 import * as express from "express";
-import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
-import { HelmetProvider } from "react-helmet-async";
-import RootApp from "@/RootApp";
+import { render } from "@/entry-server";
 
 const app = createServer();
 const port = Number(process.env.PORT) || 5000;
@@ -39,17 +36,8 @@ app.use((req, res, next) => {
   }
 
   const helmetContext: any = {};
-  const appHtml = ReactDOMServer.renderToString(
-    React.createElement(
-      HelmetProvider as any,
-      { context: helmetContext },
-      React.createElement(
-        StaticRouter as any,
-        { location: req.url },
-        React.createElement(RootApp),
-      ),
-    ),
-  );
+  const reactApp = render(req.url, helmetContext);
+  const appHtml = ReactDOMServer.renderToString(reactApp);
   
   console.log('📊 SSR Render:', {
     path: req.url,
