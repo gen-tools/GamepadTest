@@ -3,7 +3,7 @@ import fs from "fs";
 import { createServer } from "./index";
 import * as express from "express";
 import ReactDOMServer from "react-dom/server";
-import { render } from "@/entry-server";
+import { render } from "../client/entry-server";
 
 const app = createServer();
 const port = Number(process.env.PORT) || 5000;
@@ -35,6 +35,33 @@ app.use((req, res, next) => {
     return res.status(500).send("Index HTML not found");
   }
 
+  // Helper function to merge HTML attributes (Helmet overrides template)
+  const mergeAttributes = (existing: string, helmet: string): string => {
+    if (!helmet) return existing;
+    if (!existing) return helmet;
+    
+    const attrs = new Map<string, string>();
+    
+    // Parse attributes (handles key="value", key='value', and standalone key)
+    const parseAttrs = (str: string) => {
+      const attrRegex = /(\w+(?:-\w+)*)(?:=["']([^"']*)["']|=([^\s>]*))?/g;
+      let match;
+      while ((match = attrRegex.exec(str)) !== null) {
+        const key = match[1];
+        const value = match[2] || match[3] || '';
+        attrs.set(key, value);
+      }
+    };
+    
+    parseAttrs(existing);  // First parse existing attributes
+    parseAttrs(helmet);    // Then parse Helmet (overwrites duplicates)
+    
+    // Reconstruct attribute string
+    return Array.from(attrs.entries())
+      .map(([k, v]) => v ? `${k}="${v}"` : k)
+      .join(' ');
+  };
+
   const helmetContext: any = {};
   const reactApp = render(req.url, helmetContext);
   const appHtml = ReactDOMServer.renderToString(reactApp);
@@ -53,9 +80,9 @@ app.use((req, res, next) => {
     `<div id=\"root\">${appHtml}</div>`,
   );
 
-  // Inject Helmet head tags
+  // Inject Helmet head tags and attributes
   if (helmetContext.helmet) {
-    const { title, meta, link, script } = helmetContext.helmet;
+    const { title, meta, link, script, style, noscript, base, htmlAttributes, bodyAttributes } = helmetContext.helmet;
     
     console.log('🔍 SSR Debug:', {
       path: req.url,
@@ -64,30 +91,41 @@ app.use((req, res, next) => {
       metaLength: meta?.toString()?.length || 0
     });
 
+    // Merge HTML attributes (Helmet overrides existing)
+    if (htmlAttributes.toString()) {
+      const htmlMatch = html.match(/<html([^>]*)>/);
+      if (htmlMatch) {
+        const existingAttrs = htmlMatch[1].trim();
+        const mergedAttrs = mergeAttributes(existingAttrs, htmlAttributes.toString());
+        html = html.replace(/<html[^>]*>/, `<html ${mergedAttrs}>`);
+      }
+    }
+
     // Replace title
     if (title.toString()) {
       html = html.replace(/<title>.*?<\/title>/, title.toString());
     }
 
-    // Replace or inject meta tags - remove empty placeholders first
+    // Remove empty placeholders
     html = html.replace(/<meta\s+name="description"\s+content=""\s*\/?>/g, "");
     html = html.replace(/<meta\s+property="og:title"\s+content=""\s*\/?>/g, "");
-    html = html.replace(
-      /<meta\s+property="og:description"\s+content=""\s*\/?>/g,
-      "",
-    );
-    html = html.replace(
-      /<meta\s+property="twitter:title"\s+content=""\s*\/?>/g,
-      "",
-    );
-    html = html.replace(
-      /<meta\s+property="twitter:description"\s+content=""\s*\/?>/g,
-      "",
-    );
+    html = html.replace(/<meta\s+property="og:description"\s+content=""\s*\/?>/g, "");
+    html = html.replace(/<meta\s+property="twitter:title"\s+content=""\s*\/?>/g, "");
+    html = html.replace(/<meta\s+property="twitter:description"\s+content=""\s*\/?>/g, "");
 
-    // Inject Helmet tags before closing head
-    const helmetTags = `${meta.toString()}${link.toString()}${script.toString()}`;
+    // Inject all Helmet head tags before closing head
+    const helmetTags = `${base.toString()}${meta.toString()}${link.toString()}${style.toString()}${script.toString()}${noscript.toString()}`;
     html = html.replace("</head>", `${helmetTags}</head>`);
+
+    // Merge body attributes (Helmet overrides existing)
+    if (bodyAttributes.toString()) {
+      const bodyMatch = html.match(/<body([^>]*)>/);
+      if (bodyMatch) {
+        const existingAttrs = bodyMatch[1].trim();
+        const mergedAttrs = mergeAttributes(existingAttrs, bodyAttributes.toString());
+        html = html.replace(/<body[^>]*>/, `<body ${mergedAttrs}>`);
+      }
+    }
   }
 
   res.setHeader("Content-Type", "text/html");

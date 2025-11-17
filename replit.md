@@ -71,7 +71,59 @@ All environment variables have sensible defaults and are optional for basic func
 - `GET /api/demo` - Demo endpoint
 - `GET /api/image-proxy?url=<image_url>` - Image proxy for allowed hosts
 
+## Server-Side Rendering (SSR)
+
+The application implements full server-side rendering in production mode for improved SEO and initial load performance.
+
+### SSR Architecture
+
+- **Entry Point**: `client/entry-server.tsx` - Exports a `render()` function that wraps the app with `StaticRouter` and `HelmetProvider`
+- **Server Handler**: `server/node-build.ts` - Production server that renders React components to HTML strings
+- **Build Process**: Separate client and server builds ensure proper SSR bundling
+
+### How SSR Works
+
+1. **Development Mode**: Uses client-side rendering with Vite's dev server for fast HMR
+2. **Production Mode**: 
+   - Server reads the built `index.html` template from `dist/spa/`
+   - Renders React components to HTML using `ReactDOMServer.renderToString()`
+   - Injects rendered HTML into the template's `<div id="root">`
+   - Injects Helmet-managed meta tags, titles, and other head elements
+   - Sends fully-rendered HTML to the client
+3. **Client Hydration**: React hydrates the server-rendered HTML on the client side
+
+### SSR-Safe Components
+
+All components that use browser APIs (localStorage, window, etc.) must check for their existence:
+
+```typescript
+if (typeof window !== 'undefined' && window.localStorage) {
+  // Safe to use localStorage
+}
+```
+
+Examples: `ThemeContext` handles localStorage safely for SSR compatibility.
+
+### Testing SSR
+
+To test server-side rendering locally:
+
+```bash
+npm run build
+npm start
+curl http://localhost:5000/ | grep -A 10 '<div id="root">'
+```
+
+You should see rendered React components inside the root div, not an empty div.
+
 ## Recent Changes
+
+### November 17, 2025 - Full SSR Implementation
+- Created `client/entry-server.tsx` as dedicated SSR entry point
+- Updated `server/node-build.ts` to use the new render function
+- Fixed `ThemeContext` to be SSR-safe (checks for localStorage availability)
+- Verified SSR renders ~47KB of HTML with proper Helmet meta tags
+- Production builds now serve fully server-rendered pages for better SEO
 
 ### November 10, 2025 - Replit Migration
 - Migrated from Vercel to Replit
