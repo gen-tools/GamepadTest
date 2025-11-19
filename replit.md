@@ -94,15 +94,24 @@ The application implements full server-side rendering in production mode for imp
 
 ### SSR-Safe Components
 
-All components that use browser APIs (localStorage, window, etc.) must check for their existence:
+All components that use browser APIs (localStorage, window, navigator, etc.) must check for their existence:
 
 ```typescript
 if (typeof window !== 'undefined' && window.localStorage) {
   // Safe to use localStorage
 }
+
+if (typeof navigator !== 'undefined' && navigator.mediaDevices) {
+  // Safe to use Media Devices API
+}
 ```
 
-Examples: `ThemeContext` handles localStorage safely for SSR compatibility.
+SSR-safe components:
+- `ThemeContext` - Handles localStorage safely
+- `GamepadTester` - Guards navigator.getGamepads() and window APIs
+- `GpuTester` - Guards window sizing and display APIs
+- `MicTester` - Guards navigator.mediaDevices and AudioContext
+- `MidiTester` - Guards navigator.requestMIDIAccess and Web Audio API
 
 ### Testing SSR
 
@@ -117,6 +126,14 @@ curl http://localhost:5000/ | grep -A 10 '<div id="root">'
 You should see rendered React components inside the root div, not an empty div.
 
 ## Recent Changes
+
+### November 19, 2025 - SSR Fixes for Tester Pages
+- Fixed SSR compatibility issues in all hardware tester pages
+- Added SSR-safe guards for browser APIs in GamepadTester, GpuTester, MicTester, and MidiTester
+- Wrapped navigator, window, and Web API calls with `typeof` checks to prevent SSR errors
+- Fixed TypeScript error in MidiTester (added baseFreq to oscillator type)
+- Verified all tester pages render correctly without SSR crashes
+- Production build completes successfully with both client and server bundles
 
 ### November 17, 2025 - Full SSR Implementation
 - Created `client/entry-server.tsx` as dedicated SSR entry point

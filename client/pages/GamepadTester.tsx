@@ -68,6 +68,7 @@ export default function GamepadTester() {
   }, [deadzone]);
 
   const updateGamepadState = useCallback((dtMs: number) => {
+    if (typeof navigator === 'undefined' || !navigator.getGamepads) return;
     const gamepadList = navigator.getGamepads();
     const newGamepads: GamepadState[] = [];
 
@@ -169,6 +170,7 @@ export default function GamepadTester() {
   }, [applyDeadzone, isLatencyTest, latencyTestStart]);
 
   const testVibration = async (gamepadIndex: number) => {
+    if (typeof navigator === 'undefined' || !navigator.getGamepads) return;
     const gamepad = navigator.getGamepads()[gamepadIndex];
     if (gamepad && (gamepad as any).vibrationActuator) {
       setIsVibrating(true);
@@ -209,7 +211,7 @@ export default function GamepadTester() {
 
   useEffect(() => {
     return () => {
-      if (snapshotTimeoutRef.current) {
+      if (typeof window !== 'undefined' && snapshotTimeoutRef.current) {
         window.clearTimeout(snapshotTimeoutRef.current);
       }
     };
@@ -219,6 +221,8 @@ export default function GamepadTester() {
   const primaryButtonUsage = primaryPadIndex !== undefined ? buttonUsage[primaryPadIndex] : undefined;
 
   const exportSnapshot = async () => {
+    if (typeof navigator === 'undefined' || typeof window === 'undefined') return;
+    
     const summary = [
       `Controllers detected: ${gamepads.length}`,
       `Button presses: ${inputStats.buttonPresses}`,
@@ -252,6 +256,8 @@ export default function GamepadTester() {
   };
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleGamepadConnected = (e: GamepadEvent) => {
       console.log('Gamepad connected:', e.gamepad.id);
     };

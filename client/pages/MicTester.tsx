@@ -79,6 +79,8 @@ export default function MicTester() {
   const summaryTimeoutRef = useRef<number | null>(null);
 
   const getDevices = useCallback(async () => {
+    if (typeof navigator === 'undefined' || !navigator.mediaDevices) return;
+    
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
       const audioInputs = devices.filter(device => device.kind === 'audioinput');
@@ -95,6 +97,8 @@ export default function MicTester() {
   }, [selectedDevice]);
 
   useEffect(() => {
+    if (typeof navigator === 'undefined' || !navigator.mediaDevices) return;
+    
     getDevices();
 
     // Request permissions and refresh device list
@@ -122,13 +126,15 @@ export default function MicTester() {
 
   useEffect(() => {
     return () => {
-      if (summaryTimeoutRef.current) {
+      if (typeof window !== 'undefined' && summaryTimeoutRef.current) {
         window.clearTimeout(summaryTimeoutRef.current);
       }
     };
   }, []);
 
   const startRecording = async () => {
+    if (typeof navigator === 'undefined' || typeof window === 'undefined') return;
+    
     try {
       setError('');
       setSummaryCopied(false);

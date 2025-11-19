@@ -69,6 +69,8 @@ export default function GpuTester() {
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const updateMetrics = () => {
       const pixelRatio = window.devicePixelRatio || 1;
       const width = Math.round(window.innerWidth);
