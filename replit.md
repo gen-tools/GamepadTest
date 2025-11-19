@@ -127,6 +127,18 @@ You should see rendered React components inside the root div, not an empty div.
 
 ## Recent Changes
 
+### November 19, 2025 - Mobile-Friendly Improvements
+- Enhanced viewport meta tags with maximum-scale, user-scalable, and viewport-fit for better mobile support
+- Added PWA meta tags: mobile-web-app-capable, apple-mobile-web-app-capable, and HandheldFriendly
+- Implemented touch-friendly button sizes (minimum 44x44px) across all interactive elements
+- Added mobile-specific typography scaling for improved readability on small screens
+- Implemented touch device optimizations with active states instead of hover effects
+- Prevented iOS zoom on input focus with 16px minimum font size
+- Fixed SSR compatibility in use-mobile hook
+- Added webkit-tap-highlight-color and text-size-adjust for better mobile UX
+- Prevented horizontal scrolling on mobile devices
+- Improved scrolling performance with webkit-overflow-scrolling
+
 ### November 19, 2025 - SSR Fixes for Tester Pages
 - Fixed SSR compatibility issues in all hardware tester pages
 - Added SSR-safe guards for browser APIs in GamepadTester, GpuTester, MicTester, and MidiTester
