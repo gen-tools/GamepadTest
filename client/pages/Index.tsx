@@ -101,8 +101,6 @@ export default function Index() {
   const { containerRef: toolsContainerRef, visibleItems: toolsVisible } =
     useStaggeredScrollAnimation(4, { threshold: 0.2 });
   const featuresAnimation = useScrollAnimation({ threshold: 0.2 });
-  const { containerRef: featuresContainerRef, visibleItems: featuresVisible } =
-    useStaggeredScrollAnimation(3, { threshold: 0.2 });
   const faqAnimation = useScrollAnimation({ threshold: 0.2 });
 
   const organizationStructuredData = {
@@ -141,9 +139,7 @@ export default function Index() {
   return (
     <div className="flex flex-col">
       <Helmet>
-        <title>
-          GamepadTest | Free Online Hardware Tester
-        </title>
+        <title>GamepadTest | Free Online Hardware Tester</title>
         <meta
           name="description"
           content="GamepadTest lets you instantly test game controllers, GPU, microphones, and MIDI devices online. Free, browser-based diagnostics to ensure optimal hardware."
