@@ -11,7 +11,7 @@ const navigation = [
   { name: 'Mic Tester', href: '/mic-tester' },
   { name: 'MIDI Tester', href: '/midi-tester' },
   { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Privacy Policy', href: '/privacy' },
   { name: 'Blog', href: '/blog' },
 ];
 
