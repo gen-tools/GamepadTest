@@ -1,15 +1,20 @@
-
-import { useEffect, useState, useCallback, useRef } from 'react';
-import { Gamepad2, Zap, CheckCircle } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { cn } from '@/lib/utils';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { createHowToStructuredData } from '@/components/SEO';
-import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import { useEffect, useState, useCallback, useRef } from "react";
+import { Gamepad2, Zap, CheckCircle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { createHowToStructuredData } from "@/components/SEO";
+import { RecommendedProductsSection } from "@/components/RecommendedProducts";
 
 interface GamepadState {
   connected: boolean;
@@ -32,7 +37,7 @@ interface InputStats {
 }
 
 interface InputEvent {
-  type: 'press' | 'release';
+  type: "press" | "release";
   button: number;
   gamepadIndex: number;
   timestamp: number;
@@ -60,128 +65,161 @@ export default function GamepadTester() {
   const rafRef = useRef<number | null>(null);
   const snapshotTimeoutRef = useRef<number | null>(null);
 
-  const applyDeadzone = useCallback((value: number) => {
-    const threshold = Math.min(Math.max(deadzone / 100, 0), 0.95);
-    if (Math.abs(value) <= threshold) return 0;
-    const normalized = (Math.abs(value) - threshold) / (1 - threshold);
-    return Math.sign(value) * Math.min(normalized, 1);
-  }, [deadzone]);
+  const applyDeadzone = useCallback(
+    (value: number) => {
+      const threshold = Math.min(Math.max(deadzone / 100, 0), 0.95);
+      if (Math.abs(value) <= threshold) return 0;
+      const normalized = (Math.abs(value) - threshold) / (1 - threshold);
+      return Math.sign(value) * Math.min(normalized, 1);
+    },
+    [deadzone],
+  );
 
-  const updateGamepadState = useCallback((dtMs: number) => {
-    if (typeof navigator === 'undefined' || !navigator.getGamepads) return;
-    const gamepadList = navigator.getGamepads();
-    const newGamepads: GamepadState[] = [];
+  const updateGamepadState = useCallback(
+    (dtMs: number) => {
+      if (typeof navigator === "undefined" || !navigator.getGamepads) return;
+      const gamepadList = navigator.getGamepads();
+      const newGamepads: GamepadState[] = [];
 
-    for (let i = 0; i < gamepadList.length; i++) {
-      const gamepad = gamepadList[i];
-      if (!gamepad) continue;
+      for (let i = 0; i < gamepadList.length; i++) {
+        const gamepad = gamepadList[i];
+        if (!gamepad) continue;
 
-      const currentButtons = gamepad.buttons.map(button => button.pressed);
-      const previousButtons = prevButtonsRef.current[gamepad.index] || new Array(currentButtons.length).fill(false);
+        const currentButtons = gamepad.buttons.map((button) => button.pressed);
+        const previousButtons =
+          prevButtonsRef.current[gamepad.index] ||
+          new Array(currentButtons.length).fill(false);
 
-      const pressedButtons: number[] = [];
-      const releasedButtons: number[] = [];
-      for (let b = 0; b < currentButtons.length; b++) {
-        if (currentButtons[b] && !previousButtons[b]) pressedButtons.push(b);
-        if (!currentButtons[b] && previousButtons[b]) releasedButtons.push(b);
-      }
+        const pressedButtons: number[] = [];
+        const releasedButtons: number[] = [];
+        for (let b = 0; b < currentButtons.length; b++) {
+          if (currentButtons[b] && !previousButtons[b]) pressedButtons.push(b);
+          if (!currentButtons[b] && previousButtons[b]) releasedButtons.push(b);
+        }
 
-      if (pressedButtons.length > 0) {
-        setInputStats(prev => ({
-          ...prev,
-          buttonPresses: prev.buttonPresses + pressedButtons.length,
-          totalInputTime: prev.totalInputTime + dtMs,
-        }));
+        if (pressedButtons.length > 0) {
+          setInputStats((prev) => ({
+            ...prev,
+            buttonPresses: prev.buttonPresses + pressedButtons.length,
+            totalInputTime: prev.totalInputTime + dtMs,
+          }));
 
-        if (isLatencyTest && latencyTestStart > 0) {
-          const latency = Date.now() - latencyTestStart;
-          setLatencyResults(prev => [...prev, latency]);
+          if (isLatencyTest && latencyTestStart > 0) {
+            const latency = Date.now() - latencyTestStart;
+            setLatencyResults((prev) => [...prev, latency]);
+            setIsLatencyTest(false);
+            setLatencyTestStart(0);
+            setInputStats((prev) => ({
+              ...prev,
+              averageReactionTime:
+                prev.averageReactionTime === 0
+                  ? latency
+                  : (prev.averageReactionTime + latency) / 2,
+            }));
+          }
+        } else {
+          setInputStats((prev) => ({
+            ...prev,
+            totalInputTime: prev.totalInputTime + dtMs,
+          }));
+        }
+
+        if (pressedButtons.length > 0 || releasedButtons.length > 0) {
+          const timestamp = Date.now();
+          const events: InputEvent[] = [
+            ...pressedButtons.map((button) => ({
+              type: "press" as const,
+              button,
+              gamepadIndex: gamepad.index,
+              timestamp,
+            })),
+            ...releasedButtons.map((button) => ({
+              type: "release" as const,
+              button,
+              gamepadIndex: gamepad.index,
+              timestamp,
+            })),
+          ];
+          setRecentInputs((prev) => [...events, ...prev].slice(0, 14));
+        }
+
+        if (pressedButtons.length > 0) {
+          setButtonUsage((prev) => {
+            const existing = prev[gamepad.index]
+              ? [...prev[gamepad.index]]
+              : new Array(currentButtons.length).fill(0);
+            pressedButtons.forEach((button) => {
+              if (button >= existing.length) {
+                const extendBy = button - existing.length + 1;
+                existing.push(...new Array(extendBy).fill(0));
+              }
+              existing[button] = (existing[button] ?? 0) + 1;
+            });
+            return { ...prev, [gamepad.index]: existing };
+          });
+        }
+
+        if (releasedButtons.length > 0 && isLatencyTest) {
           setIsLatencyTest(false);
           setLatencyTestStart(0);
-          setInputStats(prev => ({ ...prev, averageReactionTime: prev.averageReactionTime === 0 ? latency : (prev.averageReactionTime + latency) / 2 }));
         }
-      } else {
-        setInputStats(prev => ({ ...prev, totalInputTime: prev.totalInputTime + dtMs }));
-      }
 
-      if (pressedButtons.length > 0 || releasedButtons.length > 0) {
-        const timestamp = Date.now();
-        const events: InputEvent[] = [
-          ...pressedButtons.map(button => ({ type: 'press' as const, button, gamepadIndex: gamepad.index, timestamp })),
-          ...releasedButtons.map(button => ({ type: 'release' as const, button, gamepadIndex: gamepad.index, timestamp })),
-        ];
-        setRecentInputs(prev => [...events, ...prev].slice(0, 14));
-      }
+        const normalizedAxes = Array.from(gamepad.axes, (v) =>
+          applyDeadzone(v),
+        );
 
-      if (pressedButtons.length > 0) {
-        setButtonUsage(prev => {
-          const existing = prev[gamepad.index] ? [...prev[gamepad.index]] : new Array(currentButtons.length).fill(0);
-          pressedButtons.forEach(button => {
-            if (button >= existing.length) {
-              const extendBy = button - existing.length + 1;
-              existing.push(...new Array(extendBy).fill(0));
-            }
-            existing[button] = (existing[button] ?? 0) + 1;
-          });
-          return { ...prev, [gamepad.index]: existing };
+        let triggers: number[] | undefined;
+        if (gamepad.axes.length > 4) {
+          triggers = gamepad.axes
+            .slice(4)
+            .map((v) => Math.max(-1, Math.min(1, v)));
+        } else if (gamepad.buttons.length >= 8) {
+          const l2 = gamepad.buttons[6]?.value ?? 0;
+          const r2 = gamepad.buttons[7]?.value ?? 0;
+          triggers = [l2 * 2 - 1, r2 * 2 - 1];
+        }
+
+        if (gamepad.axes.length >= 2) {
+          const x = normalizedAxes[0] ?? 0;
+          const y = normalizedAxes[1] ?? 0;
+          const stickDistance = Math.sqrt(x * x + y * y);
+          setInputStats((prev) => ({
+            ...prev,
+            maxStickDistance: Math.max(prev.maxStickDistance, stickDistance),
+          }));
+        }
+
+        prevButtonsRef.current[gamepad.index] = currentButtons;
+
+        newGamepads.push({
+          connected: gamepad.connected,
+          id: gamepad.id,
+          index: gamepad.index,
+          buttons: currentButtons,
+          axes: normalizedAxes,
+          timestamp: gamepad.timestamp,
+          triggers,
         });
       }
 
-      if (releasedButtons.length > 0 && isLatencyTest) {
-        setIsLatencyTest(false);
-        setLatencyTestStart(0);
-      }
-
-      const normalizedAxes = Array.from(gamepad.axes, v => applyDeadzone(v));
-
-      let triggers: number[] | undefined;
-      if (gamepad.axes.length > 4) {
-        triggers = gamepad.axes.slice(4).map(v => Math.max(-1, Math.min(1, v)));
-      } else if (gamepad.buttons.length >= 8) {
-        const l2 = gamepad.buttons[6]?.value ?? 0;
-        const r2 = gamepad.buttons[7]?.value ?? 0;
-        triggers = [l2 * 2 - 1, r2 * 2 - 1];
-      }
-
-      if (gamepad.axes.length >= 2) {
-        const x = normalizedAxes[0] ?? 0;
-        const y = normalizedAxes[1] ?? 0;
-        const stickDistance = Math.sqrt(x * x + y * y);
-        setInputStats(prev => ({
-          ...prev,
-          maxStickDistance: Math.max(prev.maxStickDistance, stickDistance),
-        }));
-      }
-
-      prevButtonsRef.current[gamepad.index] = currentButtons;
-
-      newGamepads.push({
-        connected: gamepad.connected,
-        id: gamepad.id,
-        index: gamepad.index,
-        buttons: currentButtons,
-        axes: normalizedAxes,
-        timestamp: gamepad.timestamp,
-        triggers,
-      });
-    }
-
-    setGamepads(newGamepads);
-  }, [applyDeadzone, isLatencyTest, latencyTestStart]);
+      setGamepads(newGamepads);
+    },
+    [applyDeadzone, isLatencyTest, latencyTestStart],
+  );
 
   const testVibration = async (gamepadIndex: number) => {
-    if (typeof navigator === 'undefined' || !navigator.getGamepads) return;
+    if (typeof navigator === "undefined" || !navigator.getGamepads) return;
     const gamepad = navigator.getGamepads()[gamepadIndex];
     if (gamepad && (gamepad as any).vibrationActuator) {
       setIsVibrating(true);
       try {
-        await (gamepad as any).vibrationActuator.playEffect('dual-rumble', {
+        await (gamepad as any).vibrationActuator.playEffect("dual-rumble", {
           duration: 1000,
           strongMagnitude: 0.5,
           weakMagnitude: 0.3,
         });
       } catch (error) {
-        console.log('Vibration not supported on this gamepad');
+        console.log("Vibration not supported on this gamepad");
       }
       setTimeout(() => setIsVibrating(false), 1000);
     }
@@ -205,28 +243,31 @@ export default function GamepadTester() {
     setRecentInputs([]);
   };
 
-  const averageLatency = latencyResults.length > 0
-    ? latencyResults.reduce((a, b) => a + b, 0) / latencyResults.length
-    : 0;
+  const averageLatency =
+    latencyResults.length > 0
+      ? latencyResults.reduce((a, b) => a + b, 0) / latencyResults.length
+      : 0;
 
   useEffect(() => {
     return () => {
-      if (typeof window !== 'undefined' && snapshotTimeoutRef.current) {
+      if (typeof window !== "undefined" && snapshotTimeoutRef.current) {
         window.clearTimeout(snapshotTimeoutRef.current);
       }
     };
   }, []);
 
   const primaryPadIndex = gamepads[0]?.index;
-  const primaryButtonUsage = primaryPadIndex !== undefined ? buttonUsage[primaryPadIndex] : undefined;
+  const primaryButtonUsage =
+    primaryPadIndex !== undefined ? buttonUsage[primaryPadIndex] : undefined;
 
   const exportSnapshot = async () => {
-    if (typeof navigator === 'undefined' || typeof window === 'undefined') return;
-    
+    if (typeof navigator === "undefined" || typeof window === "undefined")
+      return;
+
     const summary = [
       `Controllers detected: ${gamepads.length}`,
       `Button presses: ${inputStats.buttonPresses}`,
-      `Average latency: ${averageLatency ? `${averageLatency.toFixed(0)}ms` : 'n/a'}`,
+      `Average latency: ${averageLatency ? `${averageLatency.toFixed(0)}ms` : "n/a"}`,
       `Max stick range: ${(inputStats.maxStickDistance * 100).toFixed(1)}%`,
       `Deadzone: ${deadzone}%`,
     ];
@@ -234,40 +275,43 @@ export default function GamepadTester() {
     if (primaryButtonUsage) {
       const topButtons = primaryButtonUsage
         .map((count, index) => ({ index, count }))
-        .filter(entry => entry.count > 0)
+        .filter((entry) => entry.count > 0)
         .sort((a, b) => b.count - a.count)
         .slice(0, 5)
-        .map(entry => `Button ${entry.index + 1}: ${entry.count}`);
+        .map((entry) => `Button ${entry.index + 1}: ${entry.count}`);
       if (topButtons.length > 0) {
-        summary.push('Top buttons:', ...topButtons);
+        summary.push("Top buttons:", ...topButtons);
       }
     }
 
     try {
-      await navigator.clipboard.writeText(summary.join('\n'));
+      await navigator.clipboard.writeText(summary.join("\n"));
       setSnapshotCopied(true);
       if (snapshotTimeoutRef.current) {
         window.clearTimeout(snapshotTimeoutRef.current);
       }
-      snapshotTimeoutRef.current = window.setTimeout(() => setSnapshotCopied(false), 2500);
+      snapshotTimeoutRef.current = window.setTimeout(
+        () => setSnapshotCopied(false),
+        2500,
+      );
     } catch (error) {
-      console.error('Clipboard copy failed', error);
+      console.error("Clipboard copy failed", error);
     }
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     const handleGamepadConnected = (e: GamepadEvent) => {
-      console.log('Gamepad connected:', e.gamepad.id);
+      console.log("Gamepad connected:", e.gamepad.id);
     };
 
     const handleGamepadDisconnected = (e: GamepadEvent) => {
-      console.log('Gamepad disconnected:', e.gamepad.id);
+      console.log("Gamepad disconnected:", e.gamepad.id);
     };
 
-    window.addEventListener('gamepadconnected', handleGamepadConnected);
-    window.addEventListener('gamepaddisconnected', handleGamepadDisconnected);
+    window.addEventListener("gamepadconnected", handleGamepadConnected);
+    window.addEventListener("gamepaddisconnected", handleGamepadDisconnected);
 
     const loop = (t: number) => {
       const last = lastTimeRef.current ?? t;
@@ -281,8 +325,11 @@ export default function GamepadTester() {
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      window.removeEventListener('gamepadconnected', handleGamepadConnected);
-      window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
+      window.removeEventListener("gamepadconnected", handleGamepadConnected);
+      window.removeEventListener(
+        "gamepaddisconnected",
+        handleGamepadDisconnected,
+      );
     };
   }, [updateGamepadState]);
 
@@ -308,68 +355,86 @@ export default function GamepadTester() {
   );
 
   const howToStructuredData = createHowToStructuredData(
-    'How to Test Your Gamepad',
+    "How to Test Your Gamepad",
     [
-      'Connect your gamepad via USB or Bluetooth',
-      'Press any button on your controller to activate it',
-      'View real-time button presses and joystick movements',
-      'Test vibration functionality with the vibration button'
-    ]
+      "Connect your gamepad via USB or Bluetooth",
+      "Press any button on your controller to activate it",
+      "View real-time button presses and joystick movements",
+      "Test vibration functionality with the vibration button",
+    ],
   );
 
   const faqData = [
     {
-      question: 'Why isn\'t my gamepad being detected?',
-      answer: 'Make sure your gamepad is properly connected and press any button to activate it. Some wireless controllers need to be paired first.'
+      question: "Why isn't my gamepad being detected?",
+      answer:
+        "Make sure your gamepad is properly connected and press any button to activate it. Some wireless controllers need to be paired first.",
     },
     {
-      question: 'Which gamepads are supported?',
-      answer: 'Most modern gamepads including Xbox, PlayStation, and generic USB controllers are supported through the browser\'s Gamepad API.'
+      question: "Which gamepads are supported?",
+      answer:
+        "Most modern gamepads including Xbox, PlayStation, and generic USB controllers are supported through the browser's Gamepad API.",
     },
     {
-      question: 'Why doesn\'t vibration work?',
-      answer: 'Vibration support varies by browser and gamepad model. Chrome and Edge have the best support for the Vibration API.'
-    }
+      question: "Why doesn't vibration work?",
+      answer:
+        "Vibration support varies by browser and gamepad model. Chrome and Edge have the best support for the Vibration API.",
+    },
   ];
 
   const gamepadAppSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Gamepad Tester',
-    applicationCategory: 'WebApplication',
-    operatingSystem: 'Any',
-    url: 'https://www.gamepadtest.tech/gamepad-tester',
-    description: 'Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest.',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Gamepad Tester",
+    applicationCategory: "WebApplication",
+    operatingSystem: "Any",
+    url: "https://www.gamepadtest.tech/gamepad-tester",
+    description:
+      "Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest.",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   };
 
   const gamepadBreadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.gamepadtest.tech/' },
-      { '@type': 'ListItem', position: 2, name: 'Gamepad Tester', item: 'https://www.gamepadtest.tech/gamepad-tester' }
-    ]
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.gamepadtest.tech/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Gamepad Tester",
+        item: "https://www.gamepadtest.tech/gamepad-tester",
+      },
+    ],
   };
 
   const recommendedProducts = [
     {
       name: "Official Luna Wireless Controller",
-      description: "Built for Amazon Luna with ultra-low latency, Bluetooth/USB support, and a comfortable grip for smooth cloud gaming.",
+      description:
+        "Built for Amazon Luna with ultra-low latency, Bluetooth/USB support, and a comfortable grip for smooth cloud gaming.",
       href: "https://amzn.to/42wogzI",
-      imageSrc: "https://m.media-amazon.com/images/I/51qbcWzHSML._AC_SL1000_.jpg",
+      imageSrc:
+        "https://m.media-amazon.com/images/I/51qbcWzHSML._AC_SL1000_.jpg",
       alt: "Luna Wireless Controller",
     },
     {
       name: "Xbox Wireless Gaming Controller – Ice Breaker Special Edition",
-      description: "Cool transparent design, hybrid D-pad, and textured grips. Works with Xbox Series X|S, Xbox One, and PC via Bluetooth or USB.",
+      description:
+        "Cool transparent design, hybrid D-pad, and textured grips. Works with Xbox Series X|S, Xbox One, and PC via Bluetooth or USB.",
       href: "https://amzn.to/3KmlSW4",
       imageSrc: "https://m.media-amazon.com/images/I/71Js3hjffrL._SL1500_.jpg",
       alt: "Xbox Wireless Gaming Controller",
     },
     {
       name: "PlayStation DualSense® Wireless Controller",
-      description: "Immersive haptic feedback, adaptive triggers, and built-in mic. Perfect for PS5 and PC gaming.",
+      description:
+        "Immersive haptic feedback, adaptive triggers, and built-in mic. Perfect for PS5 and PC gaming.",
       href: "https://amzn.to/3K1XlWl",
       imageSrc: "https://m.media-amazon.com/images/I/51PmeLGEkML._SL1500_.jpg",
       alt: "PlayStation DualSense",
@@ -379,42 +444,84 @@ export default function GamepadTester() {
   return (
     <div className="container mx-auto px-6 py-12">
       {/* SEO Meta Tags - Fixed Structure */}
-     <Helmet>
-  <html lang="en" />
-  <title>Gamepad Tester Online – Free Controller & Joypad Checker</title>
-  <meta name="description" content="Our gamepad tester lets you check buttons, joysticks, triggers, and stick drift on PS5, Xbox, and PC controllers. Free, secure, and no download required." />
-  <meta name="keywords" content="gamepad tester, controller tester, joystick test, gamepad checker, PS5 controller test, Xbox controller test, stick drift test, controller diagnostic" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href="https://www.gamepadtest.tech/gamepad-tester" />
-  
-  {/* Open Graph / Facebook */}
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.gamepadtest.tech/gamepad-tester" />
-  <meta property="og:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
-  <meta property="og:description" content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." />
-  <meta property="og:image" content="https://www.gamepadtest.tech/og-image.jpg" />
-  
-  {/* Twitter */}
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://www.gamepadtest.tech/gamepad-tester" />
-  <meta property="twitter:title" content="Gamepad Tester Online – Free Controller & Joypad Checker" />
-  <meta property="twitter:description" content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest." />
-  <meta property="twitter:image" content="https://www.gamepadtest.tech/twitter-image.jpg" />
-  
-  <script type="application/ld+json">{JSON.stringify(gamepadAppSchema)}</script>
-  <script type="application/ld+json">{JSON.stringify(gamepadBreadcrumb)}</script>
-  <script type="application/ld+json">{JSON.stringify(howToStructuredData)}</script>
-</Helmet>
+      <Helmet>
+        <html lang="en" />
+        <title>Gamepad Tester Online – Check Controller Performance</title>
+        <meta
+          name="description"
+          content="Our Gamepad Tester lets you test your Xbox, PlayStation, Nintendo, or USB/Bluetooth controller online. Check stick drift, dead zones, buttons, and vibration."
+        />
+        <meta
+          name="keywords"
+          content="gamepad tester, controller tester, joystick test, gamepad checker, PS5 controller test"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="canonical"
+          href="https://www.gamepadtest.tech/gamepad-tester"
+        />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://www.gamepadtest.tech/gamepad-tester"
+        />
+        <meta
+          property="og:title"
+          content="Gamepad Tester Online – Free Controller & Joypad Checker"
+        />
+        <meta
+          property="og:description"
+          content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest."
+        />
+        <meta
+          property="og:image"
+          content="https://www.gamepadtest.tech/og-image.jpg"
+        />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://www.gamepadtest.tech/gamepad-tester"
+        />
+        <meta
+          property="twitter:title"
+          content="Gamepad Tester Online – Free Controller & Joypad Checker"
+        />
+        <meta
+          property="twitter:description"
+          content="Test controllers online in seconds—PS4, PS5, Xbox & PC. Detect drift, verify buttons, and fix issues fast. 100% free & safe on GamepadTest."
+        />
+        <meta
+          property="twitter:image"
+          content="https://www.gamepadtest.tech/twitter-image.jpg"
+        />
+
+        <script type="application/ld+json">
+          {JSON.stringify(gamepadAppSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(gamepadBreadcrumb)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(howToStructuredData)}
+        </script>
+      </Helmet>
 
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Gamepad2 className="h-8 w-8 text-primary animate-bounce-in" />
-            <h1 className="text-3xl font-bold animate-fade-in-right animate-stagger-1">Gamepad Tester</h1>
+            <h1 className="text-3xl font-bold animate-fade-in-right animate-stagger-1">
+              Gamepad Tester
+            </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-fade-in-up animate-stagger-2">
-            Test your gaming controllers with real-time input detection, button mapping, and vibration feedback.
+            Test your gaming controllers with real-time input detection, button
+            mapping, and vibration feedback.
           </p>
         </div>
 
@@ -422,14 +529,22 @@ export default function GamepadTester() {
         <Card className="mb-8 animate-fade-in-up animate-stagger-3">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <CheckCircle className={cn("h-5 w-5 transition-colors duration-500", gamepads.length > 0 ? "text-green-500 animate-pulse" : "text-muted-foreground")} />
+              <CheckCircle
+                className={cn(
+                  "h-5 w-5 transition-colors duration-500",
+                  gamepads.length > 0
+                    ? "text-green-500 animate-pulse"
+                    : "text-muted-foreground",
+                )}
+              />
               Connection Status
             </CardTitle>
-            <CardDescription className={gamepads.length > 0 ? "animate-fade-in" : ""}>
+            <CardDescription
+              className={gamepads.length > 0 ? "animate-fade-in" : ""}
+            >
               {gamepads.length > 0
                 ? `${gamepads.length} gamepad(s) detected`
-                : 'No gamepads detected. Please connect a controller and press any button.'
-              }
+                : "No gamepads detected. Please connect a controller and press any button."}
             </CardDescription>
           </CardHeader>
         </Card>
@@ -437,14 +552,18 @@ export default function GamepadTester() {
         <Card className="mb-8 animate-fade-in-up">
           <CardHeader>
             <CardTitle>Input Lab</CardTitle>
-            <CardDescription>Tune dead zones, review input history, and export diagnostics.</CardDescription>
+            <CardDescription>
+              Tune dead zones, review input history, and export diagnostics.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="p-4 rounded-lg border bg-slate-50 dark:bg-slate-900">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Analog Deadzone</span>
-                  <span className="text-xs text-muted-foreground">{deadzone}%</span>
+                  <span className="text-xs text-muted-foreground">
+                    {deadzone}%
+                  </span>
                 </div>
                 <input
                   type="range"
@@ -456,7 +575,8 @@ export default function GamepadTester() {
                   className="w-full mt-3"
                 />
                 <p className="text-xs text-muted-foreground mt-2">
-                  Reduce drift by increasing the deadzone or set it low for competitive play.
+                  Reduce drift by increasing the deadzone or set it low for
+                  competitive play.
                 </p>
               </div>
 
@@ -464,13 +584,30 @@ export default function GamepadTester() {
                 <span className="text-sm font-medium">Recent Inputs</span>
                 <div className="mt-3 max-h-36 overflow-y-auto space-y-2 text-xs">
                   {recentInputs.length === 0 && (
-                    <p className="text-muted-foreground">No inputs yet. Press any button to capture diagnostics.</p>
+                    <p className="text-muted-foreground">
+                      No inputs yet. Press any button to capture diagnostics.
+                    </p>
                   )}
                   {recentInputs.map((event, idx) => (
-                    <div key={`${event.timestamp}-${event.button}-${idx}`} className="flex items-center justify-between gap-3 px-2 py-1 rounded bg-white dark:bg-slate-800">
-                      <span className="font-medium">#{event.gamepadIndex} · B{event.button + 1}</span>
-                      <span className={event.type === 'press' ? 'text-green-600' : 'text-red-500'}>{event.type === 'press' ? 'Pressed' : 'Released'}</span>
-                      <span className="text-muted-foreground">{new Date(event.timestamp).toLocaleTimeString()}</span>
+                    <div
+                      key={`${event.timestamp}-${event.button}-${idx}`}
+                      className="flex items-center justify-between gap-3 px-2 py-1 rounded bg-white dark:bg-slate-800"
+                    >
+                      <span className="font-medium">
+                        #{event.gamepadIndex} · B{event.button + 1}
+                      </span>
+                      <span
+                        className={
+                          event.type === "press"
+                            ? "text-green-600"
+                            : "text-red-500"
+                        }
+                      >
+                        {event.type === "press" ? "Pressed" : "Released"}
+                      </span>
+                      <span className="text-muted-foreground">
+                        {new Date(event.timestamp).toLocaleTimeString()}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -479,16 +616,22 @@ export default function GamepadTester() {
               <div className="p-4 rounded-lg border bg-slate-50 dark:bg-slate-900">
                 <span className="text-sm font-medium">Most Used Buttons</span>
                 <div className="mt-3 space-y-2 text-sm">
-                  {!primaryButtonUsage || primaryButtonUsage.every(count => count === 0) ? (
-                    <p className="text-xs text-muted-foreground">Press buttons to build usage stats.</p>
+                  {!primaryButtonUsage ||
+                  primaryButtonUsage.every((count) => count === 0) ? (
+                    <p className="text-xs text-muted-foreground">
+                      Press buttons to build usage stats.
+                    </p>
                   ) : (
                     primaryButtonUsage
                       .map((count, index) => ({ index, count }))
-                      .filter(entry => entry.count > 0)
+                      .filter((entry) => entry.count > 0)
                       .sort((a, b) => b.count - a.count)
                       .slice(0, 5)
-                      .map(entry => (
-                        <div key={entry.index} className="flex items-center justify-between rounded bg-white dark:bg-slate-800 px-3 py-1 text-xs">
+                      .map((entry) => (
+                        <div
+                          key={entry.index}
+                          className="flex items-center justify-between rounded bg-white dark:bg-slate-800 px-3 py-1 text-xs"
+                        >
                           <span>Button {entry.index + 1}</span>
                           <span className="font-semibold">{entry.count}</span>
                         </div>
@@ -498,14 +641,27 @@ export default function GamepadTester() {
               </div>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
-              <Button variant="outline" size="sm" onClick={exportSnapshot} className="gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={exportSnapshot}
+                className="gap-2"
+              >
                 <Zap className="h-4 w-4" />
                 Copy Diagnostic Snapshot
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setRecentInputs([])}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setRecentInputs([])}
+              >
                 Clear Input History
               </Button>
-              {snapshotCopied && <span className="text-sm text-green-600">Snapshot copied to clipboard.</span>}
+              {snapshotCopied && (
+                <span className="text-sm text-green-600">
+                  Snapshot copied to clipboard.
+                </span>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -519,30 +675,43 @@ export default function GamepadTester() {
                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
               </CardTitle>
               <CardDescription className="text-blue-700 dark:text-blue-300">
-                Unique features to test your gamepad's performance and responsiveness
+                Unique features to test your gamepad's performance and
+                responsiveness
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="text-center p-3 bg-white dark:bg-blue-900 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{inputStats.buttonPresses}</div>
-                  <div className="text-sm text-blue-700 dark:text-blue-300">Button Presses</div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    {inputStats.buttonPresses}
+                  </div>
+                  <div className="text-sm text-blue-700 dark:text-blue-300">
+                    Button Presses
+                  </div>
                 </div>
                 <div className="text-center p-3 bg-white dark:bg-blue-900 rounded-lg">
                   <div className="text-2xl font-bold text-blue-600">
                     {(inputStats.maxStickDistance * 100).toFixed(1)}%
                   </div>
-                  <div className="text-sm text-blue-700 dark:text-blue-300">Max Stick Range</div>
+                  <div className="text-sm text-blue-700 dark:text-blue-300">
+                    Max Stick Range
+                  </div>
                 </div>
                 <div className="text-center p-3 bg-white dark:bg-blue-900 rounded-lg">
                   <div className="text-2xl font-bold text-blue-600">
-                    {averageLatency ? `${averageLatency.toFixed(0)}ms` : '--'}
+                    {averageLatency ? `${averageLatency.toFixed(0)}ms` : "--"}
                   </div>
-                  <div className="text-sm text-blue-700 dark:text-blue-300">Avg Latency</div>
+                  <div className="text-sm text-blue-700 dark:text-blue-300">
+                    Avg Latency
+                  </div>
                 </div>
                 <div className="text-center p-3 bg-white dark:bg-blue-900 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{latencyResults.length}</div>
-                  <div className="text-sm text-blue-700 dark:text-blue-300">Tests Complete</div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    {latencyResults.length}
+                  </div>
+                  <div className="text-sm text-blue-700 dark:text-blue-300">
+                    Tests Complete
+                  </div>
                 </div>
               </div>
               <div className="flex gap-2 flex-wrap">
@@ -552,7 +721,7 @@ export default function GamepadTester() {
                   variant="outline"
                   size="sm"
                 >
-                  {isLatencyTest ? 'Press Any Button!' : 'Test Latency'}
+                  {isLatencyTest ? "Press Any Button!" : "Test Latency"}
                 </Button>
                 <Button onClick={resetStats} variant="outline" size="sm">
                   Reset Stats
@@ -617,19 +786,23 @@ export default function GamepadTester() {
                   className="gap-2"
                 >
                   <Zap className="h-4 w-4" />
-                  {isVibrating ? 'Vibrating...' : 'Test Vibration'}
+                  {isVibrating ? "Vibrating..." : "Test Vibration"}
                 </Button>
               </div>
             </CardHeader>
             <CardContent className="space-y-8">
               {/* Controller Visualization */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Controller Status</h3>
+                <h3 className="text-lg font-semibold mb-4">
+                  Controller Status
+                </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                   {/* Button Status Cards */}
                   <div className="lg:col-span-1">
                     <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-muted-foreground">Button Status</h4>
+                      <h4 className="text-sm font-medium text-muted-foreground">
+                        Button Status
+                      </h4>
                       <div className="grid grid-cols-4 gap-2">
                         {gamepad.buttons.slice(0, 16).map((pressed, index) => (
                           <div
@@ -638,7 +811,7 @@ export default function GamepadTester() {
                               "aspect-square rounded-md border flex items-center justify-center text-xs font-medium transition-all",
                               pressed
                                 ? "bg-green-500 text-white border-green-500 shadow-md"
-                                : "bg-gray-100 text-gray-600 border-gray-200"
+                                : "bg-gray-100 text-gray-600 border-gray-200",
                             )}
                           >
                             {index + 1}
@@ -646,7 +819,8 @@ export default function GamepadTester() {
                         ))}
                       </div>
                       <div className="text-xs text-muted-foreground mt-2">
-                        {gamepad.buttons.filter(Boolean).length} of {gamepad.buttons.length} buttons active
+                        {gamepad.buttons.filter(Boolean).length} of{" "}
+                        {gamepad.buttons.length} buttons active
                       </div>
                     </div>
                   </div>
@@ -660,37 +834,97 @@ export default function GamepadTester() {
                           {/* D-pad */}
                           <div className="absolute top-4 left-4">
                             <div className="relative w-12 h-12">
-                              <div className={cn("absolute top-0 left-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-x-1/2", gamepad.buttons[12] && "bg-green-500")}></div>
-                              <div className={cn("absolute bottom-0 left-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-x-1/2", gamepad.buttons[13] && "bg-green-500")}></div>
-                              <div className={cn("absolute left-0 top-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-y-1/2", gamepad.buttons[14] && "bg-green-500")}></div>
-                              <div className={cn("absolute right-0 top-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-y-1/2", gamepad.buttons[15] && "bg-green-500")}></div>
+                              <div
+                                className={cn(
+                                  "absolute top-0 left-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-x-1/2",
+                                  gamepad.buttons[12] && "bg-green-500",
+                                )}
+                              ></div>
+                              <div
+                                className={cn(
+                                  "absolute bottom-0 left-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-x-1/2",
+                                  gamepad.buttons[13] && "bg-green-500",
+                                )}
+                              ></div>
+                              <div
+                                className={cn(
+                                  "absolute left-0 top-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-y-1/2",
+                                  gamepad.buttons[14] && "bg-green-500",
+                                )}
+                              ></div>
+                              <div
+                                className={cn(
+                                  "absolute right-0 top-1/2 w-4 h-4 bg-gray-400 rounded-sm transform -translate-y-1/2",
+                                  gamepad.buttons[15] && "bg-green-500",
+                                )}
+                              ></div>
                             </div>
                           </div>
 
                           {/* Face buttons */}
                           <div className="absolute top-4 right-4">
                             <div className="relative w-12 h-12">
-                              <div className={cn("absolute top-0 left-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-x-1/2", gamepad.buttons[3] && "bg-green-500")}></div>
-                              <div className={cn("absolute bottom-0 left-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-x-1/2", gamepad.buttons[0] && "bg-green-500")}></div>
-                              <div className={cn("absolute left-0 top-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-y-1/2", gamepad.buttons[2] && "bg-green-500")}></div>
-                              <div className={cn("absolute right-0 top-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-y-1/2", gamepad.buttons[1] && "bg-green-500")}></div>
+                              <div
+                                className={cn(
+                                  "absolute top-0 left-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-x-1/2",
+                                  gamepad.buttons[3] && "bg-green-500",
+                                )}
+                              ></div>
+                              <div
+                                className={cn(
+                                  "absolute bottom-0 left-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-x-1/2",
+                                  gamepad.buttons[0] && "bg-green-500",
+                                )}
+                              ></div>
+                              <div
+                                className={cn(
+                                  "absolute left-0 top-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-y-1/2",
+                                  gamepad.buttons[2] && "bg-green-500",
+                                )}
+                              ></div>
+                              <div
+                                className={cn(
+                                  "absolute right-0 top-1/2 w-4 h-4 bg-gray-400 rounded-full transform -translate-y-1/2",
+                                  gamepad.buttons[1] && "bg-green-500",
+                                )}
+                              ></div>
                             </div>
                           </div>
 
                           {/* Analog sticks */}
                           <div className="absolute bottom-2 left-6">
-                            <div className={cn("w-6 h-6 bg-gray-400 rounded-full border-2 border-gray-500", gamepad.buttons[10] && "bg-green-500")}></div>
+                            <div
+                              className={cn(
+                                "w-6 h-6 bg-gray-400 rounded-full border-2 border-gray-500",
+                                gamepad.buttons[10] && "bg-green-500",
+                              )}
+                            ></div>
                           </div>
                           <div className="absolute bottom-2 right-6">
-                            <div className={cn("w-6 h-6 bg-gray-400 rounded-full border-2 border-gray-500", gamepad.buttons[11] && "bg-green-500")}></div>
+                            <div
+                              className={cn(
+                                "w-6 h-6 bg-gray-400 rounded-full border-2 border-gray-500",
+                                gamepad.buttons[11] && "bg-green-500",
+                              )}
+                            ></div>
                           </div>
 
                           {/* Shoulder buttons */}
                           <div className="absolute -top-2 left-4">
-                            <div className={cn("w-8 h-3 bg-gray-400 rounded-t-lg", gamepad.buttons[4] && "bg-green-500")}></div>
+                            <div
+                              className={cn(
+                                "w-8 h-3 bg-gray-400 rounded-t-lg",
+                                gamepad.buttons[4] && "bg-green-500",
+                              )}
+                            ></div>
                           </div>
                           <div className="absolute -top-2 right-4">
-                            <div className={cn("w-8 h-3 bg-gray-400 rounded-t-lg", gamepad.buttons[5] && "bg-green-500")}></div>
+                            <div
+                              className={cn(
+                                "w-8 h-3 bg-gray-400 rounded-t-lg",
+                                gamepad.buttons[5] && "bg-green-500",
+                              )}
+                            ></div>
                           </div>
                         </div>
                       </div>
@@ -701,20 +935,30 @@ export default function GamepadTester() {
                   <div className="lg:col-span-1">
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-sm font-medium text-muted-foreground mb-2">Connection</h4>
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                          Connection
+                        </h4>
                         <div className="flex items-center gap-2">
                           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                           <span className="text-sm">Connected</span>
                         </div>
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-muted-foreground mb-2">Input Count</h4>
-                        <div className="text-2xl font-bold">{inputStats.buttonPresses}</div>
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                          Input Count
+                        </h4>
+                        <div className="text-2xl font-bold">
+                          {inputStats.buttonPresses}
+                        </div>
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-muted-foreground mb-2">Latency</h4>
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                          Latency
+                        </h4>
                         <div className="text-lg font-semibold">
-                          {averageLatency ? `${averageLatency.toFixed(0)}ms` : '--'}
+                          {averageLatency
+                            ? `${averageLatency.toFixed(0)}ms`
+                            : "--"}
                         </div>
                       </div>
                     </div>
@@ -727,26 +971,40 @@ export default function GamepadTester() {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Analog Sticks</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
-                    {renderJoystick(gamepad.axes[0], gamepad.axes[1], "Left Stick")}
-                    {renderJoystick(gamepad.axes[2], gamepad.axes[3], "Right Stick")}
+                    {renderJoystick(
+                      gamepad.axes[0],
+                      gamepad.axes[1],
+                      "Left Stick",
+                    )}
+                    {renderJoystick(
+                      gamepad.axes[2],
+                      gamepad.axes[3],
+                      "Right Stick",
+                    )}
                   </div>
                 </div>
               )}
 
               {/* Triggers */}
-              {((gamepad.triggers && gamepad.triggers.length > 0) || gamepad.axes.length > 4) && (
+              {((gamepad.triggers && gamepad.triggers.length > 0) ||
+                gamepad.axes.length > 4) && (
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Triggers</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {(gamepad.triggers ?? gamepad.axes.slice(4)).map((value, index) => (
-                      <div key={index} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span>Trigger {index + 1}</span>
-                          <span>{(((value + 1) / 2) * 100).toFixed(0)}%</span>
+                    {(gamepad.triggers ?? gamepad.axes.slice(4)).map(
+                      (value, index) => (
+                        <div key={index} className="space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span>Trigger {index + 1}</span>
+                            <span>{(((value + 1) / 2) * 100).toFixed(0)}%</span>
+                          </div>
+                          <Progress
+                            value={((value + 1) / 2) * 100}
+                            className="h-3"
+                          />
                         </div>
-                        <Progress value={((value + 1) / 2) * 100} className="h-3" />
-                      </div>
-                    ))}
+                      ),
+                    )}
                   </div>
                 </div>
               )}
@@ -756,164 +1014,262 @@ export default function GamepadTester() {
 
         <RecommendedProductsSection products={recommendedProducts} />
 
-         {/* Guide: Gamepad Tester – Instantly Check Your Controller Online */}
-<section className="mt-12 space-y-8 text-base leading-7 text-foreground">
-  <header className="space-y-3">
-    <h2 className="text-2xl font-bold">Gamepad Tester – Instantly Check Your Controller Online</h2>
-    <p>
-      Ever wondered if your controller is really working the way it should? Our online Gamepad Tester is the fastest way to check every button, stick, trigger, and vibration motor — right in your browser.
-    </p>
-    <p>
-      No downloads, no installs, and no accounts needed. It works with PS4, PS5, Xbox, Xbox 360, Nintendo Switch Pro, and any USB or Bluetooth controller. Whether you're a casual gamer or a pro preparing for a tournament, testing your controller beforehand can save you from frustrating gameplay issues.
-    </p>
-  </header>
+        {/* Guide: Gamepad Tester – Diagnose Your Controller Online */}
+        <section className="mt-12 space-y-8 text-base leading-7 text-foreground">
+          <header className="space-y-3">
+            <h2 className="text-2xl font-bold">
+              Gamepad Tester – Diagnose Your Controller Online
+            </h2>
+            <p>
+              Ensure your game controller works perfectly with our free online
+              Gamepad Tester. Check every button, joystick, trigger, and
+              vibration motor directly in your browser—no software installation
+              needed.
+            </p>
+          </header>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">What Is a Gamepad Tester?</h3>
-    <p>A Gamepad Tester is a tool that reads your controller in real time using the browser Gamepad API. It shows every button press, stick movement, trigger pull, and vibration feedback, so you can see exactly how your controller responds.</p>
-    <p>Here's what it can check:</p>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li>Button presses and releases</li>
-      <li>Analog stick movement (X/Y axes)</li>
-      <li>Trigger sensitivity (L2/R2, LT/RT)</li>
-      <li>Vibration functionality</li>
-      <li>Connection type and battery level</li>
-    </ul>
-    <p className="text-muted-foreground">Think of it as a controller checker and joypad tester all in one — perfect for diagnosing hardware issues or just making sure your controller is ready to play.</p>
-  </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">What Is a Gamepad Tester?</h3>
+            <p>
+              A{" "}
+              <Link to="/gamepad-tester" className="text-primary underline">
+                Gamepad Tester
+              </Link>{" "}
+              is a browser-based tool that reads controller inputs using the Web
+              Gamepad API. It provides live feedback on:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Button presses and releases</li>
+              <li>Analog stick movement (X/Y axes)</li>
+              <li>Trigger sensitivity (L2/R2, LT/RT)</li>
+              <li>Vibration feedback</li>
+              <li>Connection type and battery status</li>
+            </ul>
+            <p className="text-muted-foreground">
+              It's a complete controller diagnostic solution for gamers,
+              streamers, and developers.
+            </p>
+          </section>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Why You Should Test Your Controller</h3>
-    <p>Testing your controller isn't just for troubleshooting — it's a way to protect your gaming experience. With our tool, you can:</p>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li>Spot stick drift or dead zones early</li>
-      <li>Ensure buttons, triggers, and vibration motors work properly</li>
-      <li>Test controller compatibility across PC, Mac, Linux, ChromeOS, or Android</li>
-      <li>Calibrate sticks and triggers for precision in competitive games</li>
-      <li>Verify second-hand controllers before purchase</li>
-    </ul>
-    <p className="text-muted-foreground">With our free online gamepad tester, you can check everything in seconds, without installing any software. If you're a streamer, also consider testing your <Link to="/mic-tester" className="text-primary underline">microphone</Link> and <Link to="/gpu-tester" className="text-primary underline">graphics card performance</Link> to ensure smooth broadcasts.</p>
-  </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Why Test Your Controller?</h3>
+            <p>
+              Regular testing ensures smooth gameplay and prevents hardware
+              issues. Our tester helps you:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Detect joystick drift or dead zones early</li>
+              <li>
+                Verify buttons, triggers, and vibration motors function
+                correctly
+              </li>
+              <li>Calibrate triggers and sticks for competitive precision</li>
+              <li>
+                Test compatibility across PC, Mac, Linux, ChromeOS, and Android
+              </li>
+              <li>Check used controllers before purchase</li>
+            </ul>
+            <p className="text-muted-foreground">
+              With our free online gamepad tester, you can check everything in
+              seconds, without installing any software. Streamers can also test
+              their{" "}
+              <Link to="/mic-tester" className="text-primary underline">
+                microphone
+              </Link>{" "}
+              and{" "}
+              <Link to="/gpu-tester" className="text-primary underline">
+                graphics card performance
+              </Link>{" "}
+              for smooth broadcasts.
+            </p>
+          </section>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Supported Controllers</h3>
-    <p>Our tester works with almost every modern controller:</p>
-    
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="bg-blue-50 p-4 rounded-lg">
-        <h4 className="font-semibold text-foreground mb-2">Xbox</h4>
-        <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-          <li>Xbox Series X|S</li>
-          <li>Xbox One</li>
-          <li>Xbox 360 (wired and wireless)</li>
-        </ul>
-      </div>
-      
-      <div className="bg-green-50 p-4 rounded-lg">
-        <h4 className="font-semibold text-foreground mb-2">PlayStation</h4>
-        <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-          <li>PS5 DualSense</li>
-          <li>PS4 DualShock 4</li>
-          <li>PS3 controller</li>
-        </ul>
-      </div>
-      
-      <div className="bg-purple-50 p-4 rounded-lg">
-        <h4 className="font-semibold text-foreground mb-2">Nintendo & Others</h4>
-        <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-          <li>Nintendo Switch Pro Controller</li>
-          <li>Joy-Cons (via USB or Bluetooth)</li>
-          <li>Logitech, 8BitDo, and other generic USB/Bluetooth controllers</li>
-        </ul>
-      </div>
-    </div>
-    
-    <p className="text-muted-foreground">
-      It's compatible with Windows, macOS, Linux, ChromeOS, and Bluetooth controllers on Android. Supported browsers include Chrome, Firefox, Edge, and Opera.
-    </p>
-  </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Supported Controllers</h3>
+            <p>Compatible with almost all modern controllers:</p>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">How to Use Gamepad Tester</h3>
-    <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
-      <li>Connect your controller via USB or Bluetooth</li>
-      <li>Open the Gamepad Tester in your browser</li>
-      <li>Press buttons, move sticks, or pull triggers</li>
-      <li>Watch live feedback on button states, axes, and vibration</li>
-      <li>Identify drift, dead zones, or calibration issues</li>
-    </ol>
-    <p className="text-muted-foreground">It's simple, fast, and works for PS4, PS5, Xbox, Xbox 360, or any USB/Bluetooth controller.</p>
-  </section>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">Xbox</h4>
+                <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+                  <li>Xbox One</li>
+                  <li>Xbox Series X|S</li>
+                  <li>Xbox 360 (wired/wireless)</li>
+                </ul>
+              </div>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Features You'll Love</h3>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li><strong>Live Input Feedback:</strong> See buttons, sticks, and triggers in action</li>
-      <li><strong>Stick Drift & Deadzone Detection:</strong> Identify worn sticks or misalignment before it affects gameplay</li>
-      <li><strong>Vibration Testing:</strong> Check rumble motors on PS, Xbox, or third-party controllers</li>
-      <li><strong>Battery & Connection Info:</strong> Monitor battery percentage, connection type, vendor ID, and product ID</li>
-      <li><strong>No Installation Required:</strong> Fully browser-based, nothing to download — just like our <Link to="/gpu-tester" className="text-primary underline">GPU tester</Link> and <Link to="/mic-tester" className="text-primary underline">microphone tester</Link></li>
-    </ul>
-  </section>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">
+                  PlayStation
+                </h4>
+                <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+                  <li>PS3</li>
+                  <li>PS4 DualShock 4</li>
+                  <li>PS5 DualSense</li>
+                </ul>
+              </div>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Advanced Testing for Developers</h3>
-    <p>For advanced users, our tester uses the browser Gamepad API to provide detailed controller data:</p>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li>Button index and state monitoring</li>
-      <li>Axis values for sticks (-1 to 1)</li>
-      <li>Vibration actuator control</li>
-    </ul>
-    <p className="text-muted-foreground">This makes it ideal for hardware testers, developers, or gamers looking for precise calibration and diagnostics.</p>
-  </section>
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">
+                  Nintendo & Others
+                </h4>
+                <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+                  <li>Switch Pro Controller</li>
+                  <li>Joy-Cons</li>
+                  <li>Logitech, 8BitDo, generic USB/Bluetooth controllers</li>
+                </ul>
+              </div>
+            </div>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Common Use Cases</h3>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li>Test new or used controllers for stick drift, input lag, or unresponsive buttons</li>
-      <li>Troubleshoot triggers or vibration issues</li>
-      <li>Verify controller compatibility before a game session or streaming setup</li>
-      <li>Calibrate sticks and triggers for competitive play</li>
-      <li>Evaluate PS5 controller tester PC, Xbox controller tester, or PS4 controller tester functionality</li>
-      <li>For music producers and DJs, pair your gamepad testing with <Link to="/midi-tester" className="text-primary underline">MIDI device testing</Link> for complete hardware validation</li>
-    </ul>
-  </section>
+            <p className="text-muted-foreground">
+              Supported Browsers: Chrome, Firefox, Edge, Opera. Works best on
+              desktop.
+            </p>
+          </section>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Frequently Asked Questions</h3>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li><strong>Q: How can I check my controller is working?</strong><br />Connect it and press buttons, move sticks, or pull triggers. The tester shows live feedback for every input.</li>
-      <li><strong>Q: Why isn't my controller detected?</strong><br />Check the USB or Bluetooth connection. Wireless controllers may need pairing or updated drivers.</li>
-      <li><strong>Q: How do I detect stick drift?</strong><br />Move the analog sticks and observe if they return to the center. Unintended movement indicates drift.</li>
-      <li><strong>Q: Can I test vibration and trigger sensitivity?</strong><br />Yes, the tester supports vibration motors and analog trigger input for most controllers.</li>
-      <li><strong>Q: Which controllers are supported?</strong><br />Almost all modern controllers, including Xbox, PS3, PS4, PS5, Xbox 360, Nintendo Switch Pro, Joy-Cons, Logitech, and 8BitDo USB/Bluetooth controllers.</li>
-    </ul>
-  </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">
+              How to Use the Gamepad Tester
+            </h3>
+            <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
+              <li>Connect your controller via USB or Bluetooth</li>
+              <li>
+                Open the{" "}
+                <Link to="/gamepad-tester" className="text-primary underline">
+                  Gamepad Tester
+                </Link>{" "}
+                in your browser
+              </li>
+              <li>Press buttons, move sticks, or pull triggers</li>
+              <li>View live feedback on all inputs</li>
+              <li>Identify drift, dead zones, or unresponsive controls</li>
+            </ol>
+            <p className="text-muted-foreground">
+              It's simple, fast, and works for PS4, PS5, Xbox, Xbox 360, or any
+              USB/Bluetooth controller.
+            </p>
+          </section>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Why Trust This Gamepad Tester</h3>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li>Created by gaming and hardware experts (Expertise)</li>
-      <li>Supports a wide range of controllers and platforms (Authoritativeness)</li>
-      <li>Fully browser-based, secure, and easy to use (Trustworthiness)</li>
-    </ul>
-    <p className="text-muted-foreground">With accurate, up-to-date diagnostics, this tool is trusted by casual players, competitive gamers, and developers.</p>
-  </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Features Gamers Will Love</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>
+                <strong>Live Input Feedback:</strong> Track buttons, triggers,
+                and analog sticks in real time
+              </li>
+              <li>
+                <strong>Stick Drift & Deadzone Detection:</strong> Identify worn
+                or misaligned sticks
+              </li>
+              <li>
+                <strong>Vibration Testing:</strong> Check rumble motors for full
+                functionality
+              </li>
+              <li>
+                <strong>Battery & Connection Info:</strong> See battery level,
+                connection type, and vendor ID
+              </li>
+              <li>
+                <strong>No Installation Required:</strong> Fully browser-based,
+                ready instantly — just like our{" "}
+                <Link to="/gpu-tester" className="text-primary underline">
+                  GPU tester
+                </Link>{" "}
+                and{" "}
+                <Link to="/mic-tester" className="text-primary underline">
+                  microphone tester
+                </Link>
+              </li>
+            </ul>
+          </section>
 
-  <section className="space-y-2">
-    <h3 className="text-xl font-semibold">Start Testing Your Controller</h3>
-    <p>Plug in your controller and instantly check:</p>
-    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-      <li>Stick drift and dead zones</li>
-      <li>Trigger and button responsiveness</li>
-      <li>Vibration feedback</li>
-      <li>Overall controller performance</li>
-    </ul>
-    <p>
-      Whether it's PS4, PS5, Xbox, Xbox 360, or a generic USB/Bluetooth controller, our online gamepad tester gives you reliable results in seconds. Don't let controller issues ruin your gaming experience — test your hardware now and game with confidence.
-       </p>
-       </section>
-      </section>
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">
+              Advanced Testing for Developers
+            </h3>
+            <p>For developers or hardware testers:</p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Monitor button index and states</li>
+              <li>Read analog stick axis values (-1 to 1)</li>
+              <li>Control vibration actuators for testing</li>
+            </ul>
+            <p className="text-muted-foreground">
+              Perfect for debugging and precise calibration.
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">Common Use Cases</h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>
+                Test new or used controllers for drift, dead zones, or input lag
+              </li>
+              <li>Troubleshoot triggers, buttons, or vibration motors</li>
+              <li>Verify compatibility across platforms and devices</li>
+              <li>
+                Calibrate controllers for competitive gaming or streaming setups
+              </li>
+              <li>
+                Combine with{" "}
+                <Link to="/midi-tester" className="text-primary underline">
+                  MIDI
+                </Link>{" "}
+                or hardware testing for professional workflows
+              </li>
+            </ul>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">
+              Frequently Asked Questions
+            </h3>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>
+                <strong>Q: Why isn't my controller detected?</strong>
+                <br />
+                Check your USB or Bluetooth connection. Some wireless
+                controllers require pairing or updated drivers.
+              </li>
+              <li>
+                <strong>
+                  Q: Can I test vibration and trigger sensitivity?
+                </strong>
+                <br />
+                Yes, most modern controllers, including PS5 DualSense and Xbox
+                Series X|S, are supported.
+              </li>
+              <li>
+                <strong>Q: Which controllers are supported?</strong>
+                <br />
+                Almost all modern controllers: Xbox, PlayStation, Nintendo, and
+                popular third-party USB/Bluetooth options.
+              </li>
+            </ul>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-xl font-semibold">
+              Start Testing Your Controller
+            </h3>
+            <p>Plug in your controller and instantly check:</p>
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              <li>Stick drift and dead zones</li>
+              <li>Trigger and button responsiveness</li>
+              <li>Vibration feedback</li>
+              <li>Overall controller performance</li>
+            </ul>
+            <p>
+              Whether it's PS4, PS5, Xbox, Xbox 360, or a generic USB/Bluetooth
+              controller, our{" "}
+              <Link to="/gamepad-tester" className="text-primary underline">
+                online gamepad tester
+              </Link>{" "}
+              gives you reliable results in seconds. Don't let controller issues
+              ruin your gaming experience — test your hardware now and game with
+              confidence.
+            </p>
+          </section>
+        </section>
       </div>
     </div>
   );

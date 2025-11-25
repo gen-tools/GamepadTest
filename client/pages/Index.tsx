@@ -146,7 +146,7 @@ export default function Index() {
         </title>
         <meta
           name="description"
-          content="GamepadTest lets you use Gamepad Tester, Mic Tester, GPU Tester, and MIDI Tester online free — check all devices directly in your browser."
+          content="GamepadTest lets you instantly test game controllers, GPU, microphones, and MIDI devices online. Free, browser-based diagnostics to ensure optimal hardware.
         />
         <meta
           name="keywords"
