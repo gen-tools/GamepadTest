@@ -83,10 +83,14 @@ The application implements full server-side rendering in production mode for imp
 
 ### How SSR Works
 
-1. **Development Mode**: Uses client-side rendering with Vite's dev server for fast HMR
-2. **Production Mode**: 
-   - Server reads the built `index.html` template from `dist/spa/`
+1. **Development Mode** (`npm run dev`): 
+   - Uses Express with Vite middleware mode for SSR
+   - Custom dev-server.ts handles SSR rendering with HMR support
    - Renders React components to HTML using `ReactDOMServer.renderToString()`
+   - Full SSR in development for accurate testing
+2. **Production Mode** (`npm start`): 
+   - Server reads the built `index.html` template from `dist/spa/`
+   - Renders React components to HTML using the entry-server render function
    - Injects rendered HTML into the template's `<div id="root">`
    - Injects Helmet-managed meta tags, titles, and other head elements
    - Sends fully-rendered HTML to the client
@@ -126,6 +130,14 @@ curl http://localhost:5000/ | grep -A 10 '<div id="root">'
 You should see rendered React components inside the root div, not an empty div.
 
 ## Recent Changes
+
+### November 28, 2025 - Development SSR Support
+- Added full SSR support for development mode via `server/dev-server.ts`
+- Development now uses Express with Vite middleware mode for SSR
+- Updated `entry-server.tsx` to return rendered HTML string directly
+- Updated `index.html` with `<!--app-html-->` placeholder for SSR injection
+- Both development and production now share the same SSR rendering contract
+- Added new npm scripts: `dev` (SSR dev), `dev:vite` (client-only), `preview` (production preview)
 
 ### November 19, 2025 - Mobile-Friendly Improvements
 - Enhanced viewport meta tags with maximum-scale, user-scalable, and viewport-fit for better mobile support
