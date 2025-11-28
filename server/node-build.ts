@@ -2,7 +2,6 @@ import path from "path";
 import fs from "fs";
 import { createServer } from "./index";
 import * as express from "express";
-import ReactDOMServer from "react-dom/server";
 import { render } from "../client/entry-server";
 
 const app = createServer();
@@ -63,8 +62,7 @@ app.use((req, res, next) => {
   };
 
   const helmetContext: any = {};
-  const reactApp = render(req.url, helmetContext);
-  const appHtml = ReactDOMServer.renderToString(reactApp);
+  const appHtml = render(req.url, helmetContext);
   
   console.log('📊 SSR Render:', {
     path: req.url,
@@ -74,11 +72,10 @@ app.use((req, res, next) => {
     helmetKeys: helmetContext.helmet ? Object.keys(helmetContext.helmet) : []
   });
 
-  // Inject SSR content
-  let html = template.replace(
-    '<div id="root"></div>',
-    `<div id=\"root\">${appHtml}</div>`,
-  );
+  // Inject SSR content (handles both placeholder formats)
+  let html = template
+    .replace('<div id="root"><!--app-html--></div>', `<div id="root">${appHtml}</div>`)
+    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 
   // Inject Helmet head tags and attributes
   if (helmetContext.helmet) {
