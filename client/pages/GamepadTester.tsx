@@ -1264,9 +1264,9 @@ export default function GamepadTester() {
               <Link to="/gamepad-tester" className="text-primary underline">
                 online gamepad tester
               </Link>{" "}
-              gives you reliable results in seconds. Don't let controller issues
-              ruin your gaming experience — test your hardware now and game with
-              confidence.
+              gives you reliable results in seconds. Don not let controller
+              issues ruin your gaming experience — test your hardware now and
+              game with confidence.
             </p>
           </section>
         </section>
