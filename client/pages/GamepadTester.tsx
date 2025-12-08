@@ -1014,262 +1014,162 @@ export default function GamepadTester() {
 
         <RecommendedProductsSection products={recommendedProducts} />
 
-        {/* Guide: Gamepad Tester – Diagnose Your Controller Online */}
-        <section className="mt-12 space-y-8 text-base leading-7 text-foreground">
-          <header className="space-y-3">
-            <h2 className="text-2xl font-bold">
-              Gamepad Tester – Diagnose Your Controller Online
-            </h2>
-            <p>
-              Ensure your game controller works perfectly with our free online
-              Gamepad Tester. Check every button, joystick, trigger, and
-              vibration motor directly in your browser—no software installation
-              needed.
-            </p>
-          </header>
+       {/* Guide: Gamepad Tester – Diagnose Your Controller Online */}
+<section className="mt-12 space-y-8 text-base leading-7 text-foreground">
+  <header className="space-y-3">
+    <h2 className="text-2xl font-bold">Gamepad Tester – Diagnose Your Controller Online</h2>
+    <p>
+      Hey, want to make sure your game controller is in top shape? Try out our free online <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link>. It lets you check all the buttons, joysticks, triggers, and vibration motors right from your browser—no need to download or install anything extra.
+    </p>
+  </header>
 
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">What Is a Gamepad Tester?</h3>
-            <p>
-              A{" "}
-              <Link to="/gamepad-tester" className="text-primary underline">
-                Gamepad Tester
-              </Link>{" "}
-              is a browser-based tool that reads controller inputs using the Web
-              Gamepad API. It provides live feedback on:
-            </p>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>Button presses and releases</li>
-              <li>Analog stick movement (X/Y axes)</li>
-              <li>Trigger sensitivity (L2/R2, LT/RT)</li>
-              <li>Vibration feedback</li>
-              <li>Connection type and battery status</li>
-            </ul>
-            <p className="text-muted-foreground">
-              It's a complete controller diagnostic solution for gamers,
-              streamers, and developers.
-            </p>
-          </section>
+  <section className="space-y-2">
+    <h2 className="text-xl font-semibold">What Is a Gamepad Tester?</h2>
+    <p>
+      So, a <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> is this handy tool that works straight in your web browser. It uses the Web Gamepad API to pick up what your controller is doing and gives you instant feedback on stuff like:
+    </p>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li>Pressing and letting go of buttons</li>
+      <li>The way analog sticks move along the X and Y directions</li>
+      <li>How sensitive those triggers are (think L2/R2 or LT/RT)</li>
+      <li>If the vibration is working as it should</li>
+      <li>Your connection type and even the battery level</li>
+    </ul>
+    <p className="text-muted-foreground">
+      It's basically a one-stop diagnostic for gamers, streamers, or folks building games.
+    </p>
+  </section>
 
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">Why Test Your Controller?</h3>
-            <p>
-              Regular testing ensures smooth gameplay and prevents hardware
-              issues. Our tester helps you:
-            </p>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>Detect joystick drift or dead zones early</li>
-              <li>
-                Verify buttons, triggers, and vibration motors function
-                correctly
-              </li>
-              <li>Calibrate triggers and sticks for competitive precision</li>
-              <li>
-                Test compatibility across PC, Mac, Linux, ChromeOS, and Android
-              </li>
-              <li>Check used controllers before purchase</li>
-            </ul>
-            <p className="text-muted-foreground">
-              With our free online gamepad tester, you can check everything in
-              seconds, without installing any software. Streamers can also test
-              their{" "}
-              <Link to="/mic-tester" className="text-primary underline">
-                microphone
-              </Link>{" "}
-              and{" "}
-              <Link to="/gpu-tester" className="text-primary underline">
-                graphics card performance
-              </Link>{" "}
-              for smooth broadcasts.
-            </p>
-          </section>
+  <section className="space-y-2">
+    <h2 className="text-xl font-semibold">Why Test Your Controller?</h2>
+    <p>
+      Testing your controller on the regular can help keep your gaming smooth and spot any hardware glitches early. With our tester, you can:
+    </p>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li>Catch joystick drift or spots where the stick just doesn't register</li>
+      <li>Confirm that buttons, triggers, and vibes are all responding properly</li>
+      <li>Tweak the triggers and sticks for that precise control in competitive matches</li>
+      <li>Make sure it plays nice with PC, Mac, Linux, ChromeOS, or Android devices</li>
+      <li>Give a used controller a once-over before you shell out for it</li>
+    </ul>
+    <p className="text-muted-foreground">
+      Our free online tool lets you do all this super quick, without any software hassle. And if you're into streaming, you can also test your <Link to="/mic-tester" className="text-primary underline">microphone</Link> or <Link to="/gpu-tester" className="text-primary underline">graphics card</Link> to keep broadcasts running smoothly.
+    </p>
+  </section>
 
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">Supported Controllers</h3>
-            <p>Compatible with almost all modern controllers:</p>
+  <section className="space-y-2">
+    <h3 className="text-xl font-semibold">Supported Controllers</h3>
+    <p>We've got compatibility with most of the controllers people use these days:</p>
+    
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-blue-50 p-4 rounded-lg">
+        <h4 className="font-semibold text-foreground mb-2">Xbox</h4>
+        <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+          <li>Xbox One</li>
+          <li>Xbox Series X|S</li>
+          <li>Xbox 360 (wired or wireless versions)</li>
+        </ul>
+      </div>
+      
+      <div className="bg-green-50 p-4 rounded-lg">
+        <h4 className="font-semibold text-foreground mb-2">PlayStation</h4>
+        <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+          <li>PS3</li>
+          <li>PS4 DualShock 4</li>
+          <li>PS5 DualSense</li>
+        </ul>
+      </div>
+      
+      <div className="bg-purple-50 p-4 rounded-lg">
+        <h4 className="font-semibold text-foreground mb-2">Nintendo & Others</h4>
+        <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+          <li>Switch Pro Controller</li>
+          <li>Joy-Cons</li>
+          <li>Options from Logitech, 8BitDo, or just about any generic USB or Bluetooth controller</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-foreground mb-2">Xbox</h4>
-                <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-                  <li>Xbox One</li>
-                  <li>Xbox Series X|S</li>
-                  <li>Xbox 360 (wired/wireless)</li>
-                </ul>
-              </div>
+  <section className="space-y-2">
+    <h3 className="text-xl font-semibold">Supported Browsers</h3>
+    <p className="text-muted-foreground">
+      It runs smoothly on Chrome, Firefox, Edge, and Opera. Desktops give the best results, but it should work elsewhere too.
+    </p>
+  </section>
 
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-foreground mb-2">
-                  PlayStation
-                </h4>
-                <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-                  <li>PS3</li>
-                  <li>PS4 DualShock 4</li>
-                  <li>PS5 DualSense</li>
-                </ul>
-              </div>
+  <section className="space-y-2">
+    <h2 className="text-xl font-semibold">How to Use the Gamepad Tester</h2>
+    <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
+      <li>Plug in your controller with USB or connect it over Bluetooth</li>
+      <li>Load up the <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> in your browser</li>
+      <li>Go ahead and press buttons, move the sticks, or squeeze the triggers</li>
+      <li>See the real-time responses for every action</li>
+      <li>Spot any issues like drift, dead zones, or things that aren't clicking</li>
+    </ol>
+    <p className="text-muted-foreground">
+      Easy as that, and it works for PS4, PS5, Xbox, Xbox 360, or whatever USB/Bluetooth controller you've got.
+    </p>
+  </section>
 
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-foreground mb-2">
-                  Nintendo & Others
-                </h4>
-                <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-                  <li>Switch Pro Controller</li>
-                  <li>Joy-Cons</li>
-                  <li>Logitech, 8BitDo, generic USB/Bluetooth controllers</li>
-                </ul>
-              </div>
-            </div>
+  <section className="space-y-2">
+    <h3 className="text-xl font-semibold">Features Gamers Will Love</h3>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li><strong>Instant Input Feedback:</strong> Watch buttons, triggers, and sticks react live as you use them</li>
+      <li><strong>Drift & Deadzone Detection:</strong> Find out if your sticks are drifting off or have unresponsive areas</li>
+      <li><strong>Vibration Testing:</strong> Make sure those rumble motors are firing on all cylinders</li>
+      <li><strong>Battery & Connection Info:</strong> Check out the battery status, connection method, and vendor details</li>
+      <li><strong>No Setup Needed:</strong> Everything happens in the browser, ready to go—just like our <Link to="/gpu-tester" className="text-primary underline">GPU</Link> or <Link to="/mic-tester" className="text-primary underline">mic testers</Link></li>
+    </ul>
+  </section>
 
-            <p className="text-muted-foreground">
-              Supported Browsers: Chrome, Firefox, Edge, Opera. Works best on
-              desktop.
-            </p>
-          </section>
+  <section className="space-y-2">
+    <h3 className="text-xl font-semibold">Advanced Testing for Developers</h3>
+    <p>For devs or anyone deep into hardware testing:</p>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li>Track button positions and statuses</li>
+      <li>Get the raw axis readings from sticks (from -1 to 1)</li>
+      <li>Fire up the vibration motors to test them directly</li>
+    </ul>
+    <p className="text-muted-foreground">
+      Great for debugging or dialing in exact calibrations.
+    </p>
+  </section>
 
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">
-              How to Use the Gamepad Tester
-            </h3>
-            <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
-              <li>Connect your controller via USB or Bluetooth</li>
-              <li>
-                Open the{" "}
-                <Link to="/gamepad-tester" className="text-primary underline">
-                  Gamepad Tester
-                </Link>{" "}
-                in your browser
-              </li>
-              <li>Press buttons, move sticks, or pull triggers</li>
-              <li>View live feedback on all inputs</li>
-              <li>Identify drift, dead zones, or unresponsive controls</li>
-            </ol>
-            <p className="text-muted-foreground">
-              It's simple, fast, and works for PS4, PS5, Xbox, Xbox 360, or any
-              USB/Bluetooth controller.
-            </p>
-          </section>
+  <section className="space-y-2">
+    <h3 className="text-xl font-semibold">Common Use Cases</h3>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li>Testing fresh or second-hand controllers for drift, dead zones, or slow inputs</li>
+      <li>Sorting out issues with triggers, buttons, or the vibration system</li>
+      <li>Ensuring it works across various platforms and gadgets</li>
+      <li>Setting up controllers for high-stakes gaming or streaming rigs</li>
+      <li>Mixing it with <Link to="/midi-tester" className="text-primary underline">MIDI</Link> or other hardware tests in more advanced setups</li>
+    </ul>
+  </section>
 
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">Features Gamers Will Love</h3>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>
-                <strong>Live Input Feedback:</strong> Track buttons, triggers,
-                and analog sticks in real time
-              </li>
-              <li>
-                <strong>Stick Drift & Deadzone Detection:</strong> Identify worn
-                or misaligned sticks
-              </li>
-              <li>
-                <strong>Vibration Testing:</strong> Check rumble motors for full
-                functionality
-              </li>
-              <li>
-                <strong>Battery & Connection Info:</strong> See battery level,
-                connection type, and vendor ID
-              </li>
-              <li>
-                <strong>No Installation Required:</strong> Fully browser-based,
-                ready instantly — just like our{" "}
-                <Link to="/gpu-tester" className="text-primary underline">
-                  GPU tester
-                </Link>{" "}
-                and{" "}
-                <Link to="/mic-tester" className="text-primary underline">
-                  microphone tester
-                </Link>
-              </li>
-            </ul>
-          </section>
+  <section className="space-y-2">
+    <h2 className="text-xl font-semibold">Frequently Asked Questions</h2>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li><strong>Q: Why can't I get my controller to show up?</strong><br />Take a look at your USB or Bluetooth setup. Wireless ones sometimes need re-pairing or driver updates.</li>
+      <li><strong>Q: Does it handle vibration and trigger sensitivity checks?</strong><br />Yep, it does for most current controllers, including the PS5 DualSense and Xbox Series X|S.</li>
+      <li><strong>Q: What kinds of controllers are compatible?</strong><br />Pretty much all the modern ones: Xbox lineup, PlayStation series, Nintendo stuff, and lots of third-party USB/Bluetooth models.</li>
+    </ul>
+  </section>
 
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">
-              Advanced Testing for Developers
-            </h3>
-            <p>For developers or hardware testers:</p>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>Monitor button index and states</li>
-              <li>Read analog stick axis values (-1 to 1)</li>
-              <li>Control vibration actuators for testing</li>
-            </ul>
-            <p className="text-muted-foreground">
-              Perfect for debugging and precise calibration.
-            </p>
-          </section>
-
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">Common Use Cases</h3>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>
-                Test new or used controllers for drift, dead zones, or input lag
-              </li>
-              <li>Troubleshoot triggers, buttons, or vibration motors</li>
-              <li>Verify compatibility across platforms and devices</li>
-              <li>
-                Calibrate controllers for competitive gaming or streaming setups
-              </li>
-              <li>
-                Combine with{" "}
-                <Link to="/midi-tester" className="text-primary underline">
-                  MIDI
-                </Link>{" "}
-                or hardware testing for professional workflows
-              </li>
-            </ul>
-          </section>
-
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">
-              Frequently Asked Questions
-            </h3>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>
-                <strong>Q: Why isn't my controller detected?</strong>
-                <br />
-                Check your USB or Bluetooth connection. Some wireless
-                controllers require pairing or updated drivers.
-              </li>
-              <li>
-                <strong>
-                  Q: Can I test vibration and trigger sensitivity?
-                </strong>
-                <br />
-                Yes, most modern controllers, including PS5 DualSense and Xbox
-                Series X|S, are supported.
-              </li>
-              <li>
-                <strong>Q: Which controllers are supported?</strong>
-                <br />
-                Almost all modern controllers: Xbox, PlayStation, Nintendo, and
-                popular third-party USB/Bluetooth options.
-              </li>
-            </ul>
-          </section>
-
-          <section className="space-y-2">
-            <h3 className="text-xl font-semibold">
-              Start Testing Your Controller
-            </h3>
-            <p>Plug in your controller and instantly check:</p>
-            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li>Stick drift and dead zones</li>
-              <li>Trigger and button responsiveness</li>
-              <li>Vibration feedback</li>
-              <li>Overall controller performance</li>
-            </ul>
-            <p>
-              Whether it's PS4, PS5, Xbox, Xbox 360, or a generic USB/Bluetooth
-              controller, our{" "}
-              <Link to="/gamepad-tester" className="text-primary underline">
-                online gamepad tester
-              </Link>{" "}
-              gives you reliable results in seconds. Don not let controller
-              issues ruin your gaming experience — test your hardware now and
-              game with confidence.
-            </p>
-          </section>
-        </section>
+  <section className="space-y-2">
+    <h3 className="text-xl font-semibold">Start Testing Your Controller</h3>
+    <p>Just connect your controller and jump in to verify:</p>
+    <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+      <li>Any signs of stick drift or dead zones</li>
+      <li>The quickness of triggers and buttons</li>
+      <li>How well the vibration responds</li>
+      <li>Your controller's general performance</li>
+    </ul>
+    <p>
+      Whether you're using a PS4, PS5, Xbox, Xbox 360, or a basic USB/Bluetooth one, our <Link to="/gamepad-tester" className="text-primary underline">online tester</Link> gets you accurate info in no time. Don't let a faulty controller spoil your gaming—test it out now and play with peace of mind.
+    </p>
+  </section>
+</section>
       </div>
     </div>
   );
