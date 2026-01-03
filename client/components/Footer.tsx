@@ -27,7 +27,7 @@ const navigation = {
     },
     {
       name: 'Email',
-      href: 'sa0663787@gmail.com',
+      href: 'mailto:sa0663787@gmail.com',
       icon: Mail,
     },
   ],
