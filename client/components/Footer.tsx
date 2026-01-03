@@ -17,7 +17,7 @@ const navigation = {
   social: [
     {
       name: 'GitHub',
-      href: '#',
+      href: 'https://github.com/gen-tools/GamepadTest',
       icon: Github,
     },
     {
@@ -27,7 +27,7 @@ const navigation = {
     },
     {
       name: 'Email',
-      href: 'mailto:hello@gamepadtester.com',
+      href: 'sa0663787@gmail.com',
       icon: Mail,
     },
   ],
