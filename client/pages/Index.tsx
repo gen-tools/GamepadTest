@@ -107,8 +107,8 @@ export default function Index() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "GamepadTest",
-    url: "https://gamepadchecker.com",
-    logo: "https://gamepadchecker.com/logo.png",
+    url: "https://gamepadtest.tech",
+    logo: "https://gamepadtest.tech/logo.png",
     description:
       "The #1 professional gamepad testing tool trusted by millions worldwide.",
     foundingDate: "2024",
@@ -118,8 +118,8 @@ export default function Index() {
       email: "support@gamepadchecker.com",
     },
     sameAs: [
-      "https://twitter.com/gamepadchecker",
-      "https://facebook.com/gamepadchecker",
+      "https://twitter.com/gamepadtest",
+      "https://facebook.com/gamepadtest",
     ],
   };
 
@@ -131,7 +131,7 @@ export default function Index() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://gamepadchecker.com",
+        item: "https://gamepadtest.tech",
       },
     ],
   };
@@ -164,8 +164,8 @@ export default function Index() {
             name: "GamepadTest",
             url: "https://www.gamepadtest.tech",
             sameAs: [
-              "https://twitter.com/gamepadchecker",
-              "https://facebook.com/gamepadchecker",
+              "https://twitter.com/gamepadtest",
+              "https://facebook.com/gamepadtest",
             ],
           })}
         </script>
