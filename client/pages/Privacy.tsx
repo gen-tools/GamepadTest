@@ -17,7 +17,7 @@ export default function Privacy() {
         <div className="text-center mb-12 animate-fade-in-down">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="h-10 w-10 text-primary animate-bounce-in" />
-            <h2 className="text-4xl font-bold animate-fade-in-right animate-stagger-1">Privacy Policy</h2>
+            <h1 className="text-4xl font-bold animate-fade-in-right animate-stagger-1">Privacy Policy</h1>
           </div>
           <h2 className="text-xl text-muted-foreground animate-fade-in-up animate-stagger-2">
             How We Protect Your Privacy and Handle Your Data
