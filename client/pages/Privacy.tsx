@@ -1,4 +1,4 @@
-import { Shield, Eye, Lock, Database } from 'lucide-react';
+import { Shield, Lock, Database, BarChart, Cookie, Globe, CheckCircle, Calendar, FileText } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Helmet } from 'react-helmet-async';
 
@@ -8,23 +8,16 @@ export default function Privacy() {
       <Helmet>
         <title>Privacy Policy - GamepadTest</title>
         <meta name="description" content="GamepadTest Privacy Policy. Learn how we protect your data, what information we collect, and your privacy rights when using our hardware testing tools." />
-        <meta name="keywords" content="privacy policy, data protection, privacy rights, gamepadtest privacy" />
+        <meta name="keywords" content="privacy policy, data protection, privacy rights, gamepadchecker privacy" />
         <link rel="canonical" href="https://www.gamepadtest.tech/privacy" />
       </Helmet>
       
       <div className="max-w-4xl mx-auto">
-        import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Lock, Database, BarChart, Cookie, Globe, CheckCircle, Calendar, FileText } from "lucide-react";
-
-export default function PrivacyPolicy() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 py-12 sm:py-16">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="h-10 w-10 text-primary animate-bounce-in" />
-            <h1 className="text-4xl font-bold animate-fade-in-right animate-stagger-1">Privacy Policy</h1>
+            <h2 className="text-4xl font-bold animate-fade-in-right animate-stagger-1">Privacy Policy</h2>
           </div>
           <h2 className="text-xl text-muted-foreground animate-fade-in-up animate-stagger-2">
             How We Protect Your Privacy and Handle Your Data
@@ -34,7 +27,7 @@ export default function PrivacyPolicy() {
           </p>
         </div>
 
-        {/* Privacy Overview */}
+        {/* Our Privacy Commitment */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-3">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -52,7 +45,7 @@ export default function PrivacyPolicy() {
           </CardContent>
         </Card>
 
-        {/* What We Don't Collect */}
+        {/* What We DON'T Collect */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -108,7 +101,7 @@ export default function PrivacyPolicy() {
           </CardContent>
         </Card>
 
-        {/* What We Do Collect */}
+        {/* What We DO Collect */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
