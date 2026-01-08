@@ -1,6 +1,7 @@
 import { Shield, Eye, Lock, Database } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Helmet } from 'react-helmet-async';
+import { Shield, Lock, Database, BarChart, Cookie, Globe, CheckCircle, Calendar, FileText } from "lucide-react";
 
 export default function Privacy() {
   return (
@@ -13,17 +14,24 @@ export default function Privacy() {
       </Helmet>
       
       <div className="max-w-4xl mx-auto">
+        import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, Lock, Database, BarChart, Cookie, Globe, CheckCircle, Calendar, FileText } from "lucide-react";
+
+export default function PrivacyPolicy() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 py-12 sm:py-16">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="h-10 w-10 text-primary animate-bounce-in" />
             <h1 className="text-4xl font-bold animate-fade-in-right animate-stagger-1">Privacy Policy</h1>
           </div>
-          <p className="text-xl text-muted-foreground animate-fade-in-up animate-stagger-2">
-            How we protect your privacy and handle your data
-          </p>
+          <h2 className="text-xl text-muted-foreground animate-fade-in-up animate-stagger-2">
+            How We Protect Your Privacy and Handle Your Data
+          </h2>
           <p className="text-sm text-muted-foreground mt-2">
-            Last updated: January 15, 2024
+            Last updated: January 8, 2026
           </p>
         </div>
 
@@ -31,16 +39,16 @@ export default function Privacy() {
         <Card className="mb-8 animate-fade-in-up animate-stagger-3">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Eye className="h-6 w-6 text-green-600" />
-              Our Privacy Commitment
+              <Shield className="h-6 w-6 text-green-600" />
+              <h2>Our Privacy Commitment</h2>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-lg leading-relaxed mb-4">
-              At GamepadTest, your privacy is our top priority. We believe that testing your hardware should never compromise your personal data or privacy. Our tools are designed to work entirely in your browser, ensuring your information stays exactly where it belongs—with you.
+              At GamepadTest, we really care about your privacy. Testing your hardware should be straightforward, quick, and safe, without ever risking your personal info. Our goal is to offer tools that run right in your browser, so all your data stays right on your device—with you.
             </p>
             <p className="text-lg leading-relaxed">
-              This privacy policy explains what information we collect (spoiler: very little), how we use it, and what rights you have regarding your data.
+              This Privacy Policy breaks down exactly what info we collect (and what we don't), how we use the little bit we do gather, and your rights when it comes to your data. We've made our approach clear, simple to follow, and all about keeping your privacy safe.
             </p>
           </CardContent>
         </Card>
@@ -50,10 +58,10 @@ export default function Privacy() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lock className="h-6 w-6 text-blue-600" />
-              What We DON'T Collect
+              <h2>What We DON'T Collect</h2>
             </CardTitle>
             <CardDescription>
-              The most important part of our privacy policy
+              Here's the key part of our privacy policy: we grab very little personal info—pretty much nothing at all.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -61,31 +69,42 @@ export default function Privacy() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold">Hardware Test Data</h4>
-                  <p className="text-sm text-muted-foreground">Your gamepad inputs, GPU performance data, microphone audio, or MIDI signals never leave your device.</p>
+                  <h2 className="font-semibold text-lg">Hardware Test Data</h2>
+                  <p className="text-muted-foreground">
+                    All the testing happens right on your end. Inputs from your gamepads, MIDI devices, GPU stats, or mic audio stay put on your device. So, any signals from your hardware during a test get handled totally in your browser and never hit our servers.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold">Personal Information</h4>
-                  <p className="text-sm text-muted-foreground">We don't collect names, email addresses, phone numbers, or any other personal identifying information.</p>
+                  <h2 className="font-semibold text-lg">Personal Information</h2>
+                  <p className="text-muted-foreground">
+                    We don't ask for or store names, emails, phone numbers, or anything that could identify you. You can jump in and use our tools completely anonymously, no personal stuff required.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold">Device Information</h4>
-                  <p className="text-sm text-muted-foreground">We don't store information about your specific hardware, serial numbers, or device configurations.</p>
+                  <h2 className="font-semibold text-lg">Device Information</h2>
+                  <p className="text-muted-foreground">
+                    We don't keep details about your specific hardware, like serial numbers or setups. Any info about your gear is just temporary, used only during your session for the test, and that's it.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold">Audio or Video Content</h4>
-                  <p className="text-sm text-muted-foreground">Microphone tests process audio locally in your browser—we never record, store, or transmit your audio.</p>
+                  <h2 className="font-semibold text-lg">Audio or Video Content</h2>
+                  <p className="text-muted-foreground">
+                    For mic tests, your audio gets processed locally—we never record, save, or send it anywhere. And if we add video features down the line, we'll stick to the same rule: all media stays and gets handled on your device.
+                  </p>
                 </div>
               </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                By skipping these kinds of sensitive data, we make sure your privacy is protected from the start.
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -95,7 +114,7 @@ export default function Privacy() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Database className="h-6 w-6 text-orange-600" />
-              What We DO Collect
+              <h2>What We DO Collect</h2>
             </CardTitle>
             <CardDescription>
               Minimal, anonymous data to improve our service
@@ -104,31 +123,34 @@ export default function Privacy() {
           <CardContent>
             <div className="space-y-6">
               <div>
-                <h4 className="font-semibold mb-2">Basic Website Analytics</h4>
-                <p className="text-sm text-muted-foreground mb-2">
-                  We use standard web analytics to understand how our tools are used, including:
+                <h2 className="font-semibold text-lg mb-2">Basic Website Analytics</h2>
+                <p className="text-muted-foreground mb-2">
+                  We use everyday web analytics to see overall trends. This covers things like:
                 </p>
-                <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-                  <li>• Page views and which tools are most popular</li>
-                  <li>• General geographic regions (country/state level)</li>
-                  <li>• Browser types and versions for compatibility</li>
-                  <li>• Anonymous usage patterns to improve our tools</li>
+                <ul className="text-muted-foreground space-y-1 ml-4">
+                  <li>• How many page views we get and which tools folks like most</li>
+                  <li>• Rough locations of users (just country or state level)</li>
+                  <li>• What browsers and versions people are using, to keep things compatible</li>
+                  <li>• General, anonymous habits to boost speed and ease of use</li>
                 </ul>
-                <p className="text-xs text-muted-foreground mt-2">
-                  This data is aggregated and anonymized—we can't trace it back to individual users.
+                <p className="text-sm text-muted-foreground mt-2">
+                  All this is bundled up and made anonymous, so it can't point back to any one person.
                 </p>
               </div>
 
               <div>
-                <h4 className="font-semibold mb-2">Technical Information</h4>
-                <p className="text-sm text-muted-foreground mb-2">
-                  To ensure our tools work properly across different setups:
+                <h2 className="font-semibold text-lg mb-2">Technical Information</h2>
+                <p className="text-muted-foreground mb-2">
+                  To keep our tools running well on various setups, we might gather:
                 </p>
-                <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-                  <li>• Browser compatibility information</li>
-                  <li>• Error logs for debugging (no personal data)</li>
-                  <li>• Performance metrics for optimization</li>
+                <ul className="text-muted-foreground space-y-1 ml-4">
+                  <li>• Browser compatibility details</li>
+                  <li>• Error reports to fix bugs</li>
+                  <li>• Performance stats for tweaks</li>
                 </ul>
+                <p className="text-sm text-muted-foreground mt-2">
+                  None of this has personal identifiers—it's all just tech stuff to help us maintain and upgrade things.
+                </p>
               </div>
             </div>
           </CardContent>
@@ -137,28 +159,34 @@ export default function Privacy() {
         {/* How We Use Information */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
-            <CardTitle>How We Use Information</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart className="h-6 w-6 text-purple-600" />
+              <h2>How We Use the Information</h2>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold">Improving Our Tools</h4>
-                <p className="text-sm text-muted-foreground">
-                  Anonymous usage data helps us understand which features are most valuable and where we should focus development efforts.
+                <h2 className="font-semibold text-lg">Improving Our Tools</h2>
+                <p className="text-muted-foreground">
+                  Anonymous usage info lets us spot which features you all love and which could use some work. That way, we put our energy into what really helps.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">Fixing Bugs and Issues</h4>
-                <p className="text-sm text-muted-foreground">
-                  Error logs help us identify and fix problems that might affect your testing experience.
+                <h2 className="font-semibold text-lg">Fixing Bugs and Issues</h2>
+                <p className="text-muted-foreground">
+                  Those error logs and tech feedback help us catch problems fast and sort them out, so our tools are more reliable for everyone.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">Ensuring Compatibility</h4>
-                <p className="text-sm text-muted-foreground">
-                  Browser and device information helps us maintain compatibility across different platforms and configurations.
+                <h2 className="font-semibold text-lg">Ensuring Compatibility</h2>
+                <p className="text-muted-foreground">
+                  Knowing about browser types and device performance means we can make sure everything works great, no matter if you're on a desktop, laptop, or phone.
                 </p>
               </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                By keeping it all anonymous, we protect your privacy while still giving you a top-notch experience.
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -166,28 +194,34 @@ export default function Privacy() {
         {/* Cookies and Local Storage */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
-            <CardTitle>Cookies and Local Storage</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Cookie className="h-6 w-6 text-amber-600" />
+              <h2>Cookies and Local Storage</h2>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold">Essential Cookies</h4>
-                <p className="text-sm text-muted-foreground">
-                  We use minimal cookies for basic website functionality, such as remembering your theme preference (dark/light mode).
+                <h2 className="font-semibold text-lg">Essential Cookies</h2>
+                <p className="text-muted-foreground">
+                  We only use a few cookies, and just for basic site functions. Like, one might remember if you prefer light or dark mode. These don't track anything beyond the essentials.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">No Tracking Cookies</h4>
-                <p className="text-sm text-muted-foreground">
-                  We don't use advertising cookies, tracking cookies, or any cookies that follow you across other websites.
+                <h2 className="font-semibold text-lg">No Tracking Cookies</h2>
+                <p className="text-muted-foreground">
+                  We skip ad cookies or any from third parties that spy on you. Nothing here follows you around the web, builds profiles, or hits you with targeted ads.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">Local Storage</h4>
-                <p className="text-sm text-muted-foreground">
-                  Some preferences (like theme settings) are stored locally in your browser for convenience. This data never leaves your device.
+                <h2 className="font-semibold text-lg">Local Storage</h2>
+                <p className="text-muted-foreground">
+                  Some settings, like your theme choice, get saved right in your browser for ease. This stays on your device, totally in your hands.
                 </p>
               </div>
+              <p className="text-sm text-muted-foreground">
+                You can tweak or wipe these cookies and local storage anytime via your browser options. Our tools will keep working fine even if you tighten things up or block them.
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -195,71 +229,105 @@ export default function Privacy() {
         {/* Third-Party Services */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
-            <CardTitle>Third-Party Services</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="h-6 w-6 text-blue-600" />
+              <h2>Third-Party Services</h2>
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              We use minimal third-party services to operate our website:
+            <p className="text-muted-foreground mb-4">
+              We keep third-party stuff to a minimum, but a couple are needed to run the site:
             </p>
             <div className="space-y-3">
               <div>
-                <h4 className="font-semibold">Web Hosting</h4>
-                <p className="text-sm text-muted-foreground">
-                  Our website is hosted on secure, privacy-focused platforms that comply with international privacy standards.
+                <h2 className="font-semibold text-lg">Web Hosting</h2>
+                <p className="text-muted-foreground">
+                  Our site sits on secure, privacy-minded hosts that meet global privacy rules. We pick them carefully so your data stays private and safe.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">Analytics</h4>
-                <p className="text-sm text-muted-foreground">
-                  We use privacy-focused analytics that don't track individual users or create personal profiles.
+                <h2 className="font-semibold text-lg">Analytics</h2>
+                <p className="text-muted-foreground">
+                  We go with analytics services that respect privacy, just to check usage and make improvements. They don't track individuals or make personal profiles.
                 </p>
               </div>
             </div>
+            <p className="text-sm text-muted-foreground mt-4">
+              By limiting third parties and choosing privacy-focused ones, we stay in control of your info.
+            </p>
           </CardContent>
         </Card>
 
         {/* Your Rights */}
         <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
-            <CardTitle>Your Privacy Rights</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle className="h-6 w-6 text-green-600" />
+              <h2>Your Privacy Rights</h2>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold">Right to Privacy</h4>
-                <p className="text-sm text-muted-foreground">
-                  Since we don't collect personal data, your privacy is protected by design. There's no personal data to access, modify, or delete.
+                <h2 className="font-semibold text-lg">Right to Privacy</h2>
+                <p className="text-muted-foreground">
+                  Since we don't grab personal data, your privacy is built-in safe. There's no personal info stored that you'd need to check, change, or delete.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">Browser Controls</h4>
-                <p className="text-sm text-muted-foreground">
-                  You can control cookies and local storage through your browser settings. Our tools will continue to work even with strict privacy settings.
+                <h2 className="font-semibold text-lg">Browser Controls</h2>
+                <p className="text-muted-foreground">
+                  Handle cookies, local storage, and other browser data through your settings. Our tools are made to work even with tough privacy modes or blocked cookies.
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">Questions or Concerns</h4>
-                <p className="text-sm text-muted-foreground">
-                  If you have any questions about our privacy practices, please contact us through our website.
+                <h2 className="font-semibold text-lg">Questions or Concerns</h2>
+                <p className="text-muted-foreground">
+                  Got questions or worries about how we handle privacy? Hit us up via the site—we take these seriously and get back to you quickly.
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Updates */}
-        <Card className="animate-fade-in-up animate-stagger-4">
+        {/* Policy Updates */}
+        <Card className="mb-8 animate-fade-in-up animate-stagger-4">
           <CardHeader>
-            <CardTitle>Policy Updates</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Calendar className="h-6 w-6 text-orange-600" />
+              <h2>Policy Updates</h2>
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
-              We may update this privacy policy occasionally to reflect changes in our practices or legal requirements. 
-              Any significant changes will be clearly communicated on our website. Since we collect minimal data, 
-              most updates will likely expand privacy protections rather than reduce them.
+            <p className="text-muted-foreground">
+              We might tweak this Privacy Policy now and then to match changes in what we do or legal stuff. Big changes will get highlighted right on the site.
+            </p>
+            <p className="text-muted-foreground mt-4">
+              Since we collect so little, updates usually beef up privacy rather than dial it back. When we change things, we'll make it obvious what's new so you can keep using our tools without worry.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Final Notes */}
+        <Card className="animate-fade-in-up animate-stagger-4">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-6 w-6 text-blue-600" />
+              <h2>Final Notes</h2>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Privacy is the heart of what we do at GamepadTest. We've built our tools and site to collect as little as possible, handle stuff locally when we can, and be upfront about everything.
+            </p>
+            <p className="text-muted-foreground mb-4">
+              With this privacy-by-design approach, testing your gamepads, GPUs, mics, or MIDI gear is secure, safe, and private—just how it ought to be.
+            </p>
+            <p className="text-muted-foreground">
+              Thanks for choosing GamepadTest. We hope you have fun testing your hardware, knowing your privacy is always in good hands.
             </p>
             <p className="text-sm text-muted-foreground mt-4">
-              This policy was last updated on January 15, 2024.
+              Last Updated: January 8, 2026
             </p>
           </CardContent>
         </Card>
