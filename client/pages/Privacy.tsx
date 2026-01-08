@@ -1,7 +1,6 @@
 import { Shield, Eye, Lock, Database } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Helmet } from 'react-helmet-async';
-import { Shield, Lock, Database, BarChart, Cookie, Globe, CheckCircle, Calendar, FileText } from "lucide-react";
 
 export default function Privacy() {
   return (
