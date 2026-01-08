@@ -8,7 +8,7 @@ export default function Privacy() {
       <Helmet>
         <title>Privacy Policy - GamepadTest</title>
         <meta name="description" content="GamepadTest Privacy Policy. Learn how we protect your data, what information we collect, and your privacy rights when using our hardware testing tools." />
-        <meta name="keywords" content="privacy policy, data protection, privacy rights, gamepadchecker privacy" />
+        <meta name="keywords" content="privacy policy, data protection, privacy rights, gamepadtest privacy" />
         <link rel="canonical" href="https://www.gamepadtest.tech/privacy" />
       </Helmet>
       
