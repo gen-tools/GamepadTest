@@ -514,6 +514,11 @@ export default function GamepadTester() {
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
           <div id="ezoic-pub-ad-placeholder-101"></div>
+       <script>
+    ezstandalone.cmd.push(function () {
+        ezstandalone.showAds(101);
+      });
+    </script>
           <div className="flex items-center justify-center gap-2 mb-4">
             <Gamepad2 className="h-8 w-8 text-primary animate-bounce-in" />
             <h1 className="text-3xl font-bold animate-fade-in-right animate-stagger-1">
@@ -1012,7 +1017,12 @@ export default function GamepadTester() {
             </CardContent>
           </Card>
         ))}
-        <div id="ezoic-pub-ad-placeholder-102"></div>
+        <div id="ezoic-pub-ad-placeholder-101"></div>
+<script>
+    ezstandalone.cmd.push(function () {
+        ezstandalone.showAds(101);
+    });
+</script>
 
         <RecommendedProductsSection products={recommendedProducts} />
 
