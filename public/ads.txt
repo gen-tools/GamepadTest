@@ -1,1 +1,1 @@
-https://srv.adstxtmanager.com/82696/gamepadtest.tech
+Redirect 301 /ads.txt https://srv.adstxtmanager.com/82696/gamepadtest.tech
