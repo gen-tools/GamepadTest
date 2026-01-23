@@ -1011,6 +1011,7 @@ export default function GamepadTester() {
             </CardContent>
           </Card>
         ))}
+        <div id="ezoic-pub-ad-placeholder-102"></div>
 
         <RecommendedProductsSection products={recommendedProducts} />
 
