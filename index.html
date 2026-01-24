@@ -87,6 +87,11 @@
 <script>
     window.ezstandalone = window.ezstandalone || {};
     ezstandalone.cmd = ezstandalone.cmd || [];
+
+    // Generate or use a persistent visit_uuid for Ezoic
+    if (!window.ezstandalone.visit_uuid) {
+      window.ezstandalone.visit_uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    }
 </script>
 
     <!-- Minimal Structured Data - rest injected by React/Helmet -->
