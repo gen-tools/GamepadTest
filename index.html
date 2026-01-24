@@ -81,25 +81,32 @@
       name="twitter:image"
       content="https://www.gamepadtest.tech/twitter-image.jpg"
     />
+
+    <!-- Initialize Ezoic FIRST with required visit_uuid -->
+    <script>
+      (function() {
+        // Create visit_uuid early to prevent Ezoic initialization errors
+        const storageKey = '__ezoic_visit_uuid__';
+        let uuid = sessionStorage.getItem(storageKey);
+        if (!uuid) {
+          uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+          sessionStorage.setItem(storageKey, uuid);
+        }
+
+        // Initialize all Ezoic globals that might be needed
+        window.ezstandalone = window.ezstandalone || {};
+        window.ezstandalone.cmd = window.ezstandalone.cmd || [];
+        window.ezstandalone.visit_uuid = uuid;
+
+        // Also set it on EzoicIdentity if it exists
+        if (window.EzoicIdentity) {
+          window.EzoicIdentity.visit_uuid = uuid;
+        }
+      })();
+    </script>
+
     <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
 <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
-<script>
-    // Initialize Ezoic with visit_uuid BEFORE loading the library
-    window.ezstandalone = window.ezstandalone || {};
-    window.ezstandalone.cmd = window.ezstandalone.cmd || [];
-
-    // Generate a persistent visit_uuid for Ezoic (required by EzoicIdentity.init)
-    if (!window.ezstandalone.visit_uuid) {
-      // Create a sessionStorage-backed UUID that persists during the session
-      const storageKey = '__ezoic_visit_uuid__';
-      let uuid = sessionStorage.getItem(storageKey);
-      if (!uuid) {
-        uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-        sessionStorage.setItem(storageKey, uuid);
-      }
-      window.ezstandalone.visit_uuid = uuid;
-    }
-</script>
 <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
 
     <!-- Minimal Structured Data - rest injected by React/Helmet -->
