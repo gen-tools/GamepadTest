@@ -82,32 +82,8 @@
       content="https://www.gamepadtest.tech/twitter-image.jpg"
     />
 
-    <!-- Initialize Ezoic FIRST with required visit_uuid -->
-    <script>
-      (function() {
-        // Create visit_uuid early to prevent Ezoic initialization errors
-        const storageKey = '__ezoic_visit_uuid__';
-        let uuid = sessionStorage.getItem(storageKey);
-        if (!uuid) {
-          uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-          sessionStorage.setItem(storageKey, uuid);
-        }
-
-        // Initialize all Ezoic globals that might be needed
-        window.ezstandalone = window.ezstandalone || {};
-        window.ezstandalone.cmd = window.ezstandalone.cmd || [];
-        window.ezstandalone.visit_uuid = uuid;
-
-        // Also set it on EzoicIdentity if it exists
-        if (window.EzoicIdentity) {
-          window.EzoicIdentity.visit_uuid = uuid;
-        }
-      })();
-    </script>
-
     <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
 <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
-<script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
 
     <!-- Minimal Structured Data - rest injected by React/Helmet -->
     <script type="application/ld+json">
@@ -120,7 +96,6 @@
         "isAccessibleForFree": true
       }
     </script>
-    <meta name="ezoic-site-verification" content="rLT4hioWoVTejqmpPeFNZGN2A6AZxA" />
     <!-- DNS Prefetch & Preconnect for faster external resource loading -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
