@@ -83,16 +83,24 @@
     />
     <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
 <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
-    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
 <script>
+    // Initialize Ezoic with visit_uuid BEFORE loading the library
     window.ezstandalone = window.ezstandalone || {};
-    ezstandalone.cmd = ezstandalone.cmd || [];
+    window.ezstandalone.cmd = window.ezstandalone.cmd || [];
 
-    // Generate or use a persistent visit_uuid for Ezoic
+    // Generate a persistent visit_uuid for Ezoic (required by EzoicIdentity.init)
     if (!window.ezstandalone.visit_uuid) {
-      window.ezstandalone.visit_uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      // Create a sessionStorage-backed UUID that persists during the session
+      const storageKey = '__ezoic_visit_uuid__';
+      let uuid = sessionStorage.getItem(storageKey);
+      if (!uuid) {
+        uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        sessionStorage.setItem(storageKey, uuid);
+      }
+      window.ezstandalone.visit_uuid = uuid;
     }
 </script>
+<script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
 
     <!-- Minimal Structured Data - rest injected by React/Helmet -->
     <script type="application/ld+json">
