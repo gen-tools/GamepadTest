@@ -446,19 +446,32 @@ export default function GamepadTester() {
     // Check if Ezoic is available
     if (typeof window !== 'undefined' && (window as any).ezstandalone) {
       const ez = (window as any).ezstandalone;
-      
+
       // Initialize ads after component mounts
       setTimeout(() => {
-        if (ez && ez.cmd && typeof ez.cmd.push === 'function') {
-          // First ad placement
-          ez.cmd.push(function() {
-            ez.showAds(101);
-          });
-          
-          // Second ad placement (with different ID)
-          ez.cmd.push(function() {
-            ez.showAds(102);
-          });
+        try {
+          if (ez && ez.cmd && typeof ez.cmd.push === 'function') {
+            // Ensure visit_uuid is set
+            if (!ez.visit_uuid) {
+              ez.visit_uuid = 'guest-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            }
+
+            // First ad placement
+            if (typeof ez.showAds === 'function') {
+              ez.cmd.push(function() {
+                ez.showAds(101);
+              });
+            }
+
+            // Second ad placement (with different ID)
+            if (typeof ez.showAds === 'function') {
+              ez.cmd.push(function() {
+                ez.showAds(102);
+              });
+            }
+          }
+        } catch (error) {
+          console.warn('Ezoic initialization warning:', error);
         }
       }, 100);
     }
