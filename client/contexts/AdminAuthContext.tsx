@@ -75,8 +75,18 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAdminAuth() {
   const context = useContext(AdminAuthContext);
+
+  // During SSR, context might not exist, so return a safe default
   if (!context) {
-    throw new Error('useAdminAuth must be used within AdminAuthProvider');
+    return {
+      isLoggedIn: false,
+      isLoading: true,
+      adminEmail: null,
+      login: async () => { throw new Error('Auth not available during SSR'); },
+      logout: async () => { throw new Error('Auth not available during SSR'); },
+      signup: async () => { throw new Error('Auth not available during SSR'); },
+    };
   }
+
   return context;
 }
