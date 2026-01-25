@@ -47,6 +47,14 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Blog API routes
+  app.get("/api/blogs", getBlogs);
+  app.get("/api/blogs/:slug", getBlogBySlug);
+  app.get("/api/admin/blogs", getAdminBlogs);
+  app.post("/api/admin/blogs", createBlog);
+  app.put("/api/admin/blogs/:id", updateBlog);
+  app.delete("/api/admin/blogs/:id", deleteBlog);
+
   // Simple image proxy for allowed hosts (fixes hotlink/CORS blocks)
   app.get("/api/image-proxy", async (req, res) => {
     try {
