@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { AlertCircle, BookOpen, ArrowRight } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Helmet } from 'react-helmet-async';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, BookOpen, ArrowRight } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Helmet } from "react-helmet-async";
 
 interface Blog {
   id: string;
@@ -17,7 +23,7 @@ interface Blog {
 export default function BlogList() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchBlogs();
@@ -26,12 +32,12 @@ export default function BlogList() {
   const fetchBlogs = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('/api/blogs');
-      if (!response.ok) throw new Error('Failed to fetch blogs');
+      const response = await fetch("/api/blogs");
+      if (!response.ok) throw new Error("Failed to fetch blogs");
       const data = await response.json();
       setBlogs(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch blogs');
+      setError(err instanceof Error ? err.message : "Failed to fetch blogs");
     } finally {
       setIsLoading(false);
     }
@@ -41,7 +47,10 @@ export default function BlogList() {
     <>
       <Helmet>
         <title>Blog - GamepadTest</title>
-        <meta name="description" content="Read our latest articles about gaming hardware, controllers, and testing tools." />
+        <meta
+          name="description"
+          content="Read our latest articles about gaming hardware, controllers, and testing tools."
+        />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -76,7 +85,8 @@ export default function BlogList() {
                 <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <p className="text-muted-foreground mb-4">No blog posts yet.</p>
                 <p className="text-sm text-muted-foreground">
-                  Check back soon for exciting content about gaming hardware and testing tools!
+                  Check back soon for exciting content about gaming hardware and
+                  testing tools!
                 </p>
               </CardContent>
             </Card>
@@ -86,17 +96,21 @@ export default function BlogList() {
                 <Link key={blog.id} to={`/blog/${blog.slug}`}>
                   <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
                     <CardHeader>
-                      <CardTitle className="line-clamp-2">{blog.title}</CardTitle>
+                      <CardTitle className="line-clamp-2">
+                        {blog.title}
+                      </CardTitle>
                       <CardDescription>
-                        {new Date(blog.created_at).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
+                        {new Date(blog.created_at).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
                         })}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground line-clamp-2 mb-4">{blog.excerpt}</p>
+                      <p className="text-muted-foreground line-clamp-2 mb-4">
+                        {blog.excerpt}
+                      </p>
                       <Button variant="outline" size="sm">
                         Read More
                         <ArrowRight className="h-4 w-4 ml-2" />

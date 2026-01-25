@@ -11,7 +11,10 @@ interface ClientProvidersProps {
   queryClient: QueryClient;
 }
 
-export function ClientProviders({ children, queryClient }: ClientProvidersProps) {
+export function ClientProviders({
+  children,
+  queryClient,
+}: ClientProvidersProps) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

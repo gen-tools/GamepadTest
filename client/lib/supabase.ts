@@ -1,10 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+  throw new Error("Missing Supabase environment variables");
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -25,8 +25,11 @@ export type Database = {
           featured_image?: string;
           excerpt?: string;
         };
-        Insert: Omit<Database['public']['Tables']['blogs']['Row'], 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Database['public']['Tables']['blogs']['Insert']>;
+        Insert: Omit<
+          Database["public"]["Tables"]["blogs"]["Row"],
+          "id" | "created_at" | "updated_at"
+        >;
+        Update: Partial<Database["public"]["Tables"]["blogs"]["Insert"]>;
       };
       admin_users: {
         Row: {
@@ -35,8 +38,11 @@ export type Database = {
           name: string;
           created_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['admin_users']['Row'], 'id' | 'created_at'>;
-        Update: Partial<Database['public']['Tables']['admin_users']['Insert']>;
+        Insert: Omit<
+          Database["public"]["Tables"]["admin_users"]["Row"],
+          "id" | "created_at"
+        >;
+        Update: Partial<Database["public"]["Tables"]["admin_users"]["Insert"]>;
       };
     };
   };

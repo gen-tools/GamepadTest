@@ -1,16 +1,22 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAdminAuth } from '@/contexts/AdminAuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { AlertCircle, LogIn } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { AlertCircle, LogIn } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -24,7 +30,7 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setIsLoading(true);
 
     try {
@@ -33,9 +39,9 @@ export default function AdminLogin() {
       } else {
         await login(email, password);
       }
-      navigate('/admin/dashboard');
+      navigate("/admin/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Authentication failed');
+      setError(err instanceof Error ? err.message : "Authentication failed");
     } finally {
       setIsLoading(false);
     }
@@ -61,7 +67,7 @@ export default function AdminLogin() {
             <CardTitle className="text-2xl">Admin Access</CardTitle>
           </div>
           <CardDescription>
-            {isSignup ? 'Create your admin account' : 'Sign in to manage blogs'}
+            {isSignup ? "Create your admin account" : "Sign in to manage blogs"}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -98,18 +104,24 @@ export default function AdminLogin() {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Loading...' : (isSignup ? 'Create Account' : 'Sign In')}
+              {isLoading
+                ? "Loading..."
+                : isSignup
+                  ? "Create Account"
+                  : "Sign In"}
             </Button>
 
             <button
               type="button"
               onClick={() => {
                 setIsSignup(!isSignup);
-                setError('');
+                setError("");
               }}
               className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+              {isSignup
+                ? "Already have an account? Sign in"
+                : "Don't have an account? Sign up"}
             </button>
           </form>
         </CardContent>

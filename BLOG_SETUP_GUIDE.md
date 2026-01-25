@@ -84,6 +84,7 @@ CREATE POLICY "Users can delete their own blogs"
 ## Step 5: Publish Your Blog
 
 To make a blog visible to public:
+
 1. In the admin dashboard, find the blog you want to publish
 2. Click the edit button (pencil icon)
 3. Change the published status to "Published"
@@ -114,15 +115,18 @@ VITE_SUPABASE_ANON_KEY=your_anon_key_here
 ## Troubleshooting
 
 ### "Failed to create blog" error
+
 - Make sure you've created the `blogs` table in Supabase
 - Check that RLS policies are correctly configured
 - Verify your Supabase credentials in the environment variables
 
 ### Blogs not showing on public page
+
 - Make sure the blog is marked as "Published" (not Draft)
 - Check that the blog has a title and content filled in
 
 ### Can't login to admin panel
+
 - Make sure you've created an account using the signup form first
 - Check that Supabase auth is properly configured
 

@@ -12,8 +12,8 @@ export function render(url: string, helmetContext: any): string {
     React.createElement(
       StaticRouter,
       { location: url },
-      React.createElement(RootApp)
-    )
+      React.createElement(RootApp),
+    ),
   );
 
   return ReactDOMServer.renderToString(app);

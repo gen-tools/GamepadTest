@@ -1,12 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAdminAuth } from '@/contexts/AdminAuthContext';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { AlertCircle, LogOut, Plus, Edit2, Trash2, Save, X } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  AlertCircle,
+  LogOut,
+  Plus,
+  Edit2,
+  Trash2,
+  Save,
+  X,
+} from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface Blog {
   id: string;
@@ -22,19 +36,19 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showNewForm, setShowNewForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    excerpt: '',
-    content: '',
+    title: "",
+    excerpt: "",
+    content: "",
   });
 
   // Redirect if not logged in
   useEffect(() => {
     if (!isLoading && !isLoggedIn) {
-      navigate('/admin/login');
+      navigate("/admin/login");
     }
   }, [isLoggedIn, isLoading, navigate]);
 
@@ -48,12 +62,12 @@ export default function AdminDashboard() {
   const fetchBlogs = async () => {
     try {
       setBlogsLoading(true);
-      const response = await fetch('/api/admin/blogs');
-      if (!response.ok) throw new Error('Failed to fetch blogs');
+      const response = await fetch("/api/admin/blogs");
+      if (!response.ok) throw new Error("Failed to fetch blogs");
       const data = await response.json();
       setBlogs(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch blogs');
+      setError(err instanceof Error ? err.message : "Failed to fetch blogs");
     } finally {
       setBlogsLoading(false);
     }
@@ -61,42 +75,46 @@ export default function AdminDashboard() {
 
   const handleSave = async () => {
     if (!formData.title || !formData.content) {
-      setError('Title and content are required');
+      setError("Title and content are required");
       return;
     }
 
     try {
-      setError('');
-      const method = editingId ? 'PUT' : 'POST';
-      const url = editingId ? `/api/admin/blogs/${editingId}` : '/api/admin/blogs';
+      setError("");
+      const method = editingId ? "PUT" : "POST";
+      const url = editingId
+        ? `/api/admin/blogs/${editingId}`
+        : "/api/admin/blogs";
 
       const response = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error('Failed to save blog');
-      
+      if (!response.ok) throw new Error("Failed to save blog");
+
       await fetchBlogs();
-      setFormData({ title: '', excerpt: '', content: '' });
+      setFormData({ title: "", excerpt: "", content: "" });
       setEditingId(null);
       setShowNewForm(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save blog');
+      setError(err instanceof Error ? err.message : "Failed to save blog");
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this blog?')) return;
+    if (!confirm("Are you sure you want to delete this blog?")) return;
 
     try {
-      setError('');
-      const response = await fetch(`/api/admin/blogs/${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Failed to delete blog');
+      setError("");
+      const response = await fetch(`/api/admin/blogs/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Failed to delete blog");
       await fetchBlogs();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete blog');
+      setError(err instanceof Error ? err.message : "Failed to delete blog");
     }
   };
 
@@ -104,7 +122,7 @@ export default function AdminDashboard() {
     setFormData({
       title: blog.title,
       excerpt: blog.excerpt,
-      content: '', // Content would need to be fetched separately
+      content: "", // Content would need to be fetched separately
     });
     setEditingId(blog.id);
     setShowNewForm(false);
@@ -113,9 +131,9 @@ export default function AdminDashboard() {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/admin/login');
+      navigate("/admin/login");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Logout failed');
+      setError(err instanceof Error ? err.message : "Logout failed");
     }
   };
 
@@ -153,7 +171,9 @@ export default function AdminDashboard() {
         {(showNewForm || editingId) && (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>{editingId ? 'Edit Blog' : 'Create New Blog'}</CardTitle>
+              <CardTitle>
+                {editingId ? "Edit Blog" : "Create New Blog"}
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -161,7 +181,9 @@ export default function AdminDashboard() {
                 <Input
                   placeholder="Blog title"
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
                 />
               </div>
 
@@ -170,7 +192,9 @@ export default function AdminDashboard() {
                 <Input
                   placeholder="Short description"
                   value={formData.excerpt}
-                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, excerpt: e.target.value })
+                  }
                 />
               </div>
 
@@ -179,7 +203,9 @@ export default function AdminDashboard() {
                 <Textarea
                   placeholder="Blog content"
                   value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, content: e.target.value })
+                  }
                   rows={10}
                 />
               </div>
@@ -194,7 +220,7 @@ export default function AdminDashboard() {
                   onClick={() => {
                     setShowNewForm(false);
                     setEditingId(null);
-                    setFormData({ title: '', excerpt: '', content: '' });
+                    setFormData({ title: "", excerpt: "", content: "" });
                   }}
                 >
                   <X className="h-4 w-4 mr-2" />
@@ -234,10 +260,14 @@ export default function AdminDashboard() {
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <h3 className="font-bold text-lg">{blog.title}</h3>
-                      <p className="text-sm text-muted-foreground">{blog.excerpt}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {blog.excerpt}
+                      </p>
                       <div className="mt-2 flex gap-2">
-                        <span className={`text-xs px-2 py-1 rounded ${blog.published ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
-                          {blog.published ? 'Published' : 'Draft'}
+                        <span
+                          className={`text-xs px-2 py-1 rounded ${blog.published ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700"}`}
+                        >
+                          {blog.published ? "Published" : "Draft"}
                         </span>
                         <span className="text-xs text-muted-foreground">
                           {new Date(blog.created_at).toLocaleDateString()}

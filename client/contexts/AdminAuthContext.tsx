@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 interface AdminAuthContextType {
   isLoggedIn: boolean;
@@ -10,7 +10,9 @@ interface AdminAuthContextType {
   signup: (email: string, password: string) => Promise<void>;
 }
 
-const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined);
+const AdminAuthContext = createContext<AdminAuthContextType | undefined>(
+  undefined,
+);
 
 export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,13 +23,15 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
         if (session?.user) {
           setIsLoggedIn(true);
           setAdminEmail(session.user.email || null);
         }
       } catch (error) {
-        console.error('Auth check error:', error);
+        console.error("Auth check error:", error);
       } finally {
         setIsLoading(false);
       }
@@ -36,7 +40,9 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     checkAuth();
 
     // Subscribe to auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         setIsLoggedIn(true);
         setAdminEmail(session.user.email || null);
@@ -52,7 +58,10 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) throw error;
   };
 
@@ -67,7 +76,9 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AdminAuthContext.Provider value={{ isLoggedIn, isLoading, adminEmail, login, logout, signup }}>
+    <AdminAuthContext.Provider
+      value={{ isLoggedIn, isLoading, adminEmail, login, logout, signup }}
+    >
       {children}
     </AdminAuthContext.Provider>
   );
@@ -82,9 +93,15 @@ export function useAdminAuth() {
       isLoggedIn: false,
       isLoading: true,
       adminEmail: null,
-      login: async () => { throw new Error('Auth not available during SSR'); },
-      logout: async () => { throw new Error('Auth not available during SSR'); },
-      signup: async () => { throw new Error('Auth not available during SSR'); },
+      login: async () => {
+        throw new Error("Auth not available during SSR");
+      },
+      logout: async () => {
+        throw new Error("Auth not available during SSR");
+      },
+      signup: async () => {
+        throw new Error("Auth not available during SSR");
+      },
     };
   }
 

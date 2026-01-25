@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { AlertCircle, ArrowLeft } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Helmet } from 'react-helmet-async';
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, ArrowLeft } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Helmet } from "react-helmet-async";
 
 interface Blog {
   id: string;
@@ -18,7 +18,7 @@ export default function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (slug) {
@@ -30,11 +30,11 @@ export default function BlogDetail() {
     try {
       setIsLoading(true);
       const response = await fetch(`/api/blogs/${slug}`);
-      if (!response.ok) throw new Error('Blog not found');
+      if (!response.ok) throw new Error("Blog not found");
       const data = await response.json();
       setBlog(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch blog');
+      setError(err instanceof Error ? err.message : "Failed to fetch blog");
     } finally {
       setIsLoading(false);
     }
@@ -58,10 +58,10 @@ export default function BlogDetail() {
               Back to Blog
             </Button>
           </Link>
-          
+
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error || 'Blog not found'}</AlertDescription>
+            <AlertDescription>{error || "Blog not found"}</AlertDescription>
           </Alert>
         </div>
       </div>
@@ -88,18 +88,21 @@ export default function BlogDetail() {
             <header className="mb-8 not-prose">
               <h1 className="text-4xl font-bold mb-2">{blog.title}</h1>
               <time className="text-muted-foreground">
-                {new Date(blog.created_at).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
+                {new Date(blog.created_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </time>
             </header>
 
             <div className="mt-8 prose prose-slate max-w-none">
-              {blog.content.split('\n').map((paragraph, i) => 
-                paragraph.trim() && <p key={i}>{paragraph}</p>
-              )}
+              {blog.content
+                .split("\n")
+                .map(
+                  (paragraph, i) =>
+                    paragraph.trim() && <p key={i}>{paragraph}</p>,
+                )}
             </div>
           </article>
 
