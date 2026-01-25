@@ -18,7 +18,7 @@ export default function AdminLogin() {
   const navigate = useNavigate();
 
   // Ensure this component only renders interactive content on client
-  useState(() => {
+  useEffect(() => {
     setIsClient(true);
   }, []);
 
