@@ -124,12 +124,14 @@
     <!-- Security Headers -->
     <!-- Note: CSP is managed server-side in production via Express middleware in server/index.ts -->
 
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="/client/global.css">
-
     <!-- Critical CSS Inline for better performance -->
     <style>
-      /* Critical above-the-fold styles */
+      /* Critical above-the-fold styles - prevent FOUC */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       html {
         scroll-behavior: smooth;
       }
@@ -138,6 +140,12 @@
         font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background-color: #fafafa;
         color: #1f2937;
+        line-height: 1.5;
+      }
+      #root {
+        display: block;
+        width: 100%;
+        min-height: 100vh;
       }
       .animate-fade-in-down {
         animation: fadeInDown 0.8s ease-out;
@@ -152,11 +160,11 @@
           transform: translateY(0);
         }
       }
-      /* Prevent FOUC */
-      #root {
-        display: block;
-      }
     </style>
+    <!-- Application CSS will be injected here by Vite -->
+    <script type="module">
+      import '/client/App.tsx';
+    </script>
     <meta name="google-adsense-account" content="ca-pub-5735635746719975">
     <!-- Google tag (gtag.js) -->
     <script
