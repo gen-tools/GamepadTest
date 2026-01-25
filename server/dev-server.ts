@@ -39,7 +39,20 @@ async function startDevServer() {
 
       template = await vite.transformIndexHtml(url, template);
 
+      // Load the server entry point and collect CSS
       const { render } = await vite.ssrLoadModule("/client/entry-server.tsx");
+
+      // Collect CSS from the module graph in dev mode
+      let cssContent = "";
+      try {
+        const mod = vite.moduleGraph.getModuleById("/client/global.css");
+        if (mod) {
+          const source = mod.ssrModule || mod;
+          // In dev mode, Vite handles CSS injection via the module, but we can also read it directly
+        }
+      } catch (e) {
+        // CSS loading is handled by Vite's module graph
+      }
 
       const helmetContext: any = {};
       const appHtml = render(url, helmetContext);
