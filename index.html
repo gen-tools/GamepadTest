@@ -124,12 +124,20 @@
     <!-- Security Headers -->
     <!-- Note: CSP is managed server-side in production via Express middleware in server/index.ts -->
 
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="/client/global.css">
+
     <!-- Critical CSS Inline for better performance -->
     <style>
       /* Critical above-the-fold styles */
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         margin: 0;
-        font-family: Inter, sans-serif;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: #fafafa;
+        color: #1f2937;
       }
       .animate-fade-in-down {
         animation: fadeInDown 0.8s ease-out;
@@ -143,6 +151,10 @@
           opacity: 1;
           transform: translateY(0);
         }
+      }
+      /* Prevent FOUC */
+      #root {
+        display: block;
       }
     </style>
     <meta name="google-adsense-account" content="ca-pub-5735635746719975">
