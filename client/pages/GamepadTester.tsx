@@ -441,28 +441,6 @@ export default function GamepadTester() {
     },
   ];
 
-  // Effect to handle Ezoic ads initialization
-  useEffect(() => {
-    // Check if Ezoic is available
-    if (typeof window !== 'undefined' && (window as any).ezstandalone) {
-      const ez = (window as any).ezstandalone;
-      
-      // Initialize ads after component mounts
-      setTimeout(() => {
-        if (ez && ez.cmd && typeof ez.cmd.push === 'function') {
-          // First ad placement
-          ez.cmd.push(function() {
-            ez.showAds(101);
-          });
-          
-          // Second ad placement (with different ID)
-          ez.cmd.push(function() {
-            ez.showAds(102);
-          });
-        }
-      }, 100);
-    }
-  }, []);
 
   return (
     <div className="container mx-auto px-6 py-12">
@@ -536,8 +514,6 @@ export default function GamepadTester() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
-          {/* First Ezoic Ad */}
-          <div id="ezoic-pub-ad-placeholder-101"></div>
           
           <div className="flex items-center justify-center gap-2 mb-4">
             <Gamepad2 className="h-8 w-8 text-primary animate-bounce-in" />
@@ -1037,9 +1013,6 @@ export default function GamepadTester() {
             </CardContent>
           </Card>
         ))}
-
-        {/* Second Ezoic Ad with unique ID */}
-        <div id="ezoic-pub-ad-placeholder-102" className="my-8"></div>
 
         <RecommendedProductsSection products={recommendedProducts} />
 

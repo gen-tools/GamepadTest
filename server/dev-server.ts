@@ -34,7 +34,7 @@ async function startDevServer() {
     try {
       let template = fs.readFileSync(
         path.resolve(__dirname, "../index.html"),
-        "utf-8"
+        "utf-8",
       );
 
       template = await vite.transformIndexHtml(url, template);
@@ -46,7 +46,7 @@ async function startDevServer() {
 
       let html = template.replace(
         `<div id="root"><!--app-html--></div>`,
-        `<div id="root">${appHtml}</div>`
+        `<div id="root">${appHtml}</div>`,
       );
 
       if (helmetContext.helmet) {
@@ -63,24 +63,45 @@ async function startDevServer() {
         } = helmetContext.helmet;
 
         if (htmlAttributes.toString()) {
-          html = html.replace(/<html([^>]*)>/, `<html ${htmlAttributes.toString()}>`);
+          html = html.replace(
+            /<html([^>]*)>/,
+            `<html ${htmlAttributes.toString()}>`,
+          );
         }
 
         if (title.toString()) {
           html = html.replace(/<title>.*?<\/title>/, title.toString());
         }
 
-        html = html.replace(/<meta\s+name="description"\s+content=""\s*\/?>/g, "");
-        html = html.replace(/<meta\s+property="og:title"\s+content=""\s*\/?>/g, "");
-        html = html.replace(/<meta\s+property="og:description"\s+content=""\s*\/?>/g, "");
-        html = html.replace(/<meta\s+property="twitter:title"\s+content=""\s*\/?>/g, "");
-        html = html.replace(/<meta\s+property="twitter:description"\s+content=""\s*\/?>/g, "");
+        html = html.replace(
+          /<meta\s+name="description"\s+content=""\s*\/?>/g,
+          "",
+        );
+        html = html.replace(
+          /<meta\s+property="og:title"\s+content=""\s*\/?>/g,
+          "",
+        );
+        html = html.replace(
+          /<meta\s+property="og:description"\s+content=""\s*\/?>/g,
+          "",
+        );
+        html = html.replace(
+          /<meta\s+property="twitter:title"\s+content=""\s*\/?>/g,
+          "",
+        );
+        html = html.replace(
+          /<meta\s+property="twitter:description"\s+content=""\s*\/?>/g,
+          "",
+        );
 
         const helmetTags = `${base.toString()}${meta.toString()}${link.toString()}${style.toString()}${script.toString()}${noscript.toString()}`;
         html = html.replace("</head>", `${helmetTags}</head>`);
 
         if (bodyAttributes.toString()) {
-          html = html.replace(/<body([^>]*)>/, `<body ${bodyAttributes.toString()}>`);
+          html = html.replace(
+            /<body([^>]*)>/,
+            `<body ${bodyAttributes.toString()}>`,
+          );
         }
       }
 

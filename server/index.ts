@@ -2,6 +2,14 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import {
+  getBlogs,
+  getBlogBySlug,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+  getAdminBlogs,
+} from "./routes/blogs";
 
 export function createServer() {
   const app = express();
@@ -11,13 +19,13 @@ export function createServer() {
   app.use((req, res, next) => {
     res.setHeader("X-Content-Type-Options", "nosniff");
     res.setHeader("Permissions-Policy", "midi=(self), microphone=(self)");
-    
+
     // Security headers for production
     if (process.env.NODE_ENV === "production") {
       res.setHeader("X-Frame-Options", "SAMEORIGIN");
       res.setHeader(
         "Content-Security-Policy",
-        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://static.cloudflareinsights.com; frame-ancestors 'self';"
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://static.cloudflareinsights.com; frame-ancestors 'self';",
       );
     }
 
@@ -45,6 +53,14 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Blog API routes
+  app.get("/api/blogs", getBlogs);
+  app.get("/api/blogs/:slug", getBlogBySlug);
+  app.get("/api/admin/blogs", getAdminBlogs);
+  app.post("/api/admin/blogs", createBlog);
+  app.put("/api/admin/blogs/:id", updateBlog);
+  app.delete("/api/admin/blogs/:id", deleteBlog);
 
   // Simple image proxy for allowed hosts (fixes hotlink/CORS blocks)
   app.get("/api/image-proxy", async (req, res) => {

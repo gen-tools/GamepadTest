@@ -11,7 +11,7 @@
       name="description"
       content="GamepadTest lets you instantly test game controllers, GPU, microphones, and MIDI devices online. Free, browser-based diagnostics to ensure optimal hardware."
     />
-    <meta name="google-adsense-account" content="ca-pub-5735635746719975">
+    <meta name="google-adsense-account" content="ca-pub-5735635746719975" />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="" />
@@ -81,13 +81,15 @@
       name="twitter:image"
       content="https://www.gamepadtest.tech/twitter-image.jpg"
     />
-    <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
-<script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
-    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
-<script>
-    window.ezstandalone = window.ezstandalone || {};
-    ezstandalone.cmd = ezstandalone.cmd || [];
-</script>
+
+    <script
+      data-cfasync="false"
+      src="https://cmp.gatekeeperconsent.com/min.js"
+    ></script>
+    <script
+      data-cfasync="false"
+      src="https://the.gatekeeperconsent.com/cmp.min.js"
+    ></script>
 
     <!-- Minimal Structured Data - rest injected by React/Helmet -->
     <script type="application/ld+json">
@@ -100,7 +102,6 @@
         "isAccessibleForFree": true
       }
     </script>
-    <meta name="ezoic-site-verification" content="rLT4hioWoVTejqmpPeFNZGN2A6AZxA" />
     <!-- DNS Prefetch & Preconnect for faster external resource loading -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
@@ -131,10 +132,31 @@
 
     <!-- Critical CSS Inline for better performance -->
     <style>
-      /* Critical above-the-fold styles */
+      /* Critical above-the-fold styles - prevent FOUC */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         margin: 0;
-        font-family: Inter, sans-serif;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background-color: #fafafa;
+        color: #1f2937;
+        line-height: 1.5;
+      }
+      #root {
+        display: block;
+        width: 100%;
+        min-height: 100vh;
       }
       .animate-fade-in-down {
         animation: fadeInDown 0.8s ease-out;
@@ -150,7 +172,7 @@
         }
       }
     </style>
-    <meta name="google-adsense-account" content="ca-pub-5735635746719975">
+    <meta name="google-adsense-account" content="ca-pub-5735635746719975" />
     <!-- Google tag (gtag.js) -->
     <script
       async
