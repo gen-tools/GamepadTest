@@ -17,6 +17,8 @@ import MicTester from "./pages/MicTester";
 import MidiTester from "./pages/MidiTester";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import BlogList from "./pages/BlogList";
+import BlogDetail from "./pages/BlogDetail";
 
 // Guide pages - lazy loaded for code splitting (less critical for SEO)
 const GamepadTesterGuide = lazy(() => import("./pages/GamepadTesterGuide"));
