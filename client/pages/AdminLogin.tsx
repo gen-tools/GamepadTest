@@ -13,8 +13,14 @@ export default function AdminLogin() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { login, signup } = useAdminAuth();
   const navigate = useNavigate();
+
+  // Ensure this component only renders interactive content on client
+  useState(() => {
+    setIsClient(true);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
