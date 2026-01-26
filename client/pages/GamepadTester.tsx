@@ -219,7 +219,7 @@ export default function GamepadTester() {
           weakMagnitude: 0.3,
         });
       } catch (error) {
-        console.log("Vibration not supported on this gamepad");
+        // Vibration not supported on this gamepad
       }
       setTimeout(() => setIsVibrating(false), 1000);
     }
@@ -303,11 +303,11 @@ export default function GamepadTester() {
     if (typeof window === "undefined") return;
 
     const handleGamepadConnected = (e: GamepadEvent) => {
-      console.log("Gamepad connected:", e.gamepad.id);
+      // Gamepad connected
     };
 
     const handleGamepadDisconnected = (e: GamepadEvent) => {
-      console.log("Gamepad disconnected:", e.gamepad.id);
+      // Gamepad disconnected
     };
 
     window.addEventListener("gamepadconnected", handleGamepadConnected);
