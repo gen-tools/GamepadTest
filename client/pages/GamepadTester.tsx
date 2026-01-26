@@ -441,7 +441,6 @@ export default function GamepadTester() {
     },
   ];
 
-
   return (
     <div className="container mx-auto px-6 py-12">
       {/* SEO Meta Tags - Fixed Structure */}
@@ -514,7 +513,6 @@ export default function GamepadTester() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-down">
-          
           <div className="flex items-center justify-center gap-2 mb-4">
             <Gamepad2 className="h-8 w-8 text-primary animate-bounce-in" />
             <h1 className="text-3xl font-bold animate-fade-in-right animate-stagger-1">
@@ -1019,47 +1017,78 @@ export default function GamepadTester() {
         {/* Free Online Gamepad Tester – Instantly Test PS5, PS4, Xbox & PC Controllers */}
         <section className="mt-12 space-y-8 text-base leading-7 text-foreground">
           <header className="space-y-3">
-            <h2 className="text-2xl font-bold">Free Online Gamepad Tester – Instantly Test PS5, PS4, Xbox & PC Controllers</h2>
+            <h2 className="text-2xl font-bold">
+              Free Online Gamepad Tester – Instantly Test PS5, PS4, Xbox & PC
+              Controllers
+            </h2>
             <p>
-              When a controller starts acting up, guessing is a waste of time. Buttons may look fine but fail under pressure. Analog sticks might feel normal yet drift slightly off-center. Triggers can lose range without you realizing it. The fastest way to know what's really happening is to test the controller directly.
+              When a controller starts acting up, guessing is a waste of time.
+              Buttons may look fine but fail under pressure. Analog sticks might
+              feel normal yet drift slightly off-center. Triggers can lose range
+              without you realizing it. The fastest way to know what's really
+              happening is to test the controller directly.
             </p>
             <p>
-              Our free online <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> lets you test PlayStation, Xbox, and PC controllers right in your browser. No downloads. No drivers. No setup. Just connect your controller and see live input data instantly.
+              Our free online{" "}
+              <Link to="/gamepad-tester" className="text-primary underline">
+                Gamepad Tester
+              </Link>{" "}
+              lets you test PlayStation, Xbox, and PC controllers right in your
+              browser. No downloads. No drivers. No setup. Just connect your
+              controller and see live input data instantly.
             </p>
             <p>
-              Whether you're checking a PS5 DualSense, PS4 DualShock, Xbox Series controller, or a generic PC gamepad, this tool shows exactly how your controller behaves — not how a game interprets it.
+              Whether you're checking a PS5 DualSense, PS4 DualShock, Xbox
+              Series controller, or a generic PC gamepad, this tool shows
+              exactly how your controller behaves — not how a game interprets
+              it.
             </p>
           </header>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">What This Gamepad Tester Checks</h2>
+            <h2 className="text-xl font-semibold">
+              What This Gamepad Tester Checks
+            </h2>
             <p>
-              This tool is built for real diagnostics, not just basic confirmation.
+              This tool is built for real diagnostics, not just basic
+              confirmation.
             </p>
             <p>
-              You can test button response to see whether every press registers immediately and consistently. It shows analog stick movement in real time, making it easy to spot stick drift, uneven sensitivity, or dead zones. The vibration test confirms whether rumble and haptic feedback are detected correctly. For supported controllers, microphone input can also be checked to ensure it's working as expected.
+              You can test button response to see whether every press registers
+              immediately and consistently. It shows analog stick movement in
+              real time, making it easy to spot stick drift, uneven sensitivity,
+              or dead zones. The vibration test confirms whether rumble and
+              haptic feedback are detected correctly. For supported controllers,
+              microphone input can also be checked to ensure it's working as
+              expected.
             </p>
             <p>
-              All feedback is shown live, so there's no delay, no guessing, and no misleading results.
+              All feedback is shown live, so there's no delay, no guessing, and
+              no misleading results.
             </p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-xl font-semibold">Supported Controllers</h2>
             <p>
-              The Gamepad Tester works with most modern controllers used today, including:
+              The Gamepad Tester works with most modern controllers used today,
+              including:
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-foreground mb-2">PlayStation</h3>
+                <h3 className="font-semibold text-foreground mb-2">
+                  PlayStation
+                </h3>
                 <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
-                  <li>PlayStation 5 DualSense and DualSense Edge controllers</li>
+                  <li>
+                    PlayStation 5 DualSense and DualSense Edge controllers
+                  </li>
                   <li>PlayStation 4 DualShock controllers</li>
                   <li>PlayStation 3 controllers</li>
                 </ul>
               </div>
-              
+
               <div className="bg-green-50 p-4 rounded-lg">
                 <h3 className="font-semibold text-foreground mb-2">Xbox</h3>
                 <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
@@ -1067,9 +1096,11 @@ export default function GamepadTester() {
                   <li>Xbox Series X and Series S controllers</li>
                 </ul>
               </div>
-              
+
               <div className="bg-purple-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-foreground mb-2">PC & Others</h3>
+                <h3 className="font-semibold text-foreground mb-2">
+                  PC & Others
+                </h3>
                 <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
                   <li>Generic USB and Bluetooth PC gamepads</li>
                   <li>Switch Pro Controller</li>
@@ -1078,27 +1109,40 @@ export default function GamepadTester() {
               </div>
             </div>
             <p className="text-muted-foreground">
-              If your controller is recognized by your system, the tool can usually detect it immediately in a supported browser.
+              If your controller is recognized by your system, the tool can
+              usually detect it immediately in a supported browser.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">Built-In Analog Stick Calibration</h2>
+            <h2 className="text-xl font-semibold">
+              Built-In Analog Stick Calibration
+            </h2>
             <p>
-              One of the most useful features is the analog calibration support for PlayStation controllers. This allows you to clearly see how far each stick moves, where the center point sits, and whether dead zones are too large or uneven.
+              One of the most useful features is the analog calibration support
+              for PlayStation controllers. This allows you to clearly see how
+              far each stick moves, where the center point sits, and whether
+              dead zones are too large or uneven.
             </p>
             <p>
-              This is especially helpful when dealing with early-stage stick drift or after replacing analog modules. Instead of hoping the issue is fixed, you can verify it visually.
+              This is especially helpful when dealing with early-stage stick
+              drift or after replacing analog modules. Instead of hoping the
+              issue is fixed, you can verify it visually.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">Stick Drift Test – Find the Real Problem</h2>
+            <h2 className="text-xl font-semibold">
+              Stick Drift Test – Find the Real Problem
+            </h2>
             <p>
-              If your character moves on its own or your aim won't stay still, stick drift is often the cause. With this tool, drift becomes obvious immediately.
+              If your character moves on its own or your aim won't stay still,
+              stick drift is often the cause. With this tool, drift becomes
+              obvious immediately.
             </p>
             <p>
-              When the stick is untouched, it should rest perfectly centered. Any movement on screen without input means there's a problem.
+              When the stick is untouched, it should rest perfectly centered.
+              Any movement on screen without input means there's a problem.
             </p>
             <p className="text-muted-foreground">
               Common ways users address stick drift include:
@@ -1108,14 +1152,21 @@ export default function GamepadTester() {
               <li>Cleaning the joystick with isopropyl alcohol</li>
               <li>Updating firmware or drivers</li>
               <li>Replacing worn analog modules</li>
-              <li>Rechecking the results using this tester to confirm the fix actually worked</li>
+              <li>
+                Rechecking the results using this tester to confirm the fix
+                actually worked
+              </li>
             </ul>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">Controller Button Test – Diagnose Button Issues Properly</h2>
+            <h2 className="text-xl font-semibold">
+              Controller Button Test – Diagnose Button Issues Properly
+            </h2>
             <p>
-              Unresponsive or inconsistent buttons don't always mean the controller is dead. A button test shows whether inputs are missing, delayed, or stuck.
+              Unresponsive or inconsistent buttons don't always mean the
+              controller is dead. A button test shows whether inputs are
+              missing, delayed, or stuck.
             </p>
             <p className="text-muted-foreground">
               If a problem appears, users often fix it by:
@@ -1128,63 +1179,104 @@ export default function GamepadTester() {
               <li>Retesting to confirm stability</li>
             </ul>
             <p>
-              Seeing the input live makes it much easier to know whether the issue is mechanical, electrical, or software-related.
+              Seeing the input live makes it much easier to know whether the
+              issue is mechanical, electrical, or software-related.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">Why Gamers and Repair Technicians Use This Tool</h2>
+            <h2 className="text-xl font-semibold">
+              Why Gamers and Repair Technicians Use This Tool
+            </h2>
             <p>
-              This isn't a gimmick or a demo. It's a practical diagnostic tool used by people who need accurate results.
+              This isn't a gimmick or a demo. It's a practical diagnostic tool
+              used by people who need accurate results.
             </p>
             <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-              <li><strong>Fast:</strong> Runs entirely in your browser</li>
-              <li><strong>Accurate:</strong> Shows raw input without filters</li>
-              <li><strong>Safe:</strong> No data is stored or uploaded</li>
-              <li><strong>Versatile:</strong> Works across major controller brands</li>
-              <li><strong>Convenient:</strong> No installation or accounts required</li>
+              <li>
+                <strong>Fast:</strong> Runs entirely in your browser
+              </li>
+              <li>
+                <strong>Accurate:</strong> Shows raw input without filters
+              </li>
+              <li>
+                <strong>Safe:</strong> No data is stored or uploaded
+              </li>
+              <li>
+                <strong>Versatile:</strong> Works across major controller brands
+              </li>
+              <li>
+                <strong>Convenient:</strong> No installation or accounts
+                required
+              </li>
             </ul>
             <p>
-              For repair professionals, it's a quick verification step. For gamers, it prevents frustration. For competitive players, it helps ensure consistent performance before it matters.
+              For repair professionals, it's a quick verification step. For
+              gamers, it prevents frustration. For competitive players, it helps
+              ensure consistent performance before it matters.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">How to Use the Gamepad Tester</h2>
+            <h2 className="text-xl font-semibold">
+              How to Use the Gamepad Tester
+            </h2>
             <ol className="list-decimal pl-6 space-y-1 text-muted-foreground">
               <li>Connect your controller using a USB cable or Bluetooth</li>
-              <li>Open the <Link to="/gamepad-tester" className="text-primary underline">Gamepad Tester</Link> in a modern browser like Chrome, Edge, or Firefox</li>
+              <li>
+                Open the{" "}
+                <Link to="/gamepad-tester" className="text-primary underline">
+                  Gamepad Tester
+                </Link>{" "}
+                in a modern browser like Chrome, Edge, or Firefox
+              </li>
               <li>Allow browser access if prompted</li>
-              <li>Press buttons, move analog sticks, and test triggers and vibration</li>
-              <li>Watch the live feedback to identify any issues immediately</li>
+              <li>
+                Press buttons, move analog sticks, and test triggers and
+                vibration
+              </li>
+              <li>
+                Watch the live feedback to identify any issues immediately
+              </li>
             </ol>
-            <p>
-              That's it. No setup, no clutter, no confusion.
-            </p>
+            <p>That's it. No setup, no clutter, no confusion.</p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-xl font-semibold">Frequently Asked Questions</h2>
+            <h2 className="text-xl font-semibold">
+              Frequently Asked Questions
+            </h2>
             <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
               <li>
-                <strong>Q: Does this work on all browsers?</strong><br />
-                It works best on modern browsers that support controller input, such as Chrome, Edge, and Firefox.
+                <strong>Q: Does this work on all browsers?</strong>
+                <br />
+                It works best on modern browsers that support controller input,
+                such as Chrome, Edge, and Firefox.
               </li>
               <li>
-                <strong>Q: Can it really detect stick drift?</strong><br />
-                Yes. Drift is visible the moment the stick fails to stay centered.
+                <strong>Q: Can it really detect stick drift?</strong>
+                <br />
+                Yes. Drift is visible the moment the stick fails to stay
+                centered.
               </li>
               <li>
-                <strong>Q: Is it safe to use?</strong><br />
-                Completely. All testing happens locally in your browser. No data is saved or shared.
+                <strong>Q: Is it safe to use?</strong>
+                <br />
+                Completely. All testing happens locally in your browser. No data
+                is saved or shared.
               </li>
               <li>
-                <strong>Q: Do wireless controllers work?</strong><br />
-                Yes, as long as your device and browser recognize the controller via Bluetooth.
+                <strong>Q: Do wireless controllers work?</strong>
+                <br />
+                Yes, as long as your device and browser recognize the controller
+                via Bluetooth.
               </li>
               <li>
-                <strong>Q: Why isn't my controller detected?</strong><br />
-                This usually happens if the controller isn't properly connected, the browser doesn't support gamepad input, or another app is already using the controller.
+                <strong>Q: Why isn't my controller detected?</strong>
+                <br />
+                This usually happens if the controller isn't properly connected,
+                the browser doesn't support gamepad input, or another app is
+                already using the controller.
               </li>
             </ul>
           </section>
@@ -1192,10 +1284,25 @@ export default function GamepadTester() {
           <section className="space-y-2">
             <h2 className="text-xl font-semibold">Final Word</h2>
             <p>
-              A good controller test doesn't just tell you that a controller exists — it tells you how it behaves. This Gamepad Tester gives you clear, honest input data so you can make informed decisions, whether you're gaming, repairing, or troubleshooting.
+              A good controller test doesn't just tell you that a controller
+              exists — it tells you how it behaves. This Gamepad Tester gives
+              you clear, honest input data so you can make informed decisions,
+              whether you're gaming, repairing, or troubleshooting.
             </p>
             <p>
-              Whether you're testing a <Link to="/gamepad-tester" className="text-primary underline">gamepad</Link>, checking your <Link to="/mic-tester" className="text-primary underline">microphone</Link>, or verifying your <Link to="/gpu-tester" className="text-primary underline">graphics card</Link>, having the right diagnostic tools makes all the difference.
+              Whether you're testing a{" "}
+              <Link to="/gamepad-tester" className="text-primary underline">
+                gamepad
+              </Link>
+              , checking your{" "}
+              <Link to="/mic-tester" className="text-primary underline">
+                microphone
+              </Link>
+              , or verifying your{" "}
+              <Link to="/gpu-tester" className="text-primary underline">
+                graphics card
+              </Link>
+              , having the right diagnostic tools makes all the difference.
             </p>
           </section>
         </section>
