@@ -37,9 +37,10 @@ async function startDevServer() {
         "utf-8",
       );
 
-      template = await vite.transformIndexHtml(url, template);
-
+      // First get the module to ensure CSS is processed
       const { render } = await vite.ssrLoadModule("/client/entry-server.tsx");
+
+      template = await vite.transformIndexHtml(url, template);
 
       const helmetContext: any = {};
       const appHtml = render(url, helmetContext);
