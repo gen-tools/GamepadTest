@@ -93,31 +93,6 @@ export default function RootApp() {
             }
           />
           <Route path="/blog" element={<BlogList />} />
-          <Route path="/blog/:slug" element={<BlogDetail />} />
-          <Route
-            path="/privacy"
-            element={
-              <Suspense fallback={<PageLoader />}>
-                <Privacy />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/login"
-            element={
-              <Suspense fallback={<PageLoader />}>
-                <AdminLogin />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/admin/dashboard"
-            element={
-              <Suspense fallback={<PageLoader />}>
-                <AdminDashboard />
-              </Suspense>
-            }
-          />
           <Route
             path="/blog/gamepad-tester-guide"
             element={
@@ -147,6 +122,31 @@ export default function RootApp() {
             element={
               <Suspense fallback={<PageLoader />}>
                 <MidiTesterGuide />
+              </Suspense>
+            }
+          />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route
+            path="/privacy"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Privacy />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/login"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminLogin />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminDashboard />
               </Suspense>
             }
           />
