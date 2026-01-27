@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { supabase } from "../lib/supabase.js";
+import { supabase } from "../lib/supabase";
 
 // Get all published blogs
 export const getBlogs: RequestHandler = async (req, res) => {
@@ -58,7 +58,7 @@ export const createBlog: RequestHandler = async (req, res) => {
         excerpt: excerpt || "",
         featured_image: featured_image || null,
         published: published || false,
-        author_id: req.user?.id || "system",
+        author_id: (req as any).user?.id || "system",
       })
       .select()
       .single();
