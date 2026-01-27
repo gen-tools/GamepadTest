@@ -7,7 +7,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "server/node-build.ts"),
       name: "server",
-      fileName: "production",
+      fileName: () => "node-build.mjs",
       formats: ["es"],
     },
     outDir: "dist/server",
@@ -42,7 +42,7 @@ export default defineConfig({
     sourcemap: true,
   },
   ssr: {
-    noExternal: ['react-helmet-async'],
+    noExternal: ["react-helmet-async"],
   },
   resolve: {
     alias: {
