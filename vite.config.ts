@@ -45,6 +45,9 @@ export default defineConfig(({ mode }) => ({
     },
     cssCodeSplit: true,
     minify: "esbuild",
+    chunkSizeWarningLimit: 500,
+    reportCompressedSize: false,
+    target: "esnext",
   },
   plugins: [react(), expressPlugin()],
   resolve: {
