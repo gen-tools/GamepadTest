@@ -42,7 +42,7 @@ export default defineConfig({
     sourcemap: true,
   },
   ssr: {
-    noExternal: ['react-helmet-async'],
+    noExternal: ["react-helmet-async"],
   },
   resolve: {
     alias: {
