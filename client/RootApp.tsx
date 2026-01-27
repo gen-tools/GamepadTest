@@ -6,21 +6,22 @@ import { Layout } from "@/components/Layout";
 
 // Pages - critical path (eager loaded for SSR and SEO)
 import Index from "./pages/Index";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
-import GamepadTester from "./pages/GamepadTester";
-import GpuTester from "./pages/GpuTester";
-import MicTester from "./pages/MicTester";
-import MidiTester from "./pages/MidiTester";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
 import BlogList from "./pages/BlogList";
 import BlogDetail from "./pages/BlogDetail";
 
-// Guide pages - lazy loaded for code splitting (less critical for SEO)
+// Heavy pages - lazy loaded for code splitting
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const GamepadTester = lazy(() => import("./pages/GamepadTester"));
+const GpuTester = lazy(() => import("./pages/GpuTester"));
+const MicTester = lazy(() => import("./pages/MicTester"));
+const MidiTester = lazy(() => import("./pages/MidiTester"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+
+// Guide pages - lazy loaded for code splitting
 const GamepadTesterGuide = lazy(() => import("./pages/GamepadTesterGuide"));
 const GpuTesterGuide = lazy(() => import("./pages/GpuTesterGuide"));
 const MicTesterGuide = lazy(() => import("./pages/MicTesterGuide"));
