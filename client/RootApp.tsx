@@ -44,17 +44,80 @@ export default function RootApp() {
       <Layout>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/gamepad-tester" element={<GamepadTester />} />
-          <Route path="/gpu-tester" element={<GpuTester />} />
-          <Route path="/mic-tester" element={<MicTester />} />
-          <Route path="/midi-tester" element={<MidiTester />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/gamepad-tester"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <GamepadTester />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/gpu-tester"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <GpuTester />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/mic-tester"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <MicTester />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/midi-tester"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <MidiTester />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <About />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Contact />
+              </Suspense>
+            }
+          />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route
+            path="/privacy"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Privacy />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/login"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminLogin />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AdminDashboard />
+              </Suspense>
+            }
+          />
           <Route
             path="/blog/gamepad-tester-guide"
             element={
