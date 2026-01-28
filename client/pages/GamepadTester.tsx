@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { createHowToStructuredData } from "@/components/SEO";
+import AdsterraInline from "@/components/AdsterraInline";
 import { RecommendedProductsSection } from "@/components/RecommendedProducts";
 
 interface GamepadState {
