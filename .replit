@@ -26,24 +26,12 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "npm run dev:vite"
 waitForPort = 5000
 
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 24678
-externalPort = 3000
-
-[[ports]]
-localPort = 35253
-externalPort = 3001
-
-[[ports]]
-localPort = 41893
-externalPort = 3002
 
 [deployment]
 deploymentTarget = "autoscale"

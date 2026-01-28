@@ -108,7 +108,11 @@ async function startDevServer() {
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e: any) {
-      vite.ssrFixStacktrace(e);
+      try {
+        vite.ssrFixStacktrace(e);
+      } catch (fixError) {
+        // Ignore source map processing errors
+      }
       console.error(e.stack);
       res.status(500).end(e.stack);
     }
