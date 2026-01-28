@@ -37,3 +37,9 @@ externalPort = 80
 deploymentTarget = "autoscale"
 run = ["npm", "start"]
 build = ["npm", "run", "build"]
+
+[userenv]
+
+[userenv.shared]
+VITE_SUPABASE_ANON_KEY = "process.env.SUPABASE_ANON_KEY"
+VITE_SUPABASE_URL = "process.env.SUPABASE_URL"
