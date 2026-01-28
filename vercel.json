@@ -13,6 +13,10 @@
       "destination": "/api/:path*"
     },
     {
+      "source": "/feedback/(?!general).*",
+      "destination": "/api/feedback/general"
+    },
+    {
       "source": "/:path((?!.*\\.).*)",
       "destination": "/index.html"
     }
