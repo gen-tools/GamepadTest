@@ -1013,6 +1013,20 @@ export default function GamepadTester() {
           </Card>
         ))}
 
+        {/* Ad (client-only) - placed before recommended products, wrapped in a Card for UI safety */}
+        {typeof window !== "undefined" && (
+          <div className="my-8 animate-fade-in-up">
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle>Sponsored</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 flex justify-center">
+                <AdsterraAd aria-label="Advertisement" />
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         <RecommendedProductsSection products={recommendedProducts} />
 
         {/* Free Online Gamepad Tester – Instantly Test PS5, PS4, Xbox & PC Controllers */}
