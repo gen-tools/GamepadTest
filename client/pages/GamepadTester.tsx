@@ -14,17 +14,6 @@ import { cn } from "@/lib/utils";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { createHowToStructuredData } from "@/components/SEO";
-{/* Inline Ad – SEO-safe */}
-<script>
-  atOptions = {
-    'key' : '84ce185164fd1fb9a9e3c375f2a48ff8',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/84ce185164fd1fb9a9e3c375f2a48ff8/invoke.js"></script>
 import { AdsterraAd } from "@/components/AdsterraAd";
 import { RecommendedProductsSection } from "@/components/RecommendedProducts";
 
