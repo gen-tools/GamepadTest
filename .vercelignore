@@ -1,0 +1,15 @@
+node_modules
+.git
+.gitignore
+README.md
+BLOG_SETUP_GUIDE.md
+AGENTS.md
+.env.local
+.env.example
+dist/server
+server
+public/.htaccess
+*.log
+.DS_Store
+.vscode
+.idea

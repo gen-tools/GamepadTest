@@ -1,0 +1,19 @@
+{
+  "routes": [
+    "/",
+    "/blog",
+    "/blog/gamepad-tester-guide",
+    "/blog/gpu-performance-testing",
+    "/blog/microphone-testing-guide",
+    "/blog/midi-device-testing",
+    "/gamepad-tester",
+    "/gpu-tester",
+    "/mic-tester",
+    "/midi-tester",
+    "/about",
+    "/contact",
+    "/privacy"
+  ],
+  "crawlLinks": true,
+  "onMissingSPA": "allow"
+}
