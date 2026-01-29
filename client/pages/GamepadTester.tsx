@@ -25,6 +25,7 @@ import { createHowToStructuredData } from "@/components/SEO";
   };
 </script>
 <script src="https://www.highperformanceformat.com/84ce185164fd1fb9a9e3c375f2a48ff8/invoke.js"></script>
+import { AdsterraAd } from "@/components/AdsterraAd";
 import { RecommendedProductsSection } from "@/components/RecommendedProducts";
 
 interface GamepadState {
