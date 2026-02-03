@@ -7,6 +7,7 @@ import { Slider } from '@/components/ui/slider';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import AdsterraAd from '@/components/AdsterraAd';
 import type { RecommendedProductItem } from '@/components/RecommendedProducts';
 
 interface AudioStats {
@@ -716,6 +717,7 @@ export default function MicTester() {
           </Card>
         )}
 
+        <AdsterraAd />
         <RecommendedProductsSection title="Recommended Products" products={micProducts} />
         {/* Instructions */}
         <Card>

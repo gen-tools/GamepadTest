@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { RecommendedProductsSection } from '@/components/RecommendedProducts';
+import AdsterraAd from '@/components/AdsterraAd';
 import type { RecommendedProductItem } from '@/components/RecommendedProducts';
 
 interface MIDIDeviceInfo {
@@ -691,6 +692,7 @@ export default function MidiTester() {
           </>
         )}
 
+        <AdsterraAd />
         <RecommendedProductsSection title="Recommended Products" products={midiProducts} />
         {/* MIDI Tester: New SEO content */}
         <article className="mt-10 space-y-10 text-base leading-7">

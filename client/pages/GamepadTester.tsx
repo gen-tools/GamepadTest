@@ -15,6 +15,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { createHowToStructuredData } from "@/components/SEO";
 import { RecommendedProductsSection } from "@/components/RecommendedProducts";
+import AdsterraAd from "@/components/AdsterraAd";
 
 interface GamepadState {
   connected: boolean;
@@ -1041,6 +1042,7 @@ export default function GamepadTester() {
         {/* Second Ezoic Ad with unique ID */}
         <div id="ezoic-pub-ad-placeholder-102" className="my-8"></div>
 
+        <AdsterraAd />
         <RecommendedProductsSection products={recommendedProducts} />
 
         {/* Free Online Gamepad Tester – Instantly Test PS5, PS4, Xbox & PC Controllers */}

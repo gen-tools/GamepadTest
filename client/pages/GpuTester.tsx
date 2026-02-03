@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { RecommendedProductsSection } from "@/components/RecommendedProducts";
+import AdsterraAd from "@/components/AdsterraAd";
 import { GpuBenchmarkAnimation } from "@/components/GpuBenchmarkAnimation";
 
 interface GPUInfo {
@@ -756,6 +757,7 @@ export default function GpuTester() {
             )}
           </>
         )}
+        <AdsterraAd />
         <RecommendedProductsSection products={recommendedProducts} />
         
         {/* Guide: Online GPU Tester – Free GPU Stress Test & Graphics Card Checker */}
