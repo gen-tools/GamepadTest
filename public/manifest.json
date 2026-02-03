@@ -1,0 +1,72 @@
+{
+  "name": "GamepadChecker - Professional Controller Testing Tool",
+  "short_name": "GamepadChecker",
+  "description": "The #1 professional gamepad testing tool. Test Xbox, PlayStation & PC controllers with real-time input detection and performance analysis.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#64748b",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["games", "utilities", "tools"],
+  "icons": [
+    {
+      "src": "/gamepad-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "GamepadChecker desktop interface"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "GamepadChecker mobile interface"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Gamepad Tester",
+      "short_name": "Gamepad",
+      "description": "Test your gamepad or controller",
+      "url": "/gamepad-tester",
+      "icons": [{ "src": "/gamepad-icon.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "GPU Tester",
+      "short_name": "GPU",
+      "description": "Test your graphics performance",
+      "url": "/gpu-tester",
+      "icons": [{ "src": "/gamepad-icon.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mic Tester",
+      "short_name": "Mic",
+      "description": "Test your microphone",
+      "url": "/mic-tester",
+      "icons": [{ "src": "/gamepad-icon.svg", "sizes": "96x96" }]
+    }
+  ]
+}
