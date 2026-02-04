@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Layout } from "@/components/Layout";
+import StickyAdsterraAd from "@/components/StickyAdsterraAd";
 
 // Pages - critical path (eager loaded for SSR and SEO)
 import Index from "./pages/Index";
@@ -89,6 +90,7 @@ export default function RootApp() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
+          <StickyAdsterraAd />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
