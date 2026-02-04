@@ -17,29 +17,32 @@ const StickyAdsterraAd: React.FC = () => {
     // Only run on client side and ensure we haven't loaded it yet
     if (typeof window === 'undefined' || !adContainerRef.current || scriptLoadedRef.current) return;
 
-    const adId = 'e55a93825b6c50f2921b8e0d174a7729'; // Using the ID from the existing component
+    const adKey = '84ce185164fd1fb9a9e3c375f2a48ff8';
     
     // Clear container to prevent duplicate ads
     adContainerRef.current.innerHTML = '';
 
-    // Create the container element required by the ad script
-    const container = document.createElement('div');
-    container.id = `container-${adId}`;
-    adContainerRef.current.appendChild(container);
+    // Define atOptions globally for the script to use
+    (window as any).atOptions = {
+      'key' : adKey,
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
 
     // Create and append the ad script
     const script = document.createElement('script');
-    script.src = `https://pl28589316.effectivegatecpm.com/${adId}/invoke.js`;
+    script.src = `https://www.highperformanceformat.com/${adKey}/invoke.js`;
     script.async = true;
-    script.setAttribute('data-cfasync', 'false');
 
     adContainerRef.current.appendChild(script);
     scriptLoadedRef.current = true;
 
     return () => {
-      // Cleanup if necessary
-      if (adContainerRef.current) {
-        adContainerRef.current.innerHTML = '';
+      // Cleanup
+      if (typeof window !== 'undefined') {
+        delete (window as any).atOptions;
       }
     };
   }, []);
