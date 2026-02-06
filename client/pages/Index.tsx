@@ -17,6 +17,7 @@ import {
   useScrollAnimation,
   useStaggeredScrollAnimation,
 } from "@/hooks/useScrollAnimation";
+import AdsterraAd from "@/components/AdsterraAd";
 const testers = [
   {
     name: "Gamepad Tester",
