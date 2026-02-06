@@ -196,10 +196,6 @@ export default function Index() {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-20 sm:py-32">
-        {/* Ad Section before content */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-8">
-          <AdsterraAd />
-        </div>
         {/* Animated Background Elements - disabled on mobile for performance */}
         <div className="absolute inset-0 overflow-hidden hidden sm:block">
           <div className="animate-pulse-glow absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
@@ -362,6 +358,10 @@ export default function Index() {
       <section className="py-20 sm:py-32 bg-muted/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl animate-fade-in-up">
+            {/* Ad Section before content */}
+            <div className="mb-12">
+              <AdsterraAd />
+            </div>
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
                 GamepadTest – Check Your Devices Online in Seconds
