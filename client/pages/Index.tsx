@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
+import AdsterraAd from "@/components/AdsterraAd";
 import {
   useScrollAnimation,
   useStaggeredScrollAnimation,
@@ -195,6 +196,10 @@ export default function Index() {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-20 sm:py-32">
+        {/* Ad Section before content */}
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-8">
+          <AdsterraAd />
+        </div>
         {/* Animated Background Elements - disabled on mobile for performance */}
         <div className="absolute inset-0 overflow-hidden hidden sm:block">
           <div className="animate-pulse-glow absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
