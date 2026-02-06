@@ -17,8 +17,6 @@ import {
   useScrollAnimation,
   useStaggeredScrollAnimation,
 } from "@/hooks/useScrollAnimation";
-import AdsterraAd from "@/components/AdsterraAd";
-
 const testers = [
   {
     name: "Gamepad Tester",
@@ -354,8 +352,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-        <AdsterraAd />
-        <RecommendedProductsSection products={recommendedProducts} />
+
       {/* New Content Section */}
       <section className="py-20 sm:py-32 bg-muted/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
