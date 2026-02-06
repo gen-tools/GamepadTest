@@ -352,7 +352,8 @@ export default function Index() {
           </div>
         </div>
       </section>
-
+<script async="async" data-cfasync="false" src="https://pl28589316.effectivegatecpm.com/e55a93825b6c50f2921b8e0d174a7729/invoke.js"></script>
+<div id="container-e55a93825b6c50f2921b8e0d174a7729"></div>
       {/* New Content Section */}
       <section className="py-20 sm:py-32 bg-muted/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
