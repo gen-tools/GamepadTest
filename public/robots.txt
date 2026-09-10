@@ -3,4 +3,4 @@ User-agent: *
 Disallow:
 
 # Sitemap location
-Sitemap: https://www.gamepadtest.tech/sitemap.xml
+Sitemap: https://gamepadtest.vercel.app/sitemap.xml
