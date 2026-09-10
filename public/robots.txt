@@ -1,0 +1,6 @@
+# Allow all crawlers
+User-agent: *
+Disallow:
+
+# Sitemap location
+Sitemap: https://www.gamepadtest.tech/sitemap.xml

@@ -1,0 +1,10 @@
+{
+  "name": "GamepadTest",
+  "description": "Free online hardware testing suite for game controllers, GPUs, microphones, and MIDI devices.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

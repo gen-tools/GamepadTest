@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        // Intercept console functions to filter out cross-origin third-party script & monetization errors
+        var origConsoleErr = console.error;
+        var origConsoleWarn = console.warn;
+        var origConsoleLog = console.log;
+        var origConsoleInfo = console.info;
+
+        var isAdErr = function (str) {
+          return (
+            str.indexOf('Script error') !== -1 ||
+            str.indexOf('Cannot set property') !== -1 ||
+            str.indexOf('gatekeeper') !== -1 ||
+            str.indexOf('ezojs') !== -1 ||
+            str.indexOf('Ezoic') !== -1 ||
+            str.indexOf('effectivegatecpm') !== -1 ||
+            str.indexOf('highperformanceformat') !== -1 ||
+            str.indexOf('Monetization not allowed') !== -1 ||
+            str.indexOf('bad response') !== -1 ||
+            str.indexOf('403') !== -1
+          );
+        };
+
+        var formatArgs = function (args) {
+          return args.map(function (a) {
+            try { return String(a || ''); } catch (e) { return ''; }
+          }).join(' ');
+        };
+
+        console.error = function () {
+          if (isAdErr(formatArgs(Array.prototype.slice.call(arguments)))) return;
+          if (origConsoleErr) origConsoleErr.apply(console, arguments);
+        };
+
+        console.warn = function () {
+          if (isAdErr(formatArgs(Array.prototype.slice.call(arguments)))) return;
+          if (origConsoleWarn) origConsoleWarn.apply(console, arguments);
+        };
+
+        console.log = function () {
+          if (isAdErr(formatArgs(Array.prototype.slice.call(arguments)))) return;
+          if (origConsoleLog) origConsoleLog.apply(console, arguments);
+        };
+
+        console.info = function () {
+          if (isAdErr(formatArgs(Array.prototype.slice.call(arguments)))) return;
+          if (origConsoleInfo) origConsoleInfo.apply(console, arguments);
+        };
+
+        // Global error handler to catch and suppress third-party cross-origin script errors and fetch property assignment issues
+        var handleErr = function (msg, error, evt) {
+          var str = String(msg || '') + ' ' + String((error && error.message) || '');
+          if (
+            !msg ||
+            msg === 'Script error.' ||
+            msg === 'Script error' ||
+            str.indexOf('fetch') !== -1 ||
+            isAdErr(str)
+          ) {
+            return true;
+          }
+          if (evt && evt.target && (evt.target.tagName === 'SCRIPT' || evt.target.tagName === 'LINK')) {
+            return true;
+          }
+          return false;
+        };
+
+        var userOnError = null;
+        var customOnError = function (msg, url, line, col, error) {
+          if (handleErr(msg, error, null)) {
+            return true;
+          }
+          if (typeof userOnError === 'function') {
+            return userOnError.apply(this, arguments);
+          }
+          return true;
+        };
+
+        try {
+          Object.defineProperty(window, 'onerror', {
+            get: function () {
+              return customOnError;
+            },
+            set: function (fn) {
+              if (fn !== customOnError) {
+                userOnError = fn;
+              }
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          window.onerror = customOnError;
+        }
+
+        window.addEventListener(
+          'error',
+          function (e) {
+            if (handleErr(e.message, e.error, e)) {
+              if (e.preventDefault) e.preventDefault();
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+              return true;
+            }
+          },
+          true
+        );
+
+        window.addEventListener(
+          'unhandledrejection',
+          function (e) {
+            var msg = (e && e.reason && e.reason.message) || '';
+            if (handleErr(msg, e.reason, e)) {
+              if (e.preventDefault) e.preventDefault();
+            }
+          },
+          true
+        );
+
+        // Patch fetch property across prototype chain to provide getter AND setter
+        try {
+          var origFetch = window.fetch;
+          var customFetch = origFetch;
+
+          function getF() {
+            return customFetch || origFetch;
+          }
+          function setF(val) {
+            customFetch = val;
+          }
+
+          var targets = [window];
+          var p = window;
+          while (p && (p = Object.getPrototypeOf(p))) {
+            targets.push(p);
+          }
+
+          for (var i = 0; i < targets.length; i++) {
+            var t = targets[i];
+            try {
+              var desc = Object.getOwnPropertyDescriptor(t, 'fetch');
+              if (desc && desc.configurable) {
+                Object.defineProperty(t, 'fetch', {
+                  get: getF,
+                  set: setF,
+                  configurable: true,
+                  enumerable: true
+                });
+              }
+            } catch (e1) {}
+          }
+
+          try {
+            var wDesc = Object.getOwnPropertyDescriptor(window, 'fetch');
+            if (!wDesc || (wDesc.configurable && !wDesc.set)) {
+              Object.defineProperty(window, 'fetch', {
+                get: getF,
+                set: setF,
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (e2) {}
+        } catch (e) {}
+      })();
+    </script>
+    <title>GamepadTest - Professional Controller & Hardware Testing Tools</title>
+    <meta
+      name="description"
+      content="Free online hardware testing suite for game controllers, stick drift, touchscreens, MIDI devices, GPUs, and microphones. Instant diagnostic results on GamepadTest."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
+    />
+    <meta name="google-adsense-account" content="ca-pub-5735635746719975">
+    <meta name="google-adsense-account" content="ca-pub-2013522078135810">
+
+    <!-- Favicon & Manifest -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48 32x32 16x16" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Performance & Tech Configuration -->
+    <meta name="author" content="GamepadTest" />
+    <meta name="theme-color" content="#64748b" />
+    <meta name="msapplication-TileColor" content="#64748b" />
+    <meta name="application-name" content="GamepadTest" />
+    <meta name="apple-mobile-web-app-title" content="GamepadTest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="googlebot"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="distribution" content="global" />
+    <meta name="rating" content="general" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Google Analytics (Optimized Non-Blocking Load for Mobile Speed) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-JQMTTRYZSK");
+
+      (function() {
+        var loaded = false;
+        function loadGA() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-JQMTTRYZSK";
+          document.head.appendChild(s);
+        }
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadGA, { timeout: 3500 });
+        } else {
+          window.addEventListener('load', function() { setTimeout(loadGA, 2000); });
+        }
+        ['touchstart', 'scroll', 'keydown', 'mousemove'].forEach(function(e) {
+          window.addEventListener(e, loadGA, { passive: true, once: true });
+        });
+      })();
+    </script>
+    
+    <!-- DNS Prefetch & Preconnect for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <link rel="dns-prefetch" href="//pl28589316.effectivegatecpm.com" />
+    <link rel="dns-prefetch" href="//www.highperformanceformat.com" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Async Font Loading -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Critical Above-The-Fold Styles -->
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-display: swap;
+        background-color: #ffffff;
+        color: #0f172a;
+        -webkit-font-smoothing: antialiased;
+      }
+      .animate-fade-in-down {
+        animation: fadeInDown 0.8s ease-out;
+      }
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"><!--app-html--></div>
+
+    <script type="module" src="/client/App.tsx"></script>
+  </body>
+</html>
