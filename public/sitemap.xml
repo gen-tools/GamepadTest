@@ -2,157 +2,113 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.gamepadtest.tech/</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://gamepadtest.vercel.app/</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/gamepad-tester</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://gamepadtest.vercel.app/gamepad-tester</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/gpu-tester</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/gpu-tester</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/mic-tester</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/mic-tester</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/midi-tester</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/midi-tester</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/touch-screen-test</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://gamepadtest.vercel.app/touch-screen-test</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/stick-drift-test</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://gamepadtest.vercel.app/stick-drift-test</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/about</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://gamepadtest.vercel.app/about</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/contact</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://gamepadtest.vercel.app/contact</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://gamepadtest.vercel.app/blog</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/gamepad-tester-guide</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/gamepad-tester-guide</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/gpu-performance-testing</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://gamepadtest.vercel.app/blog/gpu-performance-testing</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/microphone-testing-guide</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://gamepadtest.vercel.app/blog/microphone-testing-guide</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/midi-device-testing</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://gamepadtest.vercel.app/blog/midi-device-testing</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/touch-screen-testing</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://gamepadtest.vercel.app/blog/touch-screen-testing</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/how-to-fix-stick-drift-a-complete-repair-guide-for-xbox-playstation-and-switch-controllers</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/how-to-fix-stick-drift-a-complete-repair-guide-for-xbox-playstation-and-switch-controllers</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/how-to-test-a-touch-screen-online-without-downloading-anything</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/how-to-test-a-touch-screen-online-without-downloading-anything</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/controller-buttons-not-working-heres-how-to-actually-fix-it</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/controller-buttons-not-working-heres-how-to-actually-fix-it</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/controller-connected-but-not-working-on-pc-heres-how-to-actually-fix-it</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/controller-connected-but-not-working-on-pc-heres-how-to-actually-fix-it</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/how-to-test-a-touch-screen-for-dead-zones</loc>
-    <lastmod>2026-08-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/how-to-test-a-touch-screen-for-dead-zones</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/blog/how-to-fix-trigger-issues-on-a-controller</loc>
-    <lastmod>2026-08-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://gamepadtest.vercel.app/blog/how-to-fix-trigger-issues-on-a-controller</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
   <url>
-    <loc>https://www.gamepadtest.tech/privacy</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://gamepadtest.vercel.app/privacy</loc>
+    <lastmod>2026-09-11</lastmod>
   </url>
 
 </urlset>
